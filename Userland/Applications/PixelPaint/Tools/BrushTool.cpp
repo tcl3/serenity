@@ -106,34 +106,27 @@ void BrushTool::draw_point(Gfx::Bitmap& bitmap, Gfx::Color color, Gfx::IntPoint 
 
 void BrushTool::draw_line(Gfx::Bitmap& bitmap, Gfx::Color color, Gfx::IntPoint start, Gfx::IntPoint end)
 {
-    int length_x = end.x() - start.x();
-    int length_y = end.y() - start.y();
-    float y_step = length_y == 0 ? 0 : (float)(length_y) / (float)(length_x);
-    if (y_step > abs(length_y))
-        y_step = abs(length_y);
-    if (y_step < -abs(length_y))
-        y_step = -abs(length_y);
-    if (y_step == 0 && start.x() == end.x())
-        return;
+    constexpr auto bodge_factor = 20;
 
-    int start_x = start.x();
-    int end_x = end.x();
-    int start_y = start.y();
-    int end_y = end.y();
-    if (start_x > end_x) {
-        swap(start_x, end_x);
-        swap(start_y, end_y);
-    }
+    auto center_line = Gfx::IntLine(start, end);
+    auto bounding_rect = Gfx::IntRect::from_two_points(start, end);
+    bounding_rect.inflate(size() * 2, size() * 2);
+    auto min_y = max(0, bounding_rect.top());
+    auto max_y = min(bitmap.height(), bounding_rect.bottom());
+    auto min_x = max(0, bounding_rect.left());
+    auto max_x = min(bitmap.width(), bounding_rect.right());
+    for (int y = min_y; y < max_y; y++) {
+        for (int x = min_x; x < max_x; x++) {
+            auto distance = center_line.distance_to({ x, y });
+            if (distance >= size())
+                continue;
 
-    float y = start_y;
-    for (int x = start_x; x <= end_x; x++) {
-        int start_step_y = y;
-        int end_step_y = y + y_step;
-        if (start_step_y > end_step_y)
-            swap(start_step_y, end_step_y);
-        for (int i = start_step_y; i <= end_step_y; i++)
-            draw_point(bitmap, color, { x, i });
-        y += y_step;
+            auto falloff = get_falloff(distance) * bodge_factor;
+
+            auto pixel_color = color;
+            pixel_color.set_alpha(AK::min(falloff * 255, 255));
+            bitmap.set_pixel(x, y, bitmap.get_pixel(x, y).blend(pixel_color));
+        }
     }
 }
 
