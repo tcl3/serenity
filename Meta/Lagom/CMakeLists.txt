@@ -555,6 +555,9 @@ if (BUILD_LAGOM)
         add_executable(isobmff ../../Userland/Utilities/isobmff.cpp)
         target_link_libraries(isobmff LibCore LibGfx LibMain)
 
+        add_executable(test-image-decoder ../../Userland/Utilities/test-image-decoder.cpp)
+        target_link_libraries(test-image-decoder LibCore LibFileSystem LibGfx LibMain)
+
         add_executable(ttfdisasm ../../Userland/Utilities/ttfdisasm.cpp)
         target_link_libraries(ttfdisasm LibGfx LibMain)
 
