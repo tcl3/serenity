@@ -1,9 +1,11 @@
 function(add_simple_fuzzer name)
   add_executable(${name} "${name}.cpp")
-
+  if (EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/${name}.dict")
+    configure_file("${name}.dict" "$ENV{OUT}/${name}.dict" COPYONLY)
+  endif()
   if (ENABLE_FUZZERS_OSSFUZZ)
-      target_link_libraries(${name}
-          PUBLIC ${ARGN} LibCore)
+    target_link_libraries(${name}
+      PUBLIC ${ARGN} LibCore)
   elseif (ENABLE_FUZZERS_LIBFUZZER)
     target_compile_options(${name}
       PRIVATE $<$<CXX_COMPILER_ID:Clang>:-g -O1 -fsanitize=fuzzer>
