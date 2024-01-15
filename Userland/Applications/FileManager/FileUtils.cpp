@@ -106,6 +106,10 @@ ErrorOr<void> run_file_operation(FileOperation operation, Vector<ByteString> con
     if (parent_window)
         window->center_within(*parent_window);
     window->show();
+    window->on_close = [&window, child_pid] {
+        (void)Core::System::waitpid(child_pid);
+        file_operation_windows.remove(window);
+    };
 
     return {};
 }
