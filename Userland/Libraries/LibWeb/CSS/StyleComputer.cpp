@@ -266,7 +266,7 @@ void StyleComputer::for_each_stylesheet(CascadeOrigin cascade_origin, Callback c
             callback(*m_user_style_sheet);
     }
     if (cascade_origin == CascadeOrigin::Author) {
-        for (auto const& sheet : document().style_sheets().sheets())
+        for (auto const& sheet : document().final_style_sheets())
             callback(*sheet);
     }
 }

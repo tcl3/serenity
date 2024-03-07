@@ -2696,6 +2696,76 @@ CSS::StyleSheetList const& Document::style_sheets() const
     return const_cast<Document*>(this)->style_sheets();
 }
 
+Vector<JS::NonnullGCPtr<CSS::CSSStyleSheet>> Document::final_style_sheets() const
+{
+    Vector<JS::NonnullGCPtr<CSS::CSSStyleSheet>> final_sheets;
+    for (auto const& sheet : style_sheets().sheets()) {
+        final_sheets.append(sheet);
+    }
+    for (auto const& sheet : adopted_style_sheets()) {
+        final_sheets.append(sheet);
+    }
+
+    return final_sheets;
+}
+
+Vector<JS::NonnullGCPtr<CSS::CSSStyleSheet>> Document::adopted_style_sheets()
+{
+    if (!m_adopted_style_sheets)
+        m_adopted_style_sheets = CSS::StyleSheetList::create(*this);
+    return m_adopted_style_sheets->sheets();
+}
+
+Vector<JS::NonnullGCPtr<CSS::CSSStyleSheet>> Document::adopted_style_sheets() const
+{
+    return const_cast<Document*>(this)->adopted_style_sheets();
+}
+
+JS::NonnullGCPtr<JS::Object> Document::adopted_style_sheets_for_bindings()
+{
+    Vector<JS::Value> sheets;
+    sheets.ensure_capacity(adopted_style_sheets().size());
+    for (auto const& sheet : adopted_style_sheets())
+        sheets.unchecked_append(sheet);
+
+    auto array = JS::Array::create_from(realm(), sheets);
+    MUST(array->set_integrity_level(JS::Object::IntegrityLevel::Frozen));
+    return array;
+}
+
+void Document::set_adopted_style_sheets(Vector<JS::NonnullGCPtr<CSS::CSSStyleSheet>> const& sheets)
+{
+    for (auto const& sheet : adopted_style_sheets()) {
+        m_adopted_style_sheets->remove_sheet(sheet);
+    }
+
+    for (auto const& sheet : sheets) {
+        m_adopted_style_sheets->add_sheet(sheet);
+    }
+}
+
+WebIDL::ExceptionOr<void> Document::set_adopted_style_sheets_for_bindings(JS::GCPtr<JS::Value> value)
+{
+    auto& vm = this->vm();
+    if (!value || !TRY(value->is_array(vm)))
+        return vm.throw_completion<JS::TypeError>(JS::ErrorType::NotIterable, value->to_string_without_side_effects());
+
+    auto iterator = TRY(JS::get_iterator(vm, *value, JS::IteratorHint::Sync));
+    auto values = TRY(JS::iterator_to_list(vm, iterator));
+    Vector<JS::NonnullGCPtr<CSS::CSSStyleSheet>> sheets;
+    for (auto& value : values) {
+        if (!(value.is_object() && is<CSS::CSSStyleSheet>(value.as_object())))
+            return vm.throw_completion<JS::TypeError>(JS::ErrorType::NotAnObjectOfType, "CSSStyleSheet");
+
+        JS::NonnullGCPtr<CSS::CSSStyleSheet> sheet = static_cast<CSS::CSSStyleSheet&>(value.as_object());
+        sheets.append(sheet);
+    }
+
+    set_adopted_style_sheets(sheets);
+
+    return {};
+}
+
 JS::NonnullGCPtr<HTML::History> Document::history()
 {
     if (!m_history)

@@ -17,6 +17,7 @@
 #include <AK/WeakPtr.h>
 #include <LibCore/Forward.h>
 #include <LibJS/Forward.h>
+#include <LibJS/Runtime/Array.h>
 #include <LibWeb/CSS/CSSStyleSheet.h>
 #include <LibWeb/CSS/StyleSheetList.h>
 #include <LibWeb/Cookie/Cookie.h>
@@ -132,6 +133,16 @@ public:
     CSS::StyleSheetList const& style_sheets() const;
 
     CSS::StyleSheetList* style_sheets_for_bindings() { return &style_sheets(); }
+
+    Vector<JS::NonnullGCPtr<CSS::CSSStyleSheet>> final_style_sheets() const;
+
+    Vector<JS::NonnullGCPtr<CSS::CSSStyleSheet>> adopted_style_sheets();
+    Vector<JS::NonnullGCPtr<CSS::CSSStyleSheet>> adopted_style_sheets() const;
+
+    JS::NonnullGCPtr<JS::Object> adopted_style_sheets_for_bindings();
+
+    void set_adopted_style_sheets(Vector<JS::NonnullGCPtr<CSS::CSSStyleSheet>> const&);
+    WebIDL::ExceptionOr<void> set_adopted_style_sheets_for_bindings(JS::GCPtr<JS::Value> value);
 
     virtual FlyString node_name() const override { return "#document"_fly_string; }
 
@@ -626,6 +637,8 @@ private:
     JS::NonnullGCPtr<Page> m_page;
     OwnPtr<CSS::StyleComputer> m_style_computer;
     JS::GCPtr<CSS::StyleSheetList> m_style_sheets;
+    // Vector<JS::NonnullGCPtr<CSS::CSSStyleSheet>> m_adopted_style_sheets;
+    JS::GCPtr<CSS::StyleSheetList> m_adopted_style_sheets;
     JS::GCPtr<Node> m_hovered_node;
     JS::GCPtr<Node> m_inspected_node;
     Optional<CSS::Selector::PseudoElement::Type> m_inspected_pseudo_element;
