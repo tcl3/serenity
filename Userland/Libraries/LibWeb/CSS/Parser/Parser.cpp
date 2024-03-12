@@ -4534,8 +4534,10 @@ CSSRule* Parser::parse_font_face_rule(TokenStream<ComponentValue>& tokens)
     if (unicode_range.is_empty()) {
         unicode_range.empend(0x0u, 0x10FFFFu);
     }
-
-    return CSSFontFaceRule::create(m_context.realm(), FontFace { font_family.release_value(), weight, slope, move(src), move(unicode_range) });
+    // FontFace { font_family.release_value(), weight, slope, move(src), move(unicode_range)
+    // Variant<String, JS::Handle<JS::ArrayBuffer>, JS::Handle<WebIDL::ArrayBufferView>> source = {""_string};
+    auto font_face = MUST(FontFace::construct_impl(m_context.realm(), font_family.release_value(), ""_fly_string));
+    return CSSFontFaceRule::create(m_context.realm(), font_face);
 }
 
 Vector<FontFace::Source> Parser::parse_font_face_src(TokenStream<ComponentValue>& component_values)

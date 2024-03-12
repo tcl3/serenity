@@ -16,14 +16,20 @@ namespace Web::CSS {
 
 JS_DEFINE_ALLOCATOR(CSSFontFaceRule);
 
-JS::NonnullGCPtr<CSSFontFaceRule> CSSFontFaceRule::create(JS::Realm& realm, FontFace&& font_face)
+JS::NonnullGCPtr<CSSFontFaceRule> CSSFontFaceRule::create(JS::Realm& realm, JS::NonnullGCPtr<FontFace> font_face)
 {
-    return realm.heap().allocate<CSSFontFaceRule>(realm, realm, move(font_face));
+    return realm.heap().allocate<CSSFontFaceRule>(realm, realm, font_face);
 }
 
-CSSFontFaceRule::CSSFontFaceRule(JS::Realm& realm, FontFace&& font_face)
+void CSSFontFaceRule::visit_edges(JS::Cell::Visitor& visitor)
+{
+    Base::visit_edges(visitor);
+    visitor.visit(m_font_face);
+}
+
+CSSFontFaceRule::CSSFontFaceRule(JS::Realm& realm, JS::NonnullGCPtr<FontFace> font_face)
     : CSSRule(realm)
-    , m_font_face(move(font_face))
+    , m_font_face(font_face)
 {
 }
 
@@ -52,18 +58,18 @@ String CSSFontFaceRule::serialized() const
     builder.append("font-family: "sv);
 
     // 3. The result of performing serialize a string on the rule’s font family name.
-    serialize_a_string(builder, m_font_face.font_family());
+    serialize_a_string(builder, m_font_face->font_family());
 
     // 4. The string ";", i.e., SEMICOLON (U+003B).
     builder.append(';');
 
     // 5. If the rule’s associated source list is not empty, follow these substeps:
-    if (!m_font_face.sources().is_empty()) {
+    if (!m_font_face->sources().is_empty()) {
         // 1. A single SPACE (U+0020), followed by the string "src:", followed by a single SPACE (U+0020).
         builder.append(" src: "sv);
 
         // 2. The result of invoking serialize a comma-separated list on performing serialize a URL or serialize a LOCAL for each source on the source list.
-        serialize_a_comma_separated_list(builder, m_font_face.sources(), [&](StringBuilder& builder, FontFace::Source source) -> void {
+        serialize_a_comma_separated_list(builder, m_font_face->sources(), [&](StringBuilder& builder, FontFace::Source source) -> void {
             if (source.local_or_url.has<URL>()) {
                 serialize_a_url(builder, MUST(source.local_or_url.get<URL>().to_string()));
             } else {
@@ -84,7 +90,7 @@ String CSSFontFaceRule::serialized() const
 
     // 6. If rule’s associated unicode-range descriptor is present, a single SPACE (U+0020), followed by the string "unicode-range:", followed by a single SPACE (U+0020), followed by the result of performing serialize a <'unicode-range'>, followed by the string ";", i.e., SEMICOLON (U+003B).
     builder.append(" unicode-range: "sv);
-    serialize_unicode_ranges(builder, m_font_face.unicode_ranges());
+    serialize_unicode_ranges(builder, m_font_face->unicode_ranges());
     builder.append(';');
 
     // FIXME: 7. If rule’s associated font-variant descriptor is present, a single SPACE (U+0020),
@@ -106,8 +112,8 @@ String CSSFontFaceRule::serialized() const
     //     followed by the string "font-weight:", followed by a single SPACE (U+0020),
     //     followed by the result of performing serialize a <'font-weight'>,
     //     followed by the string ";", i.e., SEMICOLON (U+003B).
-    if (m_font_face.weight().has_value()) {
-        auto weight = m_font_face.weight().value();
+    if (m_font_face->weight().has_value()) {
+        auto weight = m_font_face->weight().value();
         builder.append(" font-weight: "sv);
         if (weight == 400)
             builder.append("normal"sv);
@@ -122,8 +128,8 @@ String CSSFontFaceRule::serialized() const
     //     followed by the string "font-style:", followed by a single SPACE (U+0020),
     //     followed by the result of performing serialize a <'font-style'>,
     //     followed by the string ";", i.e., SEMICOLON (U+003B).
-    if (m_font_face.slope().has_value()) {
-        auto slope = m_font_face.slope().value();
+    if (m_font_face->slope().has_value()) {
+        auto slope = m_font_face->slope().value();
         builder.append(" font-style: "sv);
         if (slope == Gfx::name_to_slope("Normal"sv))
             builder.append("normal"sv);

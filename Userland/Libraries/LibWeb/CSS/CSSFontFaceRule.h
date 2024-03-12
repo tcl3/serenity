@@ -17,7 +17,7 @@ class CSSFontFaceRule final : public CSSRule {
     JS_DECLARE_ALLOCATOR(CSSFontFaceRule);
 
 public:
-    [[nodiscard]] static JS::NonnullGCPtr<CSSFontFaceRule> create(JS::Realm&, FontFace&&);
+    [[nodiscard]] static JS::NonnullGCPtr<CSSFontFaceRule> create(JS::Realm&, JS::NonnullGCPtr<FontFace>);
 
     virtual ~CSSFontFaceRule() override = default;
 
@@ -27,12 +27,13 @@ public:
     CSSStyleDeclaration* style();
 
 private:
-    CSSFontFaceRule(JS::Realm&, FontFace&&);
+    CSSFontFaceRule(JS::Realm&, JS::NonnullGCPtr<FontFace>);
 
     virtual void initialize(JS::Realm&) override;
+    virtual void visit_edges(JS::Cell::Visitor&) override;
     virtual String serialized() const override;
 
-    FontFace m_font_face;
+    JS::NonnullGCPtr<FontFace> m_font_face;
 };
 
 template<>
