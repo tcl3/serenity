@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<script src="../include.js"></script>
+<style>
+    div { 
+        color: red; 
+        & span { color: blue; } 
+    }
+</style>
+<div>Should be red. <span>Should be green.</span></div>
+<script>
+    test(() => {
+        const sheet = document.styleSheets[0];
+        println(`sheet.cssRules.length initial value: ${sheet.cssRules.length}`);
+        println(`sheet.cssRules[0].cssText initial value: ${sheet.cssRules[0].cssText}`);
+        println(`sheet.cssRules[0].cssRules.length initial value: ${sheet.cssRules[0].cssRules.length}`);
+        println(`sheet.cssRules[0].cssRules[0].cssText initial value: ${sheet.cssRules[0].cssRules[0].cssText}`);
+        sheet.cssRules[0].deleteRule(0);
+        try {
+            sheet.cssRules[0].deleteRule(1);
+            println("FAIL");
+        }
+        catch (e) {
+            println(`Exception thrown when deleteRule index out of bounds: ${e.name}`);
+        }
+        //println(`sheet.cssRules[0].cssRules.length after deleteRule(): ${sheet.cssRules[0].cssRules.length}`);
+        sheet.cssRules[0].insertRule("span { color: green }");
+        try {
+            sheet.cssRules[0].insertRule("invalid");
+            println("FAIL");
+        } catch (e) {
+            println(`Exception thrown when insertRule() given invalid rule: ${e.name}`);
+        }
+        println(`sheet.cssRules[0].cssRules[0].cssText after insertRule(): ${sheet.cssRules[0].cssRules[0].cssText}`);
+        //println(`sheet.cssRules[0].cssRules.length after insertRule(): ${sheet.cssRules[0].cssRules.length}`);
+    });
+</script>

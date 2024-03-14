@@ -34,6 +34,8 @@ public:
 protected:
     CSSGroupingRule(JS::Realm&, CSSRuleList&);
 
+    CSSRuleList const& child_rules() const { return m_child_rules; }
+
     virtual void initialize(JS::Realm&) override;
     virtual void visit_edges(Cell::Visitor&) override;
 

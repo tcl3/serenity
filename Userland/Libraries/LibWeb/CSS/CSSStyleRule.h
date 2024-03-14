@@ -8,18 +8,18 @@
 #pragma once
 
 #include <AK/NonnullRefPtr.h>
-#include <LibWeb/CSS/CSSRule.h>
+#include <LibWeb/CSS/CSSGroupingRule.h>
 #include <LibWeb/CSS/CSSStyleDeclaration.h>
 #include <LibWeb/CSS/Selector.h>
 
 namespace Web::CSS {
 
-class CSSStyleRule final : public CSSRule {
-    WEB_PLATFORM_OBJECT(CSSStyleRule, CSSRule);
+class CSSStyleRule final : public CSSGroupingRule {
+    WEB_PLATFORM_OBJECT(CSSStyleRule, CSSGroupingRule);
     JS_DECLARE_ALLOCATOR(CSSStyleRule);
 
 public:
-    [[nodiscard]] static JS::NonnullGCPtr<CSSStyleRule> create(JS::Realm&, Vector<NonnullRefPtr<Selector>>&&, CSSStyleDeclaration&);
+    [[nodiscard]] static JS::NonnullGCPtr<CSSStyleRule> create(JS::Realm&, CSSRuleList&, Vector<NonnullRefPtr<Selector>>&&, CSSStyleDeclaration&);
 
     virtual ~CSSStyleRule() override = default;
 
@@ -34,7 +34,7 @@ public:
     CSSStyleDeclaration* style();
 
 private:
-    CSSStyleRule(JS::Realm&, Vector<NonnullRefPtr<Selector>>&&, CSSStyleDeclaration&);
+    CSSStyleRule(JS::Realm&, CSSRuleList&, Vector<NonnullRefPtr<Selector>>&&, CSSStyleDeclaration&);
 
     virtual void initialize(JS::Realm&) override;
     virtual void visit_edges(Cell::Visitor&) override;

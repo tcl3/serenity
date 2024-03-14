@@ -14,13 +14,13 @@ namespace Web::CSS {
 
 JS_DEFINE_ALLOCATOR(CSSStyleRule);
 
-JS::NonnullGCPtr<CSSStyleRule> CSSStyleRule::create(JS::Realm& realm, Vector<NonnullRefPtr<Web::CSS::Selector>>&& selectors, CSSStyleDeclaration& declaration)
+JS::NonnullGCPtr<CSSStyleRule> CSSStyleRule::create(JS::Realm& realm, CSSRuleList& child_rules, Vector<NonnullRefPtr<Web::CSS::Selector>>&& selectors, CSSStyleDeclaration& declaration)
 {
-    return realm.heap().allocate<CSSStyleRule>(realm, realm, move(selectors), declaration);
+    return realm.heap().allocate<CSSStyleRule>(realm, realm, child_rules, move(selectors), declaration);
 }
 
-CSSStyleRule::CSSStyleRule(JS::Realm& realm, Vector<NonnullRefPtr<Selector>>&& selectors, CSSStyleDeclaration& declaration)
-    : CSSRule(realm)
+CSSStyleRule::CSSStyleRule(JS::Realm& realm, CSSRuleList& child_rules, Vector<NonnullRefPtr<Selector>>&& selectors, CSSStyleDeclaration& declaration)
+    : CSSGroupingRule(realm, child_rules)
     , m_selectors(move(selectors))
     , m_declaration(declaration)
 {
@@ -57,17 +57,20 @@ String CSSStyleRule::serialized() const
     // 2. Let decls be the result of performing serialize a CSS declaration block on the rule’s associated declarations, or null if there are no such declarations.
     auto decls = declaration().length() > 0 ? declaration().serialized() : Optional<String>();
 
-    // FIXME: 3. Let rules be the result of performing serialize a CSS rule on each rule in the rule’s cssRules list, or null if there are no such rules.
-    Optional<String> rules;
+    // 3. Let rules be the result of performing serialize a CSS rule on each rule in the rule’s cssRules list, or null if there are no such rules.
+    Vector<String> rules;
+    rules.ensure_capacity(child_rules().length());
+    for (auto const& child_rule : child_rules())
+        rules.unchecked_append(child_rule->css_text());
 
     // 4. If decls and rules are both null, append " }" to s (i.e. a single SPACE (U+0020) followed by RIGHT CURLY BRACKET (U+007D)) and return s.
-    if (!decls.has_value() && !rules.has_value()) {
+    if (!decls.has_value() && !rules.is_empty()) {
         builder.append(" }"sv);
         return MUST(builder.to_string());
     }
 
     // 5. If rules is null:
-    if (!rules.has_value()) {
+    if (rules.is_empty()) {
         //    1. Append a single SPACE (U+0020) to s
         builder.append(' ');
         //    2. Append decls to s
@@ -77,15 +80,25 @@ String CSSStyleRule::serialized() const
         //    4. Return s.
         return MUST(builder.to_string());
     }
+    // 6. Otherwise:
+    else {
+        // 1. If decls is not null, prepend it to rules.
+        if (decls.has_value())
+            rules.prepend(decls.release_value());
 
-    // FIXME: 6. Otherwise:
-    // FIXME:    1. If decls is not null, prepend it to rules.
-    // FIXME:    2. For each rule in rules:
-    // FIXME:       1. Append a newline followed by two spaces to s.
-    // FIXME:       2. Append rule to s.
-    // FIXME:    3. Append a newline followed by RIGHT CURLY BRACKET (U+007D) to s.
-    // FIXME:    4. Return s.
-    TODO();
+        // 2. For each rule in rules:
+        for (auto const& rule : rules) {
+            // 1. Append a newline followed by two spaces to s.
+            builder.append("\n  "sv);
+            // 2. Append rule to s.
+            builder.append(rule);
+            // 3. Append a newline followed by RIGHT CURLY BRACKET (U+007D) to s.
+            builder.append("\n}"sv);
+        }
+
+        // 4. Return s.
+        return MUST(builder.to_string());
+    }
 }
 
 // https://www.w3.org/TR/cssom/#dom-cssstylerule-selectortext
