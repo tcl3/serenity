@@ -34,6 +34,7 @@ void CSSGroupingRule::visit_edges(Cell::Visitor& visitor)
     visitor.visit(m_child_rules);
 }
 
+// https://drafts.csswg.org/cssom/#dom-cssgroupingrule-insertrule
 WebIDL::ExceptionOr<u32> CSSGroupingRule::insert_rule(StringView rule, u32 index)
 {
     TRY(m_child_rules->insert_a_css_rule(rule, index));
@@ -42,6 +43,7 @@ WebIDL::ExceptionOr<u32> CSSGroupingRule::insert_rule(StringView rule, u32 index
     return index;
 }
 
+// https://drafts.csswg.org/cssom/#dom-cssgroupingrule-deleterule
 WebIDL::ExceptionOr<void> CSSGroupingRule::delete_rule(u32 index)
 {
     return m_child_rules->remove_a_css_rule(index);
