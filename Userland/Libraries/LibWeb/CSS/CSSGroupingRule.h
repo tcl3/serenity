@@ -20,9 +20,9 @@ class CSSGroupingRule : public CSSRule {
 public:
     virtual ~CSSGroupingRule() = default;
 
-    CSSRuleList const& css_rules() const { return m_rules; }
-    CSSRuleList& css_rules() { return m_rules; }
-    CSSRuleList* css_rules_for_bindings() { return m_rules; }
+    CSSRuleList const& css_rules() const { return m_child_rules; }
+    CSSRuleList& css_rules() { return m_child_rules; }
+    CSSRuleList* css_rules_for_bindings() { return m_child_rules; }
     WebIDL::ExceptionOr<u32> insert_rule(StringView rule, u32 index = 0);
     WebIDL::ExceptionOr<void> delete_rule(u32 index);
 
@@ -38,7 +38,7 @@ protected:
     virtual void visit_edges(Cell::Visitor&) override;
 
 private:
-    JS::NonnullGCPtr<CSSRuleList> m_rules;
+    JS::NonnullGCPtr<CSSRuleList> m_child_rules;
 };
 
 }
