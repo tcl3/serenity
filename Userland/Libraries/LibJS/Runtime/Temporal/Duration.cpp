@@ -60,9 +60,9 @@ Duration::Duration(double years, double months, double weeks, double days, doubl
         auto& value = this->*field;
         VERIFY(isfinite(value));
         // FIXME: test-js contains a small number of cases where a Temporal.Duration is constructed
-        //        with a non-integral double. Eliminate these and VERIFY(trunc(value) == value) instead.
-        if (trunc(value) != value)
-            value = trunc(value);
+        //        with a non-integral double. Eliminate these and VERIFY(AK::trunc(value) == value) instead.
+        if (AK::trunc(value) != value)
+            value = AK::trunc(value);
         else if (bit_cast<u64>(value) == NEGATIVE_ZERO_BITS)
             value = 0;
     }
@@ -480,7 +480,7 @@ ThrowCompletionOr<TimeDurationRecord> balance_time_duration(VM& vm, double days,
 // 7.5.17 TotalDurationNanoseconds ( days, hours, minutes, seconds, milliseconds, microseconds, nanoseconds, offsetShift ), https://tc39.es/proposal-temporal/#sec-temporal-totaldurationnanoseconds
 Crypto::SignedBigInteger total_duration_nanoseconds(double days, double hours, double minutes, double seconds, double milliseconds, double microseconds, Crypto::SignedBigInteger const& nanoseconds, double offset_shift)
 {
-    VERIFY(offset_shift == trunc(offset_shift));
+    VERIFY(offset_shift == AK::trunc(offset_shift));
 
     auto result_nanoseconds = nanoseconds;
 
@@ -1236,7 +1236,7 @@ ThrowCompletionOr<DurationRecord> add_duration(VM& vm, double years1, double mon
 {
     auto& realm = *vm.current_realm();
 
-    VERIFY(all_of(AK::Array { years1, months1, weeks1, days1, hours1, minutes1, seconds1, milliseconds1, microseconds1, nanoseconds1, years2, months2, weeks2, days2, hours2, minutes2, seconds2, milliseconds2, microseconds2, nanoseconds2 }, [](auto value) { return value == trunc(value); }));
+    VERIFY(all_of(AK::Array { years1, months1, weeks1, days1, hours1, minutes1, seconds1, milliseconds1, microseconds1, nanoseconds1, years2, months2, weeks2, days2, hours2, minutes2, seconds2, milliseconds2, microseconds2, nanoseconds2 }, [](auto value) { return value == AK::trunc(value); }));
 
     // 1. Let largestUnit1 be ! DefaultTemporalLargestUnit(y1, mon1, w1, d1, h1, min1, s1, ms1, mus1).
     auto largest_unit1 = default_temporal_largest_unit(years1, months1, weeks1, days1, hours1, minutes1, seconds1, milliseconds1, microseconds1);
@@ -1505,7 +1505,7 @@ ThrowCompletionOr<RoundedDuration> round_duration(VM& vm, double years, double m
         fractional_days = fractional_days + months_weeks_in_days;
 
         // h. Let isoResult be ! AddISODate(plainRelativeTo.[[ISOYear]]. plainRelativeTo.[[ISOMonth]], plainRelativeTo.[[ISODay]], 0, 0, 0, truncate(fractionalDays), "constrain").
-        auto iso_result = MUST(add_iso_date(vm, plain_relative_to->iso_year(), plain_relative_to->iso_month(), plain_relative_to->iso_day(), 0, 0, 0, trunc(fractional_days), "constrain"sv));
+        auto iso_result = MUST(add_iso_date(vm, plain_relative_to->iso_year(), plain_relative_to->iso_month(), plain_relative_to->iso_day(), 0, 0, 0, AK::trunc(fractional_days), "constrain"sv));
 
         // i. Let wholeDaysLater be ? CreateTemporalDate(isoResult.[[Year]], isoResult.[[Month]], isoResult.[[Day]], calendarRec.[[Receiver]]).
         // FIXME: Pass through receiver from calendarRec
@@ -1599,7 +1599,7 @@ ThrowCompletionOr<RoundedDuration> round_duration(VM& vm, double years, double m
         fractional_days += weeks_in_days;
 
         // h. Let isoResult be ! AddISODate(plainRelativeTo.[[ISOYear]], plainRelativeTo.[[ISOMonth]], plainRelativeTo.[[ISODay]], 0, 0, 0, truncate(fractionalDays), "constrain").
-        auto iso_result = MUST(add_iso_date(vm, plain_relative_to->iso_year(), plain_relative_to->iso_month(), plain_relative_to->iso_day(), 0, 0, 0, trunc(fractional_days), "constrain"sv));
+        auto iso_result = MUST(add_iso_date(vm, plain_relative_to->iso_year(), plain_relative_to->iso_month(), plain_relative_to->iso_day(), 0, 0, 0, AK::trunc(fractional_days), "constrain"sv));
 
         // i. Let wholeDaysLater be ? CreateTemporalDate(isoResult.[[Year]], isoResult.[[Month]], isoResult.[[Day]], calendarRec.[[Receiver]]).
         // FIXME: Pass through calendarRec
@@ -1670,7 +1670,7 @@ ThrowCompletionOr<RoundedDuration> round_duration(VM& vm, double years, double m
         VERIFY(plain_relative_to);
 
         // a. Let isoResult be ! AddISODate(plainRelativeTo.[[ISOYear]], plainRelativeTo.[[ISOMonth]], plainRelativeTo.[[ISODay]], 0, 0, 0, truncate(fractionalDays), "constrain").
-        auto iso_result = MUST(add_iso_date(vm, plain_relative_to->iso_year(), plain_relative_to->iso_month(), plain_relative_to->iso_day(), 0, 0, 0, trunc(fractional_days), "constrain"sv));
+        auto iso_result = MUST(add_iso_date(vm, plain_relative_to->iso_year(), plain_relative_to->iso_month(), plain_relative_to->iso_day(), 0, 0, 0, AK::trunc(fractional_days), "constrain"sv));
 
         // b. Let wholeDaysLater be ? CreateTemporalDate(isoResult.[[Year]], isoResult.[[Month]], isoResult.[[Day]], calendarRec.[[Receiver]]).
         // FIXME: Pass through receiver from calendarRec
@@ -1901,19 +1901,19 @@ ThrowCompletionOr<String> temporal_duration_to_string(VM& vm, double years, doub
     auto sign = duration_sign(years, months, weeks, days, hours, minutes, seconds, milliseconds, microseconds, nanoseconds);
 
     // 2. Set microseconds to microseconds + truncate(nanoseconds / 1000).
-    microseconds += trunc(nanoseconds / 1000);
+    microseconds += AK::trunc(nanoseconds / 1000);
 
     // 3. Set nanoseconds to remainder(nanoseconds, 1000).
     nanoseconds = fmod(nanoseconds, 1000);
 
     // 4. Set milliseconds to milliseconds + truncate(microseconds / 1000).
-    milliseconds += trunc(microseconds / 1000);
+    milliseconds += AK::trunc(microseconds / 1000);
 
     // 5. Set microseconds to remainder(microseconds, 1000).
     microseconds = fmod(microseconds, 1000);
 
     // 6. Set seconds to seconds + truncate(milliseconds / 1000).
-    seconds += trunc(milliseconds / 1000);
+    seconds += AK::trunc(milliseconds / 1000);
 
     // 7. Set milliseconds to remainder(milliseconds, 1000).
     milliseconds = fmod(milliseconds, 1000);

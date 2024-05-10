@@ -9,6 +9,7 @@
 #include <AK/BuiltinWrappers.h>
 #include <AK/CharacterTypes.h>
 #include <AK/FloatingPoint.h>
+#include <AK/Math.h>
 #include <AK/StringBuilder.h>
 #include <AK/StringHash.h>
 #include <LibCrypto/BigInt/Algorithms/UnsignedBigIntegerAlgorithms.h>
@@ -41,7 +42,7 @@ UnsignedBigInteger::UnsignedBigInteger(double value)
     // also these values don't have a clear BigInteger representation.
     VERIFY(!isnan(value));
     VERIFY(!isinf(value));
-    VERIFY(trunc(value) == value);
+    VERIFY(AK::trunc(value) == value);
     VERIFY(value >= 0.0);
 
     if (value <= NumericLimits<u32>::max()) {

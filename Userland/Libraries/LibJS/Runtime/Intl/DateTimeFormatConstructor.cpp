@@ -245,7 +245,7 @@ ThrowCompletionOr<NonnullGCPtr<DateTimeFormat>> create_date_time_format(VM& vm, 
         auto offset_minutes = offset_nanoseconds / 60'000'000'000;
 
         // f. Assert: offsetMinutes is an integer.
-        VERIFY(trunc(offset_minutes) == offset_minutes);
+        VERIFY(AK::trunc(offset_minutes) == offset_minutes);
 
         // g. Set timeZone to FormatOffsetTimeZoneIdentifier(offsetMinutes).
         time_zone = format_offset_time_zone_identifier(offset_minutes);

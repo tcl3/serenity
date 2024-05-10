@@ -88,7 +88,7 @@ ThrowCompletionOr<PlainYearMonth*> to_temporal_year_month(VM& vm, Value item, Ob
 ThrowCompletionOr<ISOYearMonth> regulate_iso_year_month(VM& vm, double year, double month, StringView overflow)
 {
     // 1. Assert: year and month are integers.
-    VERIFY(year == trunc(year) && month == trunc(month));
+    VERIFY(year == AK::trunc(year) && month == AK::trunc(month));
 
     // 2. Assert: overflow is either "constrain" or "reject".
     // NOTE: Asserted by the VERIFY_NOT_REACHED at the end
@@ -159,7 +159,7 @@ bool iso_year_month_within_limits(i32 year, u8 month)
 ISOYearMonth balance_iso_year_month(double year, double month)
 {
     // 1. Assert: year and month are integers.
-    VERIFY(year == trunc(year) && month == trunc(month));
+    VERIFY(year == AK::trunc(year) && month == AK::trunc(month));
 
     // 2. Set year to year + floor((month - 1) / 12).
     year += floor((month - 1) / 12);

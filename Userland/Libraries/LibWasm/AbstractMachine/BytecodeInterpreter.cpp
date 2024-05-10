@@ -445,7 +445,7 @@ MakeSigned<T> BytecodeInterpreter::checked_signed_truncate(V value)
     if constexpr (IsSame<float, V>)
         truncated = truncf(value);
     else
-        truncated = trunc(value);
+        truncated = AK::trunc(value);
 
     using SignedT = MakeSigned<T>;
     if (NumericLimits<SignedT>::min() <= truncated && static_cast<double>(NumericLimits<SignedT>::max()) >= truncated)
@@ -467,7 +467,7 @@ MakeUnsigned<T> BytecodeInterpreter::checked_unsigned_truncate(V value)
     if constexpr (IsSame<float, V>)
         truncated = truncf(value);
     else
-        truncated = trunc(value);
+        truncated = AK::trunc(value);
 
     using UnsignedT = MakeUnsigned<T>;
     if (NumericLimits<UnsignedT>::min() <= truncated && static_cast<double>(NumericLimits<UnsignedT>::max()) >= truncated)

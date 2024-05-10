@@ -14,12 +14,12 @@
 #include <AK/Format.h>
 #include <AK/Forward.h>
 #include <AK/Function.h>
+#include <AK/Math.h>
 #include <AK/Result.h>
 #include <AK/String.h>
 #include <AK/Types.h>
 #include <LibJS/Forward.h>
 #include <LibJS/Heap/GCPtr.h>
-#include <math.h>
 
 namespace JS {
 
@@ -185,7 +185,7 @@ public:
     {
         if (is_int32())
             return true;
-        return is_finite_number() && trunc(as_double()) == as_double();
+        return is_finite_number() && AK::trunc(as_double()) == as_double();
     }
 
     bool is_finite_number() const
@@ -211,7 +211,7 @@ public:
     explicit Value(double value)
     {
         bool is_negative_zero = bit_cast<u64>(value) == NEGATIVE_ZERO_BITS;
-        if (value >= NumericLimits<i32>::min() && value <= NumericLimits<i32>::max() && trunc(value) == value && !is_negative_zero) {
+        if (value >= NumericLimits<i32>::min() && value <= NumericLimits<i32>::max() && AK::trunc(value) == value && !is_negative_zero) {
             VERIFY(!(SHIFTED_INT32_TAG & (static_cast<i32>(value) & 0xFFFFFFFFul)));
             m_value.encoded = SHIFTED_INT32_TAG | (static_cast<i32>(value) & 0xFFFFFFFFul);
         } else {

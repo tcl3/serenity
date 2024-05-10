@@ -1127,7 +1127,7 @@ ByteString time_zone_string(double time)
     }
 
     // 4. Let offset be 𝔽(truncate(offsetNs / 106)).
-    auto offset = trunc(offset_nanoseconds / 1e6);
+    auto offset = AK::trunc(offset_nanoseconds / 1e6);
 
     StringView offset_sign;
 

@@ -167,7 +167,7 @@ i32 compare_epoch_nanoseconds(BigInt const& epoch_nanoseconds_one, BigInt const&
 // 8.5.6 AddInstant ( epochNanoseconds, hours, minutes, seconds, milliseconds, microseconds, nanoseconds ), https://tc39.es/proposal-temporal/#sec-temporal-addinstant
 ThrowCompletionOr<BigInt*> add_instant(VM& vm, BigInt const& epoch_nanoseconds, double hours, double minutes, double seconds, double milliseconds, double microseconds, double nanoseconds)
 {
-    VERIFY(hours == trunc(hours) && minutes == trunc(minutes) && seconds == trunc(seconds) && milliseconds == trunc(milliseconds) && microseconds == trunc(microseconds) && nanoseconds == trunc(nanoseconds));
+    VERIFY(hours == AK::trunc(hours) && minutes == AK::trunc(minutes) && seconds == AK::trunc(seconds) && milliseconds == AK::trunc(milliseconds) && microseconds == AK::trunc(microseconds) && nanoseconds == AK::trunc(nanoseconds));
 
     // 1. Let result be epochNanoseconds + ℤ(nanoseconds) + ℤ(microseconds) × 1000ℤ + ℤ(milliseconds) × 10^6ℤ + ℤ(seconds) × 10^9ℤ + ℤ(minutes) × 60ℤ × 10^9ℤ + ℤ(hours) × 3600ℤ × 10^9ℤ.
     auto result = BigInt::create(vm,

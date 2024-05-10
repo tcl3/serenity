@@ -231,7 +231,7 @@ ThrowCompletionOr<String> format_time_zone_offset_string(VM& vm, double offset_n
 ThrowCompletionOr<String> format_iso_time_zone_offset_string(VM& vm, double offset_nanoseconds)
 {
     // 1. Assert: offsetNanoseconds is an integer.
-    VERIFY(trunc(offset_nanoseconds) == offset_nanoseconds);
+    VERIFY(AK::trunc(offset_nanoseconds) == offset_nanoseconds);
 
     // 2. Set offsetNanoseconds to RoundNumberToIncrement(offsetNanoseconds, 60 × 10^9, "halfExpand").
     offset_nanoseconds = round_number_to_increment(offset_nanoseconds, 60000000000, "halfExpand"sv);

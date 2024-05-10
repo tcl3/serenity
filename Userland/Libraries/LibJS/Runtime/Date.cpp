@@ -356,7 +356,7 @@ Crypto::SignedBigInteger get_utc_epoch_nanoseconds(i32 year, u8 month, u8 day, u
     auto ms = make_date(date, time);
 
     // 4. Assert: ms is an integral Number.
-    VERIFY(ms == trunc(ms));
+    VERIFY(ms == AK::trunc(ms));
 
     // 5. Return ℤ(ℝ(ms) × 10^6 + microsecond × 10^3 + nanosecond).
     auto result = Crypto::SignedBigInteger { ms }.multiplied_by(s_one_million_bigint);
@@ -490,7 +490,7 @@ double local_time(double time)
     }
 
     // 4. Let offsetMs be truncate(offsetNs / 10^6).
-    auto offset_milliseconds = trunc(offset_nanoseconds / 1e6);
+    auto offset_milliseconds = AK::trunc(offset_nanoseconds / 1e6);
 
     // 5. Return t + 𝔽(offsetMs).
     return time + offset_milliseconds;
@@ -538,7 +538,7 @@ double utc_time(double time)
     }
 
     // 4. Let offsetMs be truncate(offsetNs / 10^6).
-    auto offset_milliseconds = trunc(offset_nanoseconds / 1e6);
+    auto offset_milliseconds = AK::trunc(offset_nanoseconds / 1e6);
 
     // 5. Return t - 𝔽(offsetMs).
     return time - offset_milliseconds;

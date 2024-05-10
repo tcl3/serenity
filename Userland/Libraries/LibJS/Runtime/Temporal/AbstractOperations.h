@@ -212,7 +212,7 @@ ThrowCompletionOr<double> to_integer_with_truncation(VM& vm, Value argument, Err
     }
 
     // 4. Return truncate(ℝ(number)).
-    return trunc(number.as_double());
+    return AK::trunc(number.as_double());
 }
 
 // 13.41 ToIntegerIfIntegral ( argument ), https://tc39.es/proposal-temporal/#sec-tointegerifintegral

@@ -296,7 +296,7 @@ static CSSPixels snap_a_length_as_a_border_width(double device_pixels_per_css_pi
 
     // 2. If len is an integer number of device pixels, do nothing.
     auto device_pixels = length.to_double() * device_pixels_per_css_pixel;
-    if (device_pixels == trunc(device_pixels))
+    if (device_pixels == AK::trunc(device_pixels))
         return length;
 
     // 3. If len is greater than zero, but less than 1 device pixel, round len up to 1 device pixel.

@@ -10,6 +10,7 @@
 #include <AK/ByteString.h>
 #include <AK/Checked.h>
 #include <AK/Format.h>
+#include <AK/Math.h>
 #include <AK/Optional.h>
 #include <AK/String.h>
 #include <AK/StringView.h>

@@ -86,7 +86,7 @@ void FunctionObject::set_function_length(double length)
     auto& vm = this->vm();
 
     // "length (a non-negative integer or +∞)"
-    VERIFY(trunc(length) == length || __builtin_isinf_sign(length) == 1);
+    VERIFY(AK::trunc(length) == length || __builtin_isinf_sign(length) == 1);
 
     // 1. Assert: F is an extensible object that does not have a "length" own property.
     VERIFY(m_is_extensible);

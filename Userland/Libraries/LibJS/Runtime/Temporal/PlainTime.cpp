@@ -162,7 +162,7 @@ ThrowCompletionOr<PlainTime*> to_temporal_time(VM& vm, Value item, Optional<Stri
 ThrowCompletionOr<TemporalTime> regulate_time(VM& vm, double hour, double minute, double second, double millisecond, double microsecond, double nanosecond, StringView overflow)
 {
     // 1. Assert: hour, minute, second, millisecond, microsecond and nanosecond are integers.
-    VERIFY(trunc(hour) == hour && trunc(minute) == minute && trunc(second) == second && trunc(millisecond) == millisecond && trunc(microsecond) == microsecond && trunc(nanosecond) == nanosecond);
+    VERIFY(AK::trunc(hour) == hour && AK::trunc(minute) == minute && AK::trunc(second) == second && AK::trunc(millisecond) == millisecond && AK::trunc(microsecond) == microsecond && AK::trunc(nanosecond) == nanosecond);
 
     // 2. Assert: overflow is either "constrain" or "reject".
     // NOTE: Asserted by the VERIFY_NOT_REACHED at the end
@@ -233,7 +233,7 @@ bool is_valid_time(double hour, double minute, double second, double millisecond
 DaysAndTime balance_time(double hour, double minute, double second, double millisecond, double microsecond, double nanosecond)
 {
     // 1. Assert: hour, minute, second, millisecond, microsecond, and nanosecond are integers.
-    VERIFY(hour == trunc(hour) && minute == trunc(minute) && second == trunc(second) && millisecond == trunc(millisecond) && microsecond == trunc(microsecond) && nanosecond == trunc(nanosecond));
+    VERIFY(hour == AK::trunc(hour) && minute == AK::trunc(minute) && second == AK::trunc(second) && millisecond == AK::trunc(millisecond) && microsecond == AK::trunc(microsecond) && nanosecond == AK::trunc(nanosecond));
 
     // 2. Set microsecond to microsecond + floor(nanosecond / 1000).
     microsecond += floor(nanosecond / 1000);
@@ -518,7 +518,7 @@ i8 compare_temporal_time(u8 hour1, u8 minute1, u8 second1, u16 millisecond1, u16
 DaysAndTime add_time(u8 hour, u8 minute, u8 second, u16 millisecond, u16 microsecond, u16 nanosecond, double hours, double minutes, double seconds, double milliseconds, double microseconds, double nanoseconds)
 {
     // 1. Assert: hour, minute, second, millisecond, microsecond, nanosecond, hours, minutes, seconds, milliseconds, microseconds, and nanoseconds are integers.
-    VERIFY(hours == trunc(hours) && minutes == trunc(minutes) && seconds == trunc(seconds) && milliseconds == trunc(milliseconds) && microseconds == trunc(microseconds) && nanoseconds == trunc(nanoseconds));
+    VERIFY(hours == AK::trunc(hours) && minutes == AK::trunc(minutes) && seconds == AK::trunc(seconds) && milliseconds == AK::trunc(milliseconds) && microseconds == AK::trunc(microseconds) && nanoseconds == AK::trunc(nanoseconds));
 
     // 2. Assert: IsValidTime(hour, minute, second, millisecond, microsecond, nanosecond) is true.
     VERIFY(is_valid_time(hour, minute, second, millisecond, microsecond, nanosecond));

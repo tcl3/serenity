@@ -110,7 +110,7 @@ Value::Value(ByteString value)
 
 Value::Value(double value)
 {
-    if (trunc(value) == value) {
+    if (AK::trunc(value) == value) {
         if (AK::is_within_range<i64>(value)) {
             m_type = SQLType::Integer;
             m_value = static_cast<i64>(value);

@@ -291,7 +291,7 @@ ThrowCompletionOr<u64> to_temporal_rounding_increment(VM& vm, Object const& norm
     }
 
     // 4. Return truncate(ℝ(increment))
-    return static_cast<u64>(trunc(increment));
+    return static_cast<u64>(AK::trunc(increment));
 }
 
 // 13.13 ValidateTemporalRoundingIncrement ( increment, dividend, inclusive ), https://tc39.es/proposal-temporal/#sec-validatetemporalroundingincrement
@@ -392,7 +392,7 @@ ThrowCompletionOr<SecondsStringPrecision> to_seconds_string_precision_record(VM&
         return vm.template throw_completion<RangeError>(ErrorType::OptionIsNotValidValue, fractional_digits_value, "fractionalSecondDigits"sv);
 
     // 12. Let fractionalDigitCount be truncate(ℝ(fractionalDigitsVal)).
-    auto fractional_digit_count_unchecked = trunc(fractional_digits_value.as_double());
+    auto fractional_digit_count_unchecked = AK::trunc(fractional_digits_value.as_double());
 
     // 13. If fractionalDigitCount < 0 or fractionalDigitCount > 9, throw a RangeError exception.
     if (fractional_digit_count_unchecked < 0 || fractional_digit_count_unchecked > 9)

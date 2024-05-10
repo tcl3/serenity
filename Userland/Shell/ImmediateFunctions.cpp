@@ -1342,7 +1342,7 @@ ErrorOr<RefPtr<AST::Node>> Shell::immediate_math(AST::ImmediateExpression& invok
                 case Operator::NotEqual:
                     return lhs != rhs;
                 case Operator::Power:
-                    return trunc(pow(static_cast<double>(lhs), static_cast<double>(rhs)));
+                    return AK::trunc(pow(static_cast<double>(lhs), static_cast<double>(rhs)));
                 case Operator::Comma:
                     return rhs;
                 default:

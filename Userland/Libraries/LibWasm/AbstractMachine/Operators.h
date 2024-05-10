@@ -484,7 +484,7 @@ struct Truncate {
         if constexpr (IsSame<Lhs, float>)
             return truncf(lhs);
         else if constexpr (IsSame<Lhs, double>)
-            return trunc(lhs);
+            return AK::trunc(lhs);
         else
             VERIFY_NOT_REACHED();
     }
@@ -545,7 +545,7 @@ struct CheckedTruncate {
         if constexpr (IsSame<float, Lhs>)
             truncated = truncf(lhs);
         else if constexpr (IsSame<double, Lhs>)
-            truncated = trunc(lhs);
+            truncated = AK::trunc(lhs);
         else
             VERIFY_NOT_REACHED();
 
@@ -668,7 +668,7 @@ struct SaturatingTruncate {
         if constexpr (IsSame<Lhs, float>)
             return convert(truncf(lhs));
         else
-            return convert(trunc(lhs));
+            return convert(AK::trunc(lhs));
     }
 
     static StringView name() { return "truncate.saturating"sv; }

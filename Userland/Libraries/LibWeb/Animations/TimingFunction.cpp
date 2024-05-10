@@ -139,7 +139,7 @@ double StepsTimingFunction::operator()(double input_progress, bool before_flag) 
     //    - input progress value × steps mod 1 equals zero (that is, if input progress value × steps is integral), then
     //    decrement current step by one.
     auto step_progress = input_progress * number_of_steps;
-    if (before_flag && trunc(step_progress) == step_progress)
+    if (before_flag && AK::trunc(step_progress) == step_progress)
         current_step -= 1;
 
     // 4. If input progress value ≥ 0 and current step < 0, let current step be zero.

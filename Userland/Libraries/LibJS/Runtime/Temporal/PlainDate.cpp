@@ -300,7 +300,7 @@ DateDurationRecord difference_iso_date(VM& vm, i32 year1, u8 month1, u8 day1, i3
         // h. If largestUnit is "week", then
         if (largest_unit == "week"sv) {
             // i. Set weeks to truncate(days / 7).
-            weeks = trunc(days / 7);
+            weeks = AK::trunc(days / 7);
 
             // ii. Set days to remainder(days, 7).
             days = fmod(days, 7);
@@ -314,7 +314,7 @@ DateDurationRecord difference_iso_date(VM& vm, i32 year1, u8 month1, u8 day1, i3
 // 3.5.4 RegulateISODate ( year, month, day, overflow ), https://tc39.es/proposal-temporal/#sec-temporal-regulateisodate
 ThrowCompletionOr<ISODateRecord> regulate_iso_date(VM& vm, double year, double month, double day, StringView overflow)
 {
-    VERIFY(year == trunc(year) && month == trunc(month) && day == trunc(day));
+    VERIFY(year == AK::trunc(year) && month == AK::trunc(month) && day == AK::trunc(day));
 
     // 1. If overflow is "constrain", then
     if (overflow == "constrain"sv) {
@@ -474,7 +474,7 @@ ThrowCompletionOr<String> temporal_date_to_string(VM& vm, PlainDate& temporal_da
 ThrowCompletionOr<ISODateRecord> add_iso_date(VM& vm, i32 year, u8 month, u8 day, double years, double months, double weeks, double days, StringView overflow)
 {
     // 1. Assert: year, month, day, years, months, weeks, and days are integers.
-    VERIFY(years == trunc(years) && months == trunc(months) && weeks == trunc(weeks) && days == trunc(days));
+    VERIFY(years == AK::trunc(years) && months == AK::trunc(months) && weeks == AK::trunc(weeks) && days == AK::trunc(days));
 
     // 2. Assert: overflow is either "constrain" or "reject".
     VERIFY(overflow == "constrain"sv || overflow == "reject"sv);

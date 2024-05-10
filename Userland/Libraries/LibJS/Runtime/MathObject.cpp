@@ -786,7 +786,7 @@ ThrowCompletionOr<Value> MathObject::round_impl(VM& vm, Value x)
     auto number = TRY(x.to_number(vm));
 
     // 2. If n is not finite or n is an integral Number, return n.
-    if (!number.is_finite_number() || number.as_double() == ::trunc(number.as_double()))
+    if (!number.is_finite_number() || number.as_double() == ::AK::trunc(number.as_double()))
         return number;
 
     // 3. If n < 0.5𝔽 and n > +0𝔽, return +0𝔽.
