@@ -40,7 +40,7 @@ UnsignedBigInteger::UnsignedBigInteger(double value)
 {
     // Because this is currently only used for LibJS we VERIFY some preconditions
     // also these values don't have a clear BigInteger representation.
-    VERIFY(!isnan(value));
+    VERIFY(!__builtin_isnan(value));
     VERIFY(!isinf(value));
     VERIFY(AK::trunc(value) == value);
     VERIFY(value >= 0.0);
@@ -614,7 +614,7 @@ bool UnsignedBigInteger::operator>=(UnsignedBigInteger const& other) const
 
 UnsignedBigInteger::CompareResult UnsignedBigInteger::compare_to_double(double value) const
 {
-    VERIFY(!isnan(value));
+    VERIFY(!__builtin_isnan(value));
 
     if (isinf(value)) {
         bool is_positive_infinity = __builtin_isinf_sign(value) > 0;

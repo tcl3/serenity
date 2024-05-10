@@ -116,7 +116,7 @@ MediaPaintable::Components MediaPaintable::compute_control_bar_components(PaintC
     }
 
     auto display_time = human_readable_digital_time(round(media_element.layout_display_time({})));
-    auto duration = human_readable_digital_time(isnan(media_element.duration()) ? 0 : round(media_element.duration()));
+    auto duration = human_readable_digital_time(__builtin_isnan(media_element.duration()) ? 0 : round(media_element.duration()));
     components.timestamp = String::formatted("{} / {}", display_time, duration).release_value_but_fixme_should_propagate_errors();
     components.timestamp_font = layout_node().scaled_font(context);
 
@@ -176,7 +176,7 @@ void MediaPaintable::paint_control_bar_timeline(PaintContext& context, HTML::HTM
     if (components.timeline_rect.is_empty())
         return;
 
-    auto playback_percentage = isnan(media_element.duration()) ? 0.0 : media_element.layout_display_time({}) / media_element.duration();
+    auto playback_percentage = __builtin_isnan(media_element.duration()) ? 0.0 : media_element.layout_display_time({}) / media_element.duration();
     auto playback_position = static_cast<double>(static_cast<int>(components.timeline_rect.width())) * playback_percentage;
     auto timeline_button_offset_x = static_cast<DevicePixels>(round(playback_position));
 

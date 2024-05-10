@@ -1287,7 +1287,7 @@ WebIDL::ExceptionOr<double> extract_high_water_mark(QueuingStrategy const& strat
     auto high_water_mark = strategy.high_water_mark.value();
 
     // 3. If highWaterMark is NaN or highWaterMark < 0, throw a RangeError exception.
-    if (isnan(high_water_mark) || high_water_mark < 0)
+    if (__builtin_isnan(high_water_mark) || high_water_mark < 0)
         return WebIDL::SimpleException { WebIDL::SimpleExceptionType::RangeError, "Invalid value for high water mark"sv };
 
     // 4. Return highWaterMark.

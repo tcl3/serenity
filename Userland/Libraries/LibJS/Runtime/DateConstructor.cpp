@@ -293,7 +293,7 @@ ThrowCompletionOr<NonnullGCPtr<Object>> DateConstructor::construct(FunctionObjec
 
         // i. If y is NaN, let yr be NaN.
         // j. Else,
-        if (!isnan(year)) {
+        if (!__builtin_isnan(year)) {
             // i. Let yi be ! ToIntegerOrInfinity(y).
             auto year_integer = to_integer_or_infinity(year);
 
@@ -360,7 +360,7 @@ JS_DEFINE_NATIVE_FUNCTION(DateConstructor::utc)
 
     // 8. If y is NaN, let yr be NaN.
     // 9. Else,
-    if (!isnan(year)) {
+    if (!__builtin_isnan(year)) {
         // a. Let yi be ! ToIntegerOrInfinity(y).
         auto year_integer = to_integer_or_infinity(year);
 

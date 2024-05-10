@@ -321,7 +321,7 @@ void HTMLMediaElement::set_duration(double duration)
     // length) the user agent must queue a media element task given the media element to fire an event named durationchange at the media element. (The event
     // is not fired when the duration is reset as part of loading a new media resource.) If the duration is changed such that the current playback position
     // ends up being greater than the time of the end of the media resource, then the user agent must also seek to the time of the end of the media resource.
-    if (!isnan(duration)) {
+    if (!__builtin_isnan(duration)) {
         queue_a_media_element_task([this] {
             dispatch_event(DOM::Event::create(realm(), HTML::EventNames::durationchange));
         });

@@ -372,7 +372,7 @@ void GradientTool::draw_gradient(GUI::Painter& painter, bool with_guidelines, Gf
     auto gradient_rect = Gfx::IntRect::centered_at(t_gradient_center, { gradient_max_side_length, gradient_max_side_length });
     float overall_gradient_length_in_rect = Gfx::calculate_gradient_length(gradient_rect.size().to_type<float>(), rotation_degrees - 90);
 
-    if (m_gradient_half_length == 0 || overall_gradient_length_in_rect == 0 || isnan(overall_gradient_length_in_rect))
+    if (m_gradient_half_length == 0 || overall_gradient_length_in_rect == 0 || __builtin_isnan(overall_gradient_length_in_rect))
         return;
 
     auto gradient_half_width_percentage_offset = (m_gradient_half_length * scale) / overall_gradient_length_in_rect;

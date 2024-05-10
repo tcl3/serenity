@@ -88,7 +88,7 @@ public:
     static CSSPixels nearest_value_for(F value)
     {
         i32 raw_value = 0;
-        if (!isnan(value))
+        if (!__builtin_isnan(value))
             raw_value = AK::clamp_to<int>(value * fixed_point_denominator);
         // Note: The resolution of CSSPixels is 0.015625, so care must be taken when converting
         // floats/doubles to CSSPixels as small values (such as scale factors) can underflow to zero,
@@ -102,7 +102,7 @@ public:
     static CSSPixels floored_value_for(F value)
     {
         i32 raw_value = 0;
-        if (!isnan(value))
+        if (!__builtin_isnan(value))
             raw_value = AK::clamp_to<int>(floor(value * fixed_point_denominator));
         return from_raw(raw_value);
     }

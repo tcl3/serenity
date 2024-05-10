@@ -460,7 +460,7 @@ ThrowCompletionOr<Vector<PatternPartition>> format_date_time_pattern(VM& vm, Dat
     time = time_clip(time);
 
     // 2. If x is NaN, throw a RangeError exception.
-    if (isnan(time))
+    if (__builtin_isnan(time))
         return vm.throw_completion<RangeError>(ErrorType::IntlInvalidTime);
 
     // 3. Let locale be dateTimeFormat.[[Locale]].
@@ -850,14 +850,14 @@ ThrowCompletionOr<Vector<PatternPartitionWithSource>> partition_date_time_range_
     start = time_clip(start);
 
     // 2. If x is NaN, throw a RangeError exception.
-    if (isnan(start))
+    if (__builtin_isnan(start))
         return vm.throw_completion<RangeError>(ErrorType::IntlInvalidTime);
 
     // 3. Let y be TimeClip(y).
     end = time_clip(end);
 
     // 4. If y is NaN, throw a RangeError exception.
-    if (isnan(end))
+    if (__builtin_isnan(end))
         return vm.throw_completion<RangeError>(ErrorType::IntlInvalidTime);
 
     // 5. Let tm1 be ToLocalTime(ℤ(ℝ(x) × 10^6), dateTimeFormat.[[Calendar]], dateTimeFormat.[[TimeZone]]).

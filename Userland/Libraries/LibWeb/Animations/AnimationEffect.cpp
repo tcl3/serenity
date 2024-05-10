@@ -133,14 +133,14 @@ WebIDL::ExceptionOr<void> AnimationEffect::update_timing(OptionalEffectTiming ti
 
     // 2. If the iterations member of input exists, and is less than zero or is the value NaN, throw a TypeError and
     //    abort this procedure.
-    if (timing.iterations.has_value() && (timing.iterations.value() < 0.0 || isnan(timing.iterations.value())))
+    if (timing.iterations.has_value() && (timing.iterations.value() < 0.0 || __builtin_isnan(timing.iterations.value())))
         return WebIDL::SimpleException { WebIDL::SimpleExceptionType::TypeError, "Invalid iteration count value"sv };
 
     // 3. If the duration member of input exists, and is less than zero or is the value NaN, throw a TypeError and
     //    abort this procedure.
     // Note: "auto", the only valid string value, is treated as 0.
     auto& duration = timing.duration;
-    if (duration.has_value() && duration->has<double>() && (duration->get<double>() < 0.0 || isnan(duration->get<double>())))
+    if (duration.has_value() && duration->has<double>() && (duration->get<double>() < 0.0 || __builtin_isnan(duration->get<double>())))
         return WebIDL::SimpleException { WebIDL::SimpleExceptionType::TypeError, "Invalid duration value"sv };
 
     // 4. If the easing member of input exists but cannot be parsed using the <easing-function> production

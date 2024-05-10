@@ -120,7 +120,7 @@ JS_DEFINE_NATIVE_FUNCTION(DatePrototype::get_date)
     auto time = TRY(this_time_value(vm, vm.this_value()));
 
     // 2. If t is NaN, return NaN.
-    if (isnan(time))
+    if (__builtin_isnan(time))
         return js_nan();
 
     // 3. Return DateFromTime(LocalTime(t)).
@@ -134,7 +134,7 @@ JS_DEFINE_NATIVE_FUNCTION(DatePrototype::get_day)
     auto time = TRY(this_time_value(vm, vm.this_value()));
 
     // 2. If t is NaN, return NaN.
-    if (isnan(time))
+    if (__builtin_isnan(time))
         return js_nan();
 
     // 3. Return WeekDay(LocalTime(t)).
@@ -148,7 +148,7 @@ JS_DEFINE_NATIVE_FUNCTION(DatePrototype::get_full_year)
     auto time = TRY(this_time_value(vm, vm.this_value()));
 
     // 2. If t is NaN, return NaN.
-    if (isnan(time))
+    if (__builtin_isnan(time))
         return js_nan();
 
     // 3. Return YearFromTime(LocalTime(t)).
@@ -162,7 +162,7 @@ JS_DEFINE_NATIVE_FUNCTION(DatePrototype::get_hours)
     auto time = TRY(this_time_value(vm, vm.this_value()));
 
     // 2. If t is NaN, return NaN.
-    if (isnan(time))
+    if (__builtin_isnan(time))
         return js_nan();
 
     // 3. Return HourFromTime(LocalTime(t)).
@@ -176,7 +176,7 @@ JS_DEFINE_NATIVE_FUNCTION(DatePrototype::get_milliseconds)
     auto time = TRY(this_time_value(vm, vm.this_value()));
 
     // 2. If t is NaN, return NaN.
-    if (isnan(time))
+    if (__builtin_isnan(time))
         return js_nan();
 
     // 3. Return msFromTime(LocalTime(t)).
@@ -190,7 +190,7 @@ JS_DEFINE_NATIVE_FUNCTION(DatePrototype::get_minutes)
     auto time = TRY(this_time_value(vm, vm.this_value()));
 
     // 2. If t is NaN, return NaN.
-    if (isnan(time))
+    if (__builtin_isnan(time))
         return js_nan();
 
     // 3. Return MinFromTime(LocalTime(t)).
@@ -204,7 +204,7 @@ JS_DEFINE_NATIVE_FUNCTION(DatePrototype::get_month)
     auto time = TRY(this_time_value(vm, vm.this_value()));
 
     // 2. If t is NaN, return NaN.
-    if (isnan(time))
+    if (__builtin_isnan(time))
         return js_nan();
 
     // 3. Return MonthFromTime(LocalTime(t)).
@@ -218,7 +218,7 @@ JS_DEFINE_NATIVE_FUNCTION(DatePrototype::get_seconds)
     auto time = TRY(this_time_value(vm, vm.this_value()));
 
     // 2. If t is NaN, return NaN.
-    if (isnan(time))
+    if (__builtin_isnan(time))
         return js_nan();
 
     // 3. Return SecFromTime(LocalTime(t)).
@@ -239,7 +239,7 @@ JS_DEFINE_NATIVE_FUNCTION(DatePrototype::get_timezone_offset)
     auto time = TRY(this_time_value(vm, vm.this_value()));
 
     // 2. If t is NaN, return NaN.
-    if (isnan(time))
+    if (__builtin_isnan(time))
         return js_nan();
 
     // 3. Return (t - LocalTime(t)) / msPerMinute.
@@ -253,7 +253,7 @@ JS_DEFINE_NATIVE_FUNCTION(DatePrototype::get_utc_date)
     auto time = TRY(this_time_value(vm, vm.this_value()));
 
     // 2. If t is NaN, return NaN.
-    if (isnan(time))
+    if (__builtin_isnan(time))
         return js_nan();
 
     // 3. Return DateFromTime(t).
@@ -267,7 +267,7 @@ JS_DEFINE_NATIVE_FUNCTION(DatePrototype::get_utc_day)
     auto time = TRY(this_time_value(vm, vm.this_value()));
 
     // 2. If t is NaN, return NaN.
-    if (isnan(time))
+    if (__builtin_isnan(time))
         return js_nan();
 
     // 3. Return WeekDay(t).
@@ -281,7 +281,7 @@ JS_DEFINE_NATIVE_FUNCTION(DatePrototype::get_utc_full_year)
     auto time = TRY(this_time_value(vm, vm.this_value()));
 
     // 2. If t is NaN, return NaN.
-    if (isnan(time))
+    if (__builtin_isnan(time))
         return js_nan();
 
     // 3. Return YearFromTime(t).
@@ -295,7 +295,7 @@ JS_DEFINE_NATIVE_FUNCTION(DatePrototype::get_utc_hours)
     auto time = TRY(this_time_value(vm, vm.this_value()));
 
     // 2. If t is NaN, return NaN.
-    if (isnan(time))
+    if (__builtin_isnan(time))
         return js_nan();
 
     // 3. Return HourFromTime(t).
@@ -309,7 +309,7 @@ JS_DEFINE_NATIVE_FUNCTION(DatePrototype::get_utc_milliseconds)
     auto time = TRY(this_time_value(vm, vm.this_value()));
 
     // 2. If t is NaN, return NaN.
-    if (isnan(time))
+    if (__builtin_isnan(time))
         return js_nan();
 
     // 3. Return msFromTime(t).
@@ -323,7 +323,7 @@ JS_DEFINE_NATIVE_FUNCTION(DatePrototype::get_utc_minutes)
     auto time = TRY(this_time_value(vm, vm.this_value()));
 
     // 2. If t is NaN, return NaN.
-    if (isnan(time))
+    if (__builtin_isnan(time))
         return js_nan();
 
     // 3. Return MinFromTime(t).
@@ -337,7 +337,7 @@ JS_DEFINE_NATIVE_FUNCTION(DatePrototype::get_utc_month)
     auto time = TRY(this_time_value(vm, vm.this_value()));
 
     // 2. If t is NaN, return NaN.
-    if (isnan(time))
+    if (__builtin_isnan(time))
         return js_nan();
 
     // 3. Return MonthFromTime(t).
@@ -351,7 +351,7 @@ JS_DEFINE_NATIVE_FUNCTION(DatePrototype::get_utc_seconds)
     auto time = TRY(this_time_value(vm, vm.this_value()));
 
     // 2. If t is NaN, return NaN.
-    if (isnan(time))
+    if (__builtin_isnan(time))
         return js_nan();
 
     // 3. Return SecFromTime(t).
@@ -384,7 +384,7 @@ JS_DEFINE_NATIVE_FUNCTION(DatePrototype::set_date)
     auto date = TRY(vm.argument(0).to_number(vm)).as_double();
 
     // 3. If t is NaN, return NaN.
-    if (isnan(this_time))
+    if (__builtin_isnan(this_time))
         return js_nan();
 
     // 4. Set t to LocalTime(t).
@@ -419,7 +419,7 @@ JS_DEFINE_NATIVE_FUNCTION(DatePrototype::set_full_year)
 
     // 3. If t is NaN, set t to +0𝔽; otherwise, set t to LocalTime(t).
     double time = 0;
-    if (!isnan(this_time))
+    if (!__builtin_isnan(this_time))
         time = local_time(this_time);
 
     // 4. If month is not present, let m be MonthFromTime(t); otherwise, let m be ? ToNumber(month).
@@ -462,7 +462,7 @@ JS_DEFINE_NATIVE_FUNCTION(DatePrototype::set_hours)
     auto millisecond = TRY(argument_or_empty(vm, 3));
 
     // 6. If t is NaN, return NaN.
-    if (isnan(this_time))
+    if (__builtin_isnan(this_time))
         return js_nan();
 
     // 7. Set t to LocalTime(t).
@@ -505,7 +505,7 @@ JS_DEFINE_NATIVE_FUNCTION(DatePrototype::set_milliseconds)
     auto millisecond = TRY(vm.argument(0).to_number(vm)).as_double();
 
     // 3. If t is NaN, return NaN.
-    if (isnan(this_time))
+    if (__builtin_isnan(this_time))
         return js_nan();
 
     // 4. Set t to LocalTime(t).
@@ -546,7 +546,7 @@ JS_DEFINE_NATIVE_FUNCTION(DatePrototype::set_minutes)
     auto millisecond = TRY(argument_or_empty(vm, 2));
 
     // 5. If t is NaN, return NaN.
-    if (isnan(this_time))
+    if (__builtin_isnan(this_time))
         return js_nan();
 
     // 6. Set t to LocalTime(t).
@@ -590,7 +590,7 @@ JS_DEFINE_NATIVE_FUNCTION(DatePrototype::set_month)
     auto date = TRY(argument_or_empty(vm, 1));
 
     // 4. If t is NaN, return NaN.
-    if (isnan(this_time))
+    if (__builtin_isnan(this_time))
         return js_nan();
 
     // 5. Set t to LocalTime(t).
@@ -630,7 +630,7 @@ JS_DEFINE_NATIVE_FUNCTION(DatePrototype::set_seconds)
     auto millisecond = TRY(argument_or_empty(vm, 1));
 
     // 4. If t is NaN, return NaN.
-    if (isnan(this_time))
+    if (__builtin_isnan(this_time))
         return js_nan();
 
     // 5. Set t to LocalTime(t).
@@ -688,7 +688,7 @@ JS_DEFINE_NATIVE_FUNCTION(DatePrototype::set_utc_date)
     auto date = TRY(vm.argument(0).to_number(vm)).as_double();
 
     // 3. If t is NaN, return NaN.
-    if (isnan(time))
+    if (__builtin_isnan(time))
         return js_nan();
 
     // 4. Let newDate be MakeDate(MakeDay(YearFromTime(t), MonthFromTime(t), dt), TimeWithinDay(t)).
@@ -717,7 +717,7 @@ JS_DEFINE_NATIVE_FUNCTION(DatePrototype::set_utc_full_year)
 
     // 2. If t is NaN, set t to +0𝔽.
     double time = 0;
-    if (!isnan(this_time))
+    if (!__builtin_isnan(this_time))
         time = this_time;
 
     // 3. Let y be ? ToNumber(year).
@@ -763,7 +763,7 @@ JS_DEFINE_NATIVE_FUNCTION(DatePrototype::set_utc_hours)
     auto millisecond = TRY(argument_or_empty(vm, 3));
 
     // 6. If t is NaN, return NaN.
-    if (isnan(time))
+    if (__builtin_isnan(time))
         return js_nan();
 
     // 7. If min is not present, let m be MinFromTime(t).
@@ -803,7 +803,7 @@ JS_DEFINE_NATIVE_FUNCTION(DatePrototype::set_utc_milliseconds)
     auto millisecond = TRY(vm.argument(0).to_number(vm)).as_double();
 
     // 3. If t is NaN, return NaN.
-    if (isnan(time))
+    if (__builtin_isnan(time))
         return js_nan();
 
     // 4. Let time be MakeTime(HourFromTime(t), MinFromTime(t), SecFromTime(t), ms).
@@ -841,7 +841,7 @@ JS_DEFINE_NATIVE_FUNCTION(DatePrototype::set_utc_minutes)
     auto millisecond = TRY(argument_or_empty(vm, 2));
 
     // 5. If t is NaN, return NaN.
-    if (isnan(time))
+    if (__builtin_isnan(time))
         return js_nan();
 
     // 6. If sec is not present, let s be SecFromTime(t).
@@ -882,7 +882,7 @@ JS_DEFINE_NATIVE_FUNCTION(DatePrototype::set_utc_month)
     auto date = TRY(argument_or_empty(vm, 1));
 
     // 4. If t is NaN, return NaN.
-    if (isnan(time))
+    if (__builtin_isnan(time))
         return js_nan();
 
     // 5. If date is not present, let dt be DateFromTime(t).
@@ -919,7 +919,7 @@ JS_DEFINE_NATIVE_FUNCTION(DatePrototype::set_utc_seconds)
     auto millisecond = TRY(argument_or_empty(vm, 1));
 
     // 4. If t is NaN, return NaN.
-    if (isnan(time))
+    if (__builtin_isnan(time))
         return js_nan();
 
     // 5. If ms is not present, let milli be msFromTime(t).
@@ -952,7 +952,7 @@ JS_DEFINE_NATIVE_FUNCTION(DatePrototype::to_date_string)
     auto time = TRY(this_time_value(vm, vm.this_value()));
 
     // 3. If tv is NaN, return "Invalid Date".
-    if (isnan(time))
+    if (__builtin_isnan(time))
         return PrimitiveString::create(vm, "Invalid Date"_string);
 
     // 4. Let t be LocalTime(tv).
@@ -998,7 +998,7 @@ JS_DEFINE_NATIVE_FUNCTION(DatePrototype::to_locale_date_string)
     auto time = TRY(this_time_value(vm, vm.this_value()));
 
     // 2. If x is NaN, return "Invalid Date".
-    if (isnan(time))
+    if (__builtin_isnan(time))
         return PrimitiveString::create(vm, "Invalid Date"_string);
 
     // 3. Let dateFormat be ? CreateDateTimeFormat(%DateTimeFormat%, locales, options, "date", "date").
@@ -1022,7 +1022,7 @@ JS_DEFINE_NATIVE_FUNCTION(DatePrototype::to_locale_string)
     auto time = TRY(this_time_value(vm, vm.this_value()));
 
     // 2. If x is NaN, return "Invalid Date".
-    if (isnan(time))
+    if (__builtin_isnan(time))
         return PrimitiveString::create(vm, "Invalid Date"_string);
 
     // 3. Let dateFormat be ? CreateDateTimeFormat(%DateTimeFormat%, locales, options, "any", "all").
@@ -1046,7 +1046,7 @@ JS_DEFINE_NATIVE_FUNCTION(DatePrototype::to_locale_time_string)
     auto time = TRY(this_time_value(vm, vm.this_value()));
 
     // 2. If x is NaN, return "Invalid Date".
-    if (isnan(time))
+    if (__builtin_isnan(time))
         return PrimitiveString::create(vm, "Invalid Date"_string);
 
     // 3. Let timeFormat be ? CreateDateTimeFormat(%DateTimeFormat%, locales, options, "time", "time").
@@ -1200,7 +1200,7 @@ JS_DEFINE_NATIVE_FUNCTION(DatePrototype::to_time_string)
     auto time = TRY(this_time_value(vm, vm.this_value()));
 
     // 3. If tv is NaN, return "Invalid Date".
-    if (isnan(time))
+    if (__builtin_isnan(time))
         return PrimitiveString::create(vm, "Invalid Date"_string);
 
     // 4. Let t be LocalTime(tv).
@@ -1217,7 +1217,7 @@ JS_DEFINE_NATIVE_FUNCTION(DatePrototype::to_utc_string)
     auto time = TRY(this_time_value(vm, vm.this_value()));
 
     // 3. If tv is NaN, return "Invalid Date".
-    if (isnan(time))
+    if (__builtin_isnan(time))
         return PrimitiveString::create(vm, "Invalid Date"_string);
 
     // 4. Let weekday be the Name of the entry in Table 62 with the Number WeekDay(tv).
@@ -1268,7 +1268,7 @@ JS_DEFINE_NATIVE_FUNCTION(DatePrototype::get_year)
     auto time = TRY(this_time_value(vm, vm.this_value()));
 
     // 2. If t is NaN, return NaN.
-    if (isnan(time))
+    if (__builtin_isnan(time))
         return js_nan();
 
     // 3. Return YearFromTime(LocalTime(t)) - 1900𝔽.
@@ -1283,7 +1283,7 @@ JS_DEFINE_NATIVE_FUNCTION(DatePrototype::set_year)
 
     // 2. If t is NaN, set t to +0𝔽; otherwise, set t to LocalTime(t).
     double time = 0;
-    if (!isnan(this_time))
+    if (!__builtin_isnan(this_time))
         time = local_time(this_time);
 
     // 3. Let y be ? ToNumber(year).
@@ -1292,7 +1292,7 @@ JS_DEFINE_NATIVE_FUNCTION(DatePrototype::set_year)
     auto this_object = MUST(typed_this_object(vm));
 
     // 4. If y is NaN, then
-    if (isnan(year)) {
+    if (__builtin_isnan(year)) {
         // a. Set the [[DateValue]] internal slot of this Date object to NaN.
         this_object->set_date_value(NAN);
 

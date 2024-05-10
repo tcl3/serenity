@@ -329,9 +329,9 @@ struct Minimum {
     auto operator()(Lhs lhs, Rhs rhs) const
     {
         if constexpr (IsFloatingPoint<Lhs> || IsFloatingPoint<Rhs>) {
-            if (isnan(lhs))
+            if (__builtin_isnan(lhs))
                 return lhs;
-            if (isnan(rhs))
+            if (__builtin_isnan(rhs))
                 return rhs;
             if (isinf(lhs))
                 return lhs > 0 ? rhs : lhs;
@@ -349,9 +349,9 @@ struct Maximum {
     auto operator()(Lhs lhs, Rhs rhs) const
     {
         if constexpr (IsFloatingPoint<Lhs> || IsFloatingPoint<Rhs>) {
-            if (isnan(lhs))
+            if (__builtin_isnan(lhs))
                 return lhs;
-            if (isnan(rhs))
+            if (__builtin_isnan(rhs))
                 return rhs;
             if (isinf(lhs))
                 return lhs > 0 ? lhs : rhs;
@@ -538,7 +538,7 @@ struct CheckedTruncate {
     template<typename Lhs>
     AK::ErrorOr<ResultT, StringView> operator()(Lhs lhs) const
     {
-        if (isnan(lhs) || isinf(lhs)) // "undefined", let's just trap.
+        if (__builtin_isnan(lhs) || isinf(lhs)) // "undefined", let's just trap.
             return "Truncation undefined behavior"sv;
 
         Lhs truncated;
@@ -598,7 +598,7 @@ struct Reinterpret {
 struct Promote {
     double operator()(float lhs) const
     {
-        if (isnan(lhs))
+        if (__builtin_isnan(lhs))
             return nan(""); // FIXME: Ensure canonical NaN remains canonical
         return static_cast<double>(lhs);
     }
@@ -609,7 +609,7 @@ struct Promote {
 struct Demote {
     float operator()(double lhs) const
     {
-        if (isnan(lhs))
+        if (__builtin_isnan(lhs))
             return nanf(""); // FIXME: Ensure canonical NaN remains canonical
 
         if (isinf(lhs))
@@ -640,7 +640,7 @@ struct SaturatingTruncate {
     template<typename Lhs>
     ResultT operator()(Lhs lhs) const
     {
-        if (isnan(lhs))
+        if (__builtin_isnan(lhs))
             return 0;
 
         if (isinf(lhs)) {

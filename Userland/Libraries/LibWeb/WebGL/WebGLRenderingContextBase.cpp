@@ -273,7 +273,7 @@ void WebGLRenderingContextBase::line_width(GLfloat width)
 
     // https://www.khronos.org/registry/webgl/specs/latest/1.0/#NAN_LINE_WIDTH
     // "In the WebGL API, if the width parameter passed to lineWidth is set to NaN, an INVALID_VALUE error is generated and the line width is not changed."
-    RETURN_WITH_WEBGL_ERROR_IF(isnan(width), GL_INVALID_VALUE);
+    RETURN_WITH_WEBGL_ERROR_IF(__builtin_isnan(width), GL_INVALID_VALUE);
     m_context->gl_line_width(width);
 }
 

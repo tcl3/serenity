@@ -192,7 +192,7 @@ static Value raw_bytes_to_numeric(VM& vm, Bytes raw_value, bool is_little_endian
         raw_value.copy_to({ &value, sizeof(float) });
 
         // b. If value is an IEEE 754-2019 binary32 NaN value, return the NaN Number value.
-        if (isnan(value))
+        if (__builtin_isnan(value))
             return js_nan();
 
         // c. Return the Number value that corresponds to value.
@@ -206,7 +206,7 @@ static Value raw_bytes_to_numeric(VM& vm, Bytes raw_value, bool is_little_endian
         raw_value.copy_to({ &value, sizeof(double) });
 
         // b. If value is an IEEE 754-2019 binary64 NaN value, return the NaN Number value.
-        if (isnan(value))
+        if (__builtin_isnan(value))
             return js_nan();
 
         // c. Return the Number value that corresponds to value.

@@ -215,7 +215,7 @@ public:
             VERIFY(!(SHIFTED_INT32_TAG & (static_cast<i32>(value) & 0xFFFFFFFFul)));
             m_value.encoded = SHIFTED_INT32_TAG | (static_cast<i32>(value) & 0xFFFFFFFFul);
         } else {
-            if (isnan(value)) [[unlikely]]
+            if (__builtin_isnan(value)) [[unlikely]]
                 m_value.encoded = CANON_NAN_BITS;
             else
                 m_value.as_double = value;

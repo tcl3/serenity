@@ -83,7 +83,7 @@ static void number_to_string_impl(StringBuilder& builder, double d, NumberToStri
     };
 
     // 1. If x is NaN, return "NaN".
-    if (isnan(d)) {
+    if (__builtin_isnan(d)) {
         builder.append("NaN"sv);
         return;
     }
@@ -1178,7 +1178,7 @@ double to_integer_or_infinity(double number)
     // 1. Let number be ? ToNumber(argument).
 
     // 2. If number is NaN, +0𝔽, or -0𝔽, return 0.
-    if (isnan(number) || number == 0)
+    if (__builtin_isnan(number) || number == 0)
         return 0;
 
     // 3. If number is +∞𝔽, return +∞.
