@@ -26,7 +26,7 @@ PluralRules::PluralRules(Object& prototype)
     auto number = string.to_number<double>(AK::TrimWhitespace::Yes).release_value();
 
     // 2. Assert: n is finite.
-    VERIFY(isfinite(number));
+    VERIFY(__builtin_isfinite(number));
 
     // 3. Let dp be StringIndexOf(s, ".", 0).
     auto decimal_point = string.find('.');

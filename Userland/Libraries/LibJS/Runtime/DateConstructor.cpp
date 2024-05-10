@@ -153,7 +153,7 @@ static double parse_simplified_iso8601(ByteString const& iso_8601)
 static double parse_date_string(ByteString const& date_string)
 {
     auto value = parse_simplified_iso8601(date_string);
-    if (isfinite(value))
+    if (__builtin_isfinite(value))
         return value;
 
     // Date.parse() is allowed to accept an arbitrary number of implementation-defined formats.

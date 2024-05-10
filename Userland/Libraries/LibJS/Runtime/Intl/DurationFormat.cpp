@@ -256,7 +256,7 @@ bool is_valid_duration_record(Temporal::DurationRecord const& record)
         auto value = record.*value_slot;
 
         // c. Assert: 𝔽(v) is finite.
-        VERIFY(isfinite(value));
+        VERIFY(__builtin_isfinite(value));
 
         // d. If v < 0 and sign > 0, return false.
         if (value < 0 && sign > 0)

@@ -32,7 +32,7 @@ void CanvasPath::close_path()
 void CanvasPath::move_to(float x, float y)
 {
     // 1. If either of the arguments are infinite or NaN, then return.
-    if (!isfinite(x) || !isfinite(y))
+    if (!__builtin_isfinite(x) || !__builtin_isfinite(y))
         return;
 
     // 2. Create a new subpath with the specified point as its first (and only) point.
@@ -43,7 +43,7 @@ void CanvasPath::move_to(float x, float y)
 void CanvasPath::line_to(float x, float y)
 {
     // 1. If either of the arguments are infinite or NaN, then return.
-    if (!isfinite(x) || !isfinite(y))
+    if (!__builtin_isfinite(x) || !__builtin_isfinite(y))
         return;
 
     if (m_path.is_empty()) {
@@ -60,7 +60,7 @@ void CanvasPath::line_to(float x, float y)
 void CanvasPath::quadratic_curve_to(float cpx, float cpy, float x, float y)
 {
     // 1. If any of the arguments are infinite or NaN, then return.
-    if (!isfinite(cpx) || !isfinite(cpy) || !isfinite(x) || !isfinite(y))
+    if (!__builtin_isfinite(cpx) || !__builtin_isfinite(cpy) || !__builtin_isfinite(x) || !__builtin_isfinite(y))
         return;
 
     // 2. Ensure there is a subpath for (cpx, cpy)
@@ -76,7 +76,7 @@ void CanvasPath::quadratic_curve_to(float cpx, float cpy, float x, float y)
 void CanvasPath::bezier_curve_to(double cp1x, double cp1y, double cp2x, double cp2y, double x, double y)
 {
     // 1. If any of the arguments are infinite or NaN, then return.
-    if (!isfinite(cp1x) || !isfinite(cp1y) || !isfinite(cp2x) || !isfinite(cp2y) || !isfinite(x) || !isfinite(y))
+    if (!__builtin_isfinite(cp1x) || !__builtin_isfinite(cp1y) || !__builtin_isfinite(cp2x) || !__builtin_isfinite(cp2y) || !__builtin_isfinite(x) || !__builtin_isfinite(y))
         return;
 
     // 2. Ensure there is a subpath for (cp1x, cp1y)
@@ -100,7 +100,7 @@ WebIDL::ExceptionOr<void> CanvasPath::arc(float x, float y, float radius, float 
 WebIDL::ExceptionOr<void> CanvasPath::ellipse(float x, float y, float radius_x, float radius_y, float rotation, float start_angle, float end_angle, bool counter_clockwise)
 {
     // 1. If any of the arguments are infinite or NaN, then return.
-    if (!isfinite(x) || !isfinite(y) || !isfinite(radius_x) || !isfinite(radius_y) || !isfinite(rotation) || !isfinite(start_angle) || !isfinite(end_angle))
+    if (!__builtin_isfinite(x) || !__builtin_isfinite(y) || !__builtin_isfinite(radius_x) || !__builtin_isfinite(radius_y) || !__builtin_isfinite(rotation) || !__builtin_isfinite(start_angle) || !__builtin_isfinite(end_angle))
         return {};
 
     // 2. If either radiusX or radiusY are negative, then throw an "IndexSizeError" DOMException.
@@ -182,7 +182,7 @@ WebIDL::ExceptionOr<void> CanvasPath::ellipse(float x, float y, float radius_x, 
 WebIDL::ExceptionOr<void> CanvasPath::arc_to(double x1, double y1, double x2, double y2, double radius)
 {
     // 1. If any of the arguments are infinite or NaN, then return.
-    if (!isfinite(x1) || !isfinite(y1) || !isfinite(x2) || !isfinite(y2) || !isfinite(radius))
+    if (!__builtin_isfinite(x1) || !__builtin_isfinite(y1) || !__builtin_isfinite(x2) || !__builtin_isfinite(y2) || !__builtin_isfinite(radius))
         return {};
 
     // 2. Ensure there is a subpath for (x1, y1).
@@ -255,7 +255,7 @@ WebIDL::ExceptionOr<void> CanvasPath::arc_to(double x1, double y1, double x2, do
 void CanvasPath::rect(double x, double y, double w, double h)
 {
     // 1. If any of the arguments are infinite or NaN, then return.
-    if (!isfinite(x) || !isfinite(y) || !isfinite(w) || !isfinite(h))
+    if (!__builtin_isfinite(x) || !__builtin_isfinite(y) || !__builtin_isfinite(w) || !__builtin_isfinite(h))
         return;
 
     // 2. Create a new subpath containing just the four points (x, y), (x+w, y), (x+w, y+h), (x, y+h), in that order, with those four points connected by straight lines.
@@ -278,7 +278,7 @@ WebIDL::ExceptionOr<void> CanvasPath::round_rect(double x, double y, double w, d
     using Radius = Variant<double, Geometry::DOMPointInit>;
 
     // 1. If any of x, y, w, or h are infinite or NaN, then return.
-    if (!isfinite(x) || !isfinite(y) || !isfinite(w) || !isfinite(h))
+    if (!__builtin_isfinite(x) || !__builtin_isfinite(y) || !__builtin_isfinite(w) || !__builtin_isfinite(h))
         return {};
 
     // 2. If radii is an unrestricted double or DOMPointInit, then set radii to « radii ».
@@ -305,7 +305,7 @@ WebIDL::ExceptionOr<void> CanvasPath::round_rect(double x, double y, double w, d
             auto const& radius_as_dom_point = radius.get<Geometry::DOMPointInit>();
 
             // 5.1.1. If radius["x"] or radius["y"] is infinite or NaN, then return.
-            if (!isfinite(radius_as_dom_point.x) || !isfinite(radius_as_dom_point.y))
+            if (!__builtin_isfinite(radius_as_dom_point.x) || !__builtin_isfinite(radius_as_dom_point.y))
                 return {};
 
             // 5.1.2. If radius["x"] or radius["y"] is negative, then throw a RangeError.
@@ -321,7 +321,7 @@ WebIDL::ExceptionOr<void> CanvasPath::round_rect(double x, double y, double w, d
             auto radius_as_double = radius.get<double>();
 
             // 5.2.1. If radius is infinite or NaN, then return.
-            if (!isfinite(radius_as_double))
+            if (!__builtin_isfinite(radius_as_double))
                 return {};
 
             // 5.2.2. If radius is negative, then throw a RangeError.

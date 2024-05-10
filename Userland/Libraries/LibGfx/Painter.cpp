@@ -2103,7 +2103,7 @@ static bool can_approximate_bezier_curve(FloatPoint p1, FloatPoint p2, FloatPoin
     p2y = p2y * p2y;
 
     auto error = max(p1x, p2x) + max(p1y, p2y);
-    VERIFY(isfinite(error));
+    VERIFY(__builtin_isfinite(error));
 
     return error <= tolerance;
 }
@@ -2181,7 +2181,7 @@ static bool can_approximate_cubic_bezier_curve(FloatPoint p1, FloatPoint p2, Flo
     by *= by;
 
     auto error = max(ax, bx) + max(ay, by);
-    VERIFY(isfinite(error));
+    VERIFY(__builtin_isfinite(error));
 
     return error <= tolerance;
 }

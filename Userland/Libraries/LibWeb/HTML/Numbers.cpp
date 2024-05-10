@@ -87,7 +87,7 @@ Optional<double> parse_floating_point_number(StringView string)
     auto maybe_double = string.to_number<double>(TrimWhitespace::Yes);
     if (!maybe_double.has_value())
         return {};
-    if (!isfinite(maybe_double.value()))
+    if (!__builtin_isfinite(maybe_double.value()))
         return {};
     return maybe_double.value();
 }

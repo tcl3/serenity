@@ -559,10 +559,10 @@ WebIDL::ExceptionOr<String> DOMMatrixReadOnly::to_string() const
 
     // 1. If one or more of m11 element through m44 element are a non-finite value, then throw an "InvalidStateError" DOMException.
     // Spec Note: The CSS syntax cannot represent NaN or Infinity values.
-    if (!isfinite(m11()) || !isfinite(m12()) || !isfinite(m13()) || !isfinite(m14())
-        || !isfinite(m21()) || !isfinite(m22()) || !isfinite(m23()) || !isfinite(m24())
-        || !isfinite(m31()) || !isfinite(m32()) || !isfinite(m33()) || !isfinite(m34())
-        || !isfinite(m41()) || !isfinite(m42()) || !isfinite(m43()) || !isfinite(m44())) {
+    if (!__builtin_isfinite(m11()) || !__builtin_isfinite(m12()) || !__builtin_isfinite(m13()) || !__builtin_isfinite(m14())
+        || !__builtin_isfinite(m21()) || !__builtin_isfinite(m22()) || !__builtin_isfinite(m23()) || !__builtin_isfinite(m24())
+        || !__builtin_isfinite(m31()) || !__builtin_isfinite(m32()) || !__builtin_isfinite(m33()) || !__builtin_isfinite(m34())
+        || !__builtin_isfinite(m41()) || !__builtin_isfinite(m42()) || !__builtin_isfinite(m43()) || !__builtin_isfinite(m44())) {
         return WebIDL::InvalidStateError::create(realm(), "Cannot stringify non-finite matrix values"_fly_string);
     }
 

@@ -99,7 +99,7 @@ public:
 
     Color sample_color(float loc) const
     {
-        if (!isfinite(loc))
+        if (!__builtin_isfinite(loc))
             return Color();
         if (m_sample_scale != 1.0f)
             loc *= m_sample_scale;

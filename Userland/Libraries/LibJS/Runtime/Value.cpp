@@ -906,7 +906,7 @@ ThrowCompletionOr<i32> Value::to_i32_slow_case(VM& vm) const
     double number = TRY(to_number(vm)).as_double();
 
     // 2. If number is not finite or number is either +0𝔽 or -0𝔽, return +0𝔽.
-    if (!isfinite(number) || number == 0)
+    if (!__builtin_isfinite(number) || number == 0)
         return 0;
 
     // 3. Let int be the mathematical value whose sign is the sign of number and whose magnitude is floor(abs(ℝ(number))).
@@ -943,7 +943,7 @@ ThrowCompletionOr<u32> Value::to_u32(VM& vm) const
     double number = TRY(to_number(vm)).as_double();
 
     // 2. If number is not finite or number is either +0𝔽 or -0𝔽, return +0𝔽.
-    if (!isfinite(number) || number == 0)
+    if (!__builtin_isfinite(number) || number == 0)
         return 0;
 
     // 3. Let int be the mathematical value whose sign is the sign of number and whose magnitude is floor(abs(ℝ(number))).
@@ -967,7 +967,7 @@ ThrowCompletionOr<i16> Value::to_i16(VM& vm) const
     double number = TRY(to_number(vm)).as_double();
 
     // 2. If number is not finite or number is either +0𝔽 or -0𝔽, return +0𝔽.
-    if (!isfinite(number) || number == 0)
+    if (!__builtin_isfinite(number) || number == 0)
         return 0;
 
     // 3. Let int be the mathematical value whose sign is the sign of number and whose magnitude is floor(abs(ℝ(number))).
@@ -992,7 +992,7 @@ ThrowCompletionOr<u16> Value::to_u16(VM& vm) const
     double number = TRY(to_number(vm)).as_double();
 
     // 2. If number is not finite or number is either +0𝔽 or -0𝔽, return +0𝔽.
-    if (!isfinite(number) || number == 0)
+    if (!__builtin_isfinite(number) || number == 0)
         return 0;
 
     // 3. Let int be the mathematical value whose sign is the sign of number and whose magnitude is floor(abs(ℝ(number))).
@@ -1014,7 +1014,7 @@ ThrowCompletionOr<i8> Value::to_i8(VM& vm) const
     double number = TRY(to_number(vm)).as_double();
 
     // 2. If number is not finite or number is either +0𝔽 or -0𝔽, return +0𝔽.
-    if (!isfinite(number) || number == 0)
+    if (!__builtin_isfinite(number) || number == 0)
         return 0;
 
     // 3. Let int be the mathematical value whose sign is the sign of number and whose magnitude is floor(abs(ℝ(number))).
@@ -1039,7 +1039,7 @@ ThrowCompletionOr<u8> Value::to_u8(VM& vm) const
     double number = TRY(to_number(vm)).as_double();
 
     // 2. If number is not finite or number is either +0𝔽 or -0𝔽, return +0𝔽.
-    if (!isfinite(number) || number == 0)
+    if (!__builtin_isfinite(number) || number == 0)
         return 0;
 
     // 3. Let int be the mathematical value whose sign is the sign of number and whose magnitude is floor(abs(ℝ(number))).

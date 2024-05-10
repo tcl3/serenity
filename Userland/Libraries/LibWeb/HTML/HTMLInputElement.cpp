@@ -1278,7 +1278,7 @@ String HTMLInputElement::value_sanitization_algorithm(String const& value) const
     } else if (type_state() == HTMLInputElement::TypeAttributeState::Number) {
         // If the value of the element is not a valid floating-point number, then set it to the empty string instead.
         auto maybe_value = parse_floating_point_number(value);
-        if (!maybe_value.has_value() || !isfinite(maybe_value.value()))
+        if (!maybe_value.has_value() || !__builtin_isfinite(maybe_value.value()))
             return String {};
     } else if (type_state() == HTMLInputElement::TypeAttributeState::Date) {
         // https://html.spec.whatwg.org/multipage/input.html#date-state-(type=date):value-sanitization-algorithm
@@ -1305,7 +1305,7 @@ String HTMLInputElement::value_sanitization_algorithm(String const& value) const
         // https://html.spec.whatwg.org/multipage/input.html#range-state-(type=range):value-sanitization-algorithm
         // If the value of the element is not a valid floating-point number, then set it to the best representation, as a floating-point number, of the default value.
         auto maybe_value = parse_floating_point_number(value);
-        if (!maybe_value.has_value() || !isfinite(maybe_value.value())) {
+        if (!maybe_value.has_value() || !__builtin_isfinite(maybe_value.value())) {
             // The default value is the minimum plus half the difference between the minimum and the maximum, unless the maximum is less than the minimum, in which case the default value is the minimum.
             auto minimum = *min();
             auto maximum = *max();
@@ -1813,7 +1813,7 @@ WebIDL::ExceptionOr<void> HTMLInputElement::set_value_as_date(Optional<JS::Handl
         return {};
     }
     auto& date = static_cast<JS::Date&>(**value);
-    if (!isfinite(date.date_value())) {
+    if (!__builtin_isfinite(date.date_value())) {
         TRY(set_value(String {}));
         return {};
     }
@@ -1839,7 +1839,7 @@ double HTMLInputElement::value_as_number() const
 WebIDL::ExceptionOr<void> HTMLInputElement::set_value_as_number(double value)
 {
     // On setting, if the new value is infinite, then throw a TypeError exception.
-    if (!isfinite(value))
+    if (!__builtin_isfinite(value))
         return WebIDL::SimpleException { WebIDL::SimpleExceptionType::TypeError, "valueAsNumber: Value is infinite"sv };
 
     // Otherwise, if the valueAsNumber attribute does not apply, as defined for the input element's type attribute's current state, then throw an "InvalidStateError" DOMException.

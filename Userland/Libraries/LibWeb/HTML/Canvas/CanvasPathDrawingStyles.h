@@ -20,7 +20,7 @@ public:
     void set_line_width(float line_width)
     {
         // On setting, zero, negative, infinite, and NaN values must be ignored, leaving the value unchanged;
-        if (line_width <= 0 || !isfinite(line_width))
+        if (line_width <= 0 || !__builtin_isfinite(line_width))
             return;
         // other values must change the current value to the new value.
         my_drawing_state().line_width = line_width;

@@ -58,7 +58,7 @@ Duration::Duration(double years, double months, double weeks, double days, doubl
     // This is usually done using ℝ(𝔽(value)) at the call site.
     for (auto const& field : fields) {
         auto& value = this->*field;
-        VERIFY(isfinite(value));
+        VERIFY(__builtin_isfinite(value));
         // FIXME: test-js contains a small number of cases where a Temporal.Duration is constructed
         //        with a non-integral double. Eliminate these and VERIFY(AK::trunc(value) == value) instead.
         if (AK::trunc(value) != value)
@@ -244,7 +244,7 @@ bool is_valid_duration(double years, double months, double weeks, double days, d
     // 2. For each value v of « years, months, weeks, days, hours, minutes, seconds, milliseconds, microseconds, nanoseconds », do
     for (auto& v : { years, months, weeks, days, hours, minutes, seconds, milliseconds, microseconds, nanoseconds }) {
         // a. If 𝔽(v) is not finite, return false.
-        if (!isfinite(v))
+        if (!__builtin_isfinite(v))
             return false;
 
         // b. If v < 0 and sign > 0, return false.
@@ -512,7 +512,7 @@ ThrowCompletionOr<TimeDurationRecord> balance_duration(VM& vm, double days, doub
 
     // NOTE: If any of the inputs is not finite this will mean that we have infinities,
     //       so the duration will never be valid. Also
-    if (!isfinite(days) || !isfinite(hours) || !isfinite(minutes) || !isfinite(seconds) || !isfinite(milliseconds) || !isfinite(microseconds))
+    if (!__builtin_isfinite(days) || !__builtin_isfinite(hours) || !__builtin_isfinite(minutes) || !__builtin_isfinite(seconds) || !__builtin_isfinite(milliseconds) || !__builtin_isfinite(microseconds))
         return vm.throw_completion<RangeError>(ErrorType::TemporalInvalidDuration);
 
     Crypto::SignedBigInteger total_nanoseconds;
@@ -794,7 +794,7 @@ Variant<TimeDurationRecord, Overflow> balance_possibly_infinite_time_duration(VM
     // 13. For each value v of « days, hours, minutes, seconds, milliseconds, microseconds, nanoseconds », do
     for (double v : { days, hours, minutes, seconds, milliseconds, microseconds, microseconds, result_nanoseconds }) {
         // a. If 𝔽(v) is not finite, then
-        if (!isfinite(v)) {
+        if (!__builtin_isfinite(v)) {
             // i. If sign = 1, then
             if (sign == 1) {
                 // 1. Return positive overflow.

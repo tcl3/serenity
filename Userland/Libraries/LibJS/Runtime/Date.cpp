@@ -548,7 +548,7 @@ double utc_time(double time)
 double make_time(double hour, double min, double sec, double ms)
 {
     // 1. If hour is not finite or min is not finite or sec is not finite or ms is not finite, return NaN.
-    if (!isfinite(hour) || !isfinite(min) || !isfinite(sec) || !isfinite(ms))
+    if (!__builtin_isfinite(hour) || !__builtin_isfinite(min) || !__builtin_isfinite(sec) || !__builtin_isfinite(ms))
         return NAN;
 
     // 2. Let h be 𝔽(! ToIntegerOrInfinity(hour)).
@@ -570,7 +570,7 @@ double make_time(double hour, double min, double sec, double ms)
 double make_day(double year, double month, double date)
 {
     // 1. If year is not finite or month is not finite or date is not finite, return NaN.
-    if (!isfinite(year) || !isfinite(month) || !isfinite(date))
+    if (!__builtin_isfinite(year) || !__builtin_isfinite(month) || !__builtin_isfinite(date))
         return NAN;
 
     // 2. Let y be 𝔽(! ToIntegerOrInfinity(year)).
@@ -582,7 +582,7 @@ double make_day(double year, double month, double date)
     // 5. Let ym be y + 𝔽(floor(ℝ(m) / 12)).
     auto ym = y + floor(m / 12);
     // 6. If ym is not finite, return NaN.
-    if (!isfinite(ym))
+    if (!__builtin_isfinite(ym))
         return NAN;
     // 7. Let mn be 𝔽(ℝ(m) modulo 12).
     auto mn = modulo(m, 12);
@@ -600,14 +600,14 @@ double make_day(double year, double month, double date)
 double make_date(double day, double time)
 {
     // 1. If day is not finite or time is not finite, return NaN.
-    if (!isfinite(day) || !isfinite(time))
+    if (!__builtin_isfinite(day) || !__builtin_isfinite(time))
         return NAN;
 
     // 2. Let tv be day × msPerDay + time.
     auto tv = day * ms_per_day + time;
 
     // 3. If tv is not finite, return NaN.
-    if (!isfinite(tv))
+    if (!__builtin_isfinite(tv))
         return NAN;
 
     // 4. Return tv.
@@ -618,7 +618,7 @@ double make_date(double day, double time)
 double time_clip(double time)
 {
     // 1. If time is not finite, return NaN.
-    if (!isfinite(time))
+    if (!__builtin_isfinite(time))
         return NAN;
 
     // 2. If abs(ℝ(time)) > 8.64 × 10^15, return NaN.

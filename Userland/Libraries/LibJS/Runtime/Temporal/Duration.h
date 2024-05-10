@@ -163,13 +163,13 @@ double days_until(EarlierObjectType& earlier, LaterObjectType& later)
     auto epoch_days_1 = make_day(earlier.iso_year(), earlier.iso_month() - 1, earlier.iso_day());
 
     // 2. Assert: epochDays1 is finite.
-    VERIFY(isfinite(epoch_days_1));
+    VERIFY(__builtin_isfinite(epoch_days_1));
 
     // 3. Let epochDays2 be MakeDay(𝔽(later.[[ISOYear]]), 𝔽(later.[[ISOMonth]] - 1), 𝔽(later.[[ISODay]])).
     auto epoch_days_2 = make_day(later.iso_year(), later.iso_month() - 1, later.iso_day());
 
     // 4. Assert: epochDays2 is finite.
-    VERIFY(isfinite(epoch_days_2));
+    VERIFY(__builtin_isfinite(epoch_days_2));
 
     // 5. Return ℝ(epochDays2) - ℝ(epochDays1).
     return epoch_days_2 - epoch_days_1;

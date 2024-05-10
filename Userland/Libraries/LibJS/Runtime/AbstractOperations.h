@@ -299,7 +299,7 @@ auto modulo(T x, U y)
     VERIFY(y != 0);
     if constexpr (IsFloatingPoint<T> || IsFloatingPoint<U>) {
         if constexpr (IsFloatingPoint<U>)
-            VERIFY(isfinite(y));
+            VERIFY(__builtin_isfinite(y));
         auto r = fmod(x, y);
         return r < 0 ? r + y : r;
     } else {
@@ -324,7 +324,7 @@ auto remainder(T x, U y)
     VERIFY(y != 0);
     if constexpr (IsFloatingPoint<T> || IsFloatingPoint<U>) {
         if constexpr (IsFloatingPoint<U>)
-            VERIFY(isfinite(y));
+            VERIFY(__builtin_isfinite(y));
         return fmod(x, y);
     } else {
         return x % y;

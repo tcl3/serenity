@@ -1238,7 +1238,7 @@ u16 to_iso_day_of_year(i32 year, u8 month, u8 day)
     auto epoch_days = make_day(year, month - 1, day);
 
     // 3. Assert: epochDays is finite.
-    VERIFY(isfinite(epoch_days));
+    VERIFY(__builtin_isfinite(epoch_days));
 
     // 4. Return ℝ(DayWithinYear(MakeDate(epochDays, +0𝔽))) + 1.
     return day_within_year(make_date(epoch_days, 0)) + 1;
@@ -1254,7 +1254,7 @@ u8 to_iso_day_of_week(i32 year, u8 month, u8 day)
     auto epoch_days = make_day(year, month - 1, day);
 
     // 3. Assert: epochDays is finite.
-    VERIFY(isfinite(epoch_days));
+    VERIFY(__builtin_isfinite(epoch_days));
 
     // 4. Let dayOfWeek be WeekDay(MakeDate(epochDays, +0𝔽)).
     auto day_of_week = week_day(make_date(epoch_days, 0));

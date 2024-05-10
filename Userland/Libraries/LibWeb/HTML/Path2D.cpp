@@ -78,7 +78,7 @@ WebIDL::ExceptionOr<void> Path2D::add_path(JS::NonnullGCPtr<Path2D> path, Geomet
     auto matrix = TRY(Geometry::DOMMatrix::create_from_dom_matrix_2d_init(realm(), transform));
 
     // 3. If one or more of matrix's m11 element, m12 element, m21 element, m22 element, m41 element, or m42 element are infinite or NaN, then return.
-    if (!isfinite(matrix->m11()) || !isfinite(matrix->m12()) || !isfinite(matrix->m21()) || !isfinite(matrix->m22()) || !isfinite(matrix->m41()) || !isfinite(matrix->m42()))
+    if (!__builtin_isfinite(matrix->m11()) || !__builtin_isfinite(matrix->m12()) || !__builtin_isfinite(matrix->m21()) || !__builtin_isfinite(matrix->m22()) || !__builtin_isfinite(matrix->m41()) || !__builtin_isfinite(matrix->m42()))
         return {};
 
     // 4. Create a copy of all the subpaths in path. Let this copy be known as c.

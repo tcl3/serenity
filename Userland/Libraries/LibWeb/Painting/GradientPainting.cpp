@@ -69,7 +69,7 @@ static ColorStopData resolve_color_stop_positions(Layout::NodeWithStyleAndBoxMod
     size_t i = 1;
     auto find_run_end = [&] {
         auto color_stop_has_position = [](auto& color_stop) {
-            return color_stop.transition_hint.has_value() || isfinite(color_stop.position);
+            return color_stop.transition_hint.has_value() || __builtin_isfinite(color_stop.position);
         };
         while (i < color_stop_list.size() - 1 && !color_stop_has_position(resolved_color_stops[i])) {
             i++;
@@ -78,7 +78,7 @@ static ColorStopData resolve_color_stop_positions(Layout::NodeWithStyleAndBoxMod
     };
     while (i < resolved_color_stops.size() - 1) {
         auto& stop = resolved_color_stops[i];
-        if (!isfinite(stop.position)) {
+        if (!__builtin_isfinite(stop.position)) {
             auto run_start = i - 1;
             auto start_position = resolved_color_stops[i++].transition_hint.value_or(resolved_color_stops[run_start].position);
             auto run_end = find_run_end();

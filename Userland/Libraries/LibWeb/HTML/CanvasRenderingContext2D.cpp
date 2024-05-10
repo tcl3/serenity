@@ -113,7 +113,7 @@ void CanvasRenderingContext2D::stroke_rect(float x, float y, float width, float 
 WebIDL::ExceptionOr<void> CanvasRenderingContext2D::draw_image_internal(CanvasImageSource const& image, float source_x, float source_y, float source_width, float source_height, float destination_x, float destination_y, float destination_width, float destination_height)
 {
     // 1. If any of the arguments are infinite or NaN, then return.
-    if (!isfinite(source_x) || !isfinite(source_y) || !isfinite(source_width) || !isfinite(source_height) || !isfinite(destination_x) || !isfinite(destination_y) || !isfinite(destination_width) || !isfinite(destination_height))
+    if (!__builtin_isfinite(source_x) || !__builtin_isfinite(source_y) || !__builtin_isfinite(source_width) || !__builtin_isfinite(source_height) || !__builtin_isfinite(destination_x) || !__builtin_isfinite(destination_y) || !__builtin_isfinite(destination_width) || !__builtin_isfinite(destination_height))
         return {};
 
     // 2. Let usability be the result of checking the usability of image.
@@ -703,7 +703,7 @@ float CanvasRenderingContext2D::global_alpha() const
 void CanvasRenderingContext2D::set_global_alpha(float alpha)
 {
     // 1. If the given value is either infinite, NaN, or not in the range 0.0 to 1.0, then return.
-    if (!isfinite(alpha) || alpha < 0.0f || alpha > 1.0f) {
+    if (!__builtin_isfinite(alpha) || alpha < 0.0f || alpha > 1.0f) {
         return;
     }
     // 2. Otherwise, set this's global alpha to the given value.

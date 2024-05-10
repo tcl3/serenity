@@ -283,13 +283,13 @@ DateDurationRecord difference_iso_date(VM& vm, i32 year1, u8 month1, u8 day1, i3
         auto epoch_days_1 = make_day(year1, month1 - 1, day1);
 
         // c. Assert: epochDays1 is finite.
-        VERIFY(isfinite(epoch_days_1));
+        VERIFY(__builtin_isfinite(epoch_days_1));
 
         // d. Let epochDays2 be MakeDay(𝔽(y2), 𝔽(m2 - 1), 𝔽(d2)).
         auto epoch_days_2 = make_day(year2, month2 - 1, day2);
 
         // e. Assert: epochDays2 is finite.
-        VERIFY(isfinite(epoch_days_2));
+        VERIFY(__builtin_isfinite(epoch_days_2));
 
         // f. Let days be ℝ(epochDays2) - ℝ(epochDays1).
         auto days = epoch_days_2 - epoch_days_1;
@@ -420,7 +420,7 @@ ISODateRecord balance_iso_date(double year, double month, double day)
     auto epoch_days = make_day(year, month - 1, day);
 
     // 2. Assert: epochDays is finite.
-    VERIFY(isfinite(epoch_days));
+    VERIFY(__builtin_isfinite(epoch_days));
 
     // 3. Let ms be MakeDate(epochDays, +0𝔽).
     auto ms = make_date(epoch_days, 0);

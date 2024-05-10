@@ -43,7 +43,7 @@ public:
     void transform(double a, double b, double c, double d, double e, double f)
     {
         // 1. If any of the arguments are infinite or NaN, then return.
-        if (!isfinite(a) || !isfinite(b) || !isfinite(c) || !isfinite(d) || !isfinite(e) || !isfinite(f))
+        if (!__builtin_isfinite(a) || !__builtin_isfinite(b) || !__builtin_isfinite(c) || !__builtin_isfinite(d) || !__builtin_isfinite(e) || !__builtin_isfinite(f))
             return;
 
         // 2. Replace the current transformation matrix with the result of multiplying the current transformation matrix with the matrix described by:
@@ -66,7 +66,7 @@ public:
     void set_transform(double a, double b, double c, double d, double e, double f)
     {
         // 1. If any of the arguments are infinite or NaN, then return.
-        if (!isfinite(a) || !isfinite(b) || !isfinite(c) || !isfinite(d) || !isfinite(e) || !isfinite(f))
+        if (!__builtin_isfinite(a) || !__builtin_isfinite(b) || !__builtin_isfinite(c) || !__builtin_isfinite(d) || !__builtin_isfinite(e) || !__builtin_isfinite(f))
             return;
 
         // 2. Reset the current transformation matrix to the identity matrix.
@@ -84,7 +84,7 @@ public:
         auto matrix = TRY(Geometry::DOMMatrix::create_from_dom_matrix_2d_init(realm, init));
 
         // 2. If one or more of matrix's m11 element, m12 element, m21 element, m22 element, m41 element, or m42 element are infinite or NaN, then return.
-        if (!isfinite(matrix->m11()) || !isfinite(matrix->m12()) || !isfinite(matrix->m21()) || !isfinite(matrix->m22()) || !isfinite(matrix->m41()) || !isfinite(matrix->m42()))
+        if (!__builtin_isfinite(matrix->m11()) || !__builtin_isfinite(matrix->m12()) || !__builtin_isfinite(matrix->m21()) || !__builtin_isfinite(matrix->m22()) || !__builtin_isfinite(matrix->m41()) || !__builtin_isfinite(matrix->m42()))
             return {};
 
         // 3. Reset the current transformation matrix to matrix.
