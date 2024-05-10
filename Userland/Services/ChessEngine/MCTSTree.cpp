@@ -34,7 +34,7 @@ MCTSTree& MCTSTree::select_leaf()
         return *this;
 
     MCTSTree* node = nullptr;
-    double max_uct = -double(INFINITY);
+    double max_uct = -NumericLimits<double>::infinity();
     for (auto& child : m_children) {
         double uct = child->uct(m_turn);
         if (uct >= max_uct) {
@@ -143,7 +143,7 @@ MCTSTree& MCTSTree::best_node()
     int score_multiplier = (m_turn == Chess::Color::White) ? 1 : -1;
 
     MCTSTree* best_node_ptr = nullptr;
-    double best_score = -double(INFINITY);
+    double best_score = -NumericLimits<double>::infinity();
     VERIFY(m_children.size());
     for (auto& node : m_children) {
         double node_score = node->expected_value() * score_multiplier;

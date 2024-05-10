@@ -538,12 +538,12 @@ inline Value js_nan()
 
 inline Value js_infinity()
 {
-    return Value(INFINITY);
+    return Value(NumericLimits<double>::infinity());
 }
 
 inline Value js_negative_infinity()
 {
-    return Value(-INFINITY);
+    return Value(-NumericLimits<double>::infinity());
 }
 
 ThrowCompletionOr<Value> greater_than(VM&, Value lhs, Value rhs);

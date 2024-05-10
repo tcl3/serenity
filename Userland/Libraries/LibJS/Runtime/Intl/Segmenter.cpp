@@ -157,7 +157,7 @@ double find_boundary(Segmenter const& segmenter, Utf16View const& string, double
 
     // 6. If len is 0 or startIndex ≥ len, return +∞.
     if (length == 0 || start_index >= length)
-        return INFINITY;
+        return NumericLimits<double>::infinity();
 
     // 7. Search string for the first segmentation boundary that follows the code unit at index startIndex, using locale locale and text element granularity granularity.
     auto boundary_index = find_next_boundary_index(string, static_cast<size_t>(start_index), granularity);

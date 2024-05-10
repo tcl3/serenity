@@ -661,9 +661,9 @@ double string_to_number(StringView string)
     if (text.is_empty())
         return 0;
     if (text == "Infinity"sv || text == "+Infinity"sv)
-        return INFINITY;
+        return NumericLimits<double>::infinity();
     if (text == "-Infinity"sv)
-        return -INFINITY;
+        return -NumericLimits<double>::infinity();
 
     auto result = parse_number_text(text);
 
@@ -1183,11 +1183,11 @@ double to_integer_or_infinity(double number)
 
     // 3. If number is +∞𝔽, return +∞.
     if (__builtin_isinf_sign(number) > 0)
-        return static_cast<double>(INFINITY);
+        return NumericLimits<double>::infinity();
 
     // 4. If number is -∞𝔽, return -∞.
     if (__builtin_isinf_sign(number) < 0)
-        return static_cast<double>(-INFINITY);
+        return -NumericLimits<double>::infinity();
 
     // 5. Let integer be floor(abs(ℝ(number))).
     auto integer = floor(fabs(number));

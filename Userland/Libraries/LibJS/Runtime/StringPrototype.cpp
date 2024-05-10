@@ -513,7 +513,7 @@ JS_DEFINE_NATIVE_FUNCTION(StringPrototype::last_index_of)
     auto position = TRY(vm.argument(1).to_number(vm));
 
     // 6. If numPos is NaN, let pos be +∞; otherwise, let pos be ! ToIntegerOrInfinity(numPos).
-    double pos = position.is_nan() ? static_cast<double>(INFINITY) : MUST(position.to_integer_or_infinity(vm));
+    double pos = position.is_nan() ? NumericLimits<double>::infinity() : MUST(position.to_integer_or_infinity(vm));
 
     // 7. Let len be the length of S.
     auto string_length = string.length_in_code_units();

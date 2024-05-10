@@ -1703,7 +1703,7 @@ double TableFormattingContext::cell_percentage_contribution<TableFormattingConte
 {
     // Definition of percentage contribution: https://www.w3.org/TR/css-tables-3/#percentage-contribution
     auto const& computed_values = cell.box->computed_values();
-    auto max_height_percentage = computed_values.max_height().is_percentage() ? computed_values.max_height().percentage().value() : static_cast<double>(INFINITY);
+    auto max_height_percentage = computed_values.max_height().is_percentage() ? computed_values.max_height().percentage().value() : NumericLimits<double>::infinity();
     auto height_percentage = computed_values.height().is_percentage() ? computed_values.height().percentage().value() : 0;
     return min(height_percentage, max_height_percentage);
 }
@@ -1713,7 +1713,7 @@ double TableFormattingContext::cell_percentage_contribution<TableFormattingConte
 {
     // Definition of percentage contribution: https://www.w3.org/TR/css-tables-3/#percentage-contribution
     auto const& computed_values = cell.box->computed_values();
-    auto max_width_percentage = computed_values.max_width().is_percentage() ? computed_values.max_width().percentage().value() : static_cast<double>(INFINITY);
+    auto max_width_percentage = computed_values.max_width().is_percentage() ? computed_values.max_width().percentage().value() : NumericLimits<double>::infinity();
     auto width_percentage = computed_values.width().is_percentage() ? computed_values.width().percentage().value() : 0;
     return min(width_percentage, max_width_percentage);
 }
@@ -1736,7 +1736,7 @@ void TableFormattingContext::initialize_intrinsic_percentages_from_rows_or_colum
     for (auto& row : m_rows) {
         auto const& computed_values = row.box->computed_values();
         // Definition of percentage contribution: https://www.w3.org/TR/css-tables-3/#percentage-contribution
-        auto max_height_percentage = computed_values.max_height().is_percentage() ? computed_values.max_height().percentage().value() : static_cast<double>(INFINITY);
+        auto max_height_percentage = computed_values.max_height().is_percentage() ? computed_values.max_height().percentage().value() : NumericLimits<double>::infinity();
         auto height_percentage = computed_values.height().is_percentage() ? computed_values.height().percentage().value() : 0;
         row.has_intrinsic_percentage = computed_values.max_height().is_percentage() || computed_values.height().is_percentage();
         row.intrinsic_percentage = min(height_percentage, max_height_percentage);
@@ -1751,7 +1751,7 @@ void TableFormattingContext::initialize_intrinsic_percentages_from_rows_or_colum
         TableGrid::for_each_child_box_matching(column_group_box, is_table_column, [&](auto& column_box) {
             auto const& computed_values = column_box.computed_values();
             // Definition of percentage contribution: https://www.w3.org/TR/css-tables-3/#percentage-contribution
-            auto max_width_percentage = computed_values.max_width().is_percentage() ? computed_values.max_width().percentage().value() : static_cast<double>(INFINITY);
+            auto max_width_percentage = computed_values.max_width().is_percentage() ? computed_values.max_width().percentage().value() : NumericLimits<double>::infinity();
             auto width_percentage = computed_values.width().is_percentage() ? computed_values.width().percentage().value() : 0;
             m_columns[column_index].has_intrinsic_percentage = computed_values.max_width().is_percentage() || computed_values.width().is_percentage();
             m_columns[column_index].intrinsic_percentage = min(width_percentage, max_width_percentage);
