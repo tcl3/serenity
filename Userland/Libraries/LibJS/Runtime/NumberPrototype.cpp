@@ -133,7 +133,7 @@ JS_DEFINE_NATIVE_FUNCTION(NumberPrototype::to_exponential)
         // b. Else,
         //     i. Let e, n, and f be integers such that f ≥ 0, 10^f ≤ n < 10^(f+1), 𝔽(n × 10^(e-f)) is 𝔽(x), and f is as small as possible.
         //        Note that the decimal representation of n has f + 1 digits, n is not divisible by 10, and the least significant digit of n is not necessarily uniquely determined by these criteria.
-        exponent = static_cast<int>(AK::floor(log10(number)));
+        exponent = static_cast<int>(AK::floor(AK::log10(number)));
 
         if (fraction_digits_value.is_undefined()) {
             auto mantissa = convert_floating_point_to_decimal_exponential_form(number).fraction;
@@ -333,7 +333,7 @@ JS_DEFINE_NATIVE_FUNCTION(NumberPrototype::to_precision)
     else {
         // a. Let e and n be integers such that 10^(p-1) ≤ n < 10^p and for which n × 10^(e-p+1) - x is as close to zero as possible.
         //    If there are two such sets of e and n, pick the e and n for which n × 10^(e-p+1) is larger.
-        exponent = static_cast<int>(AK::floor(log10(number)));
+        exponent = static_cast<int>(AK::floor(AK::log10(number)));
         number = round(number / AK::pow(10.0, exponent - precision + 1));
 
         // b. Let m be the String value consisting of the digits of the decimal representation of n (in order, with no leading zeroes).

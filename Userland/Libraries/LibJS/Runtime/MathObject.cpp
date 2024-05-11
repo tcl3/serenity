@@ -70,7 +70,7 @@ void MathObject::initialize(Realm& realm)
     define_direct_property(vm.names.LN2, Value(M_LN2), 0);
     define_direct_property(vm.names.LN10, Value(M_LN10), 0);
     define_direct_property(vm.names.LOG2E, Value(::log2(M_E)), 0);
-    define_direct_property(vm.names.LOG10E, Value(::log10(M_E)), 0);
+    define_direct_property(vm.names.LOG10E, Value(AK::log10(M_E)), 0);
     define_direct_property(vm.names.PI, Value(M_PI), 0);
     define_direct_property(vm.names.SQRT1_2, Value(M_SQRT1_2), 0);
     define_direct_property(vm.names.SQRT2, Value(M_SQRT2), 0);
@@ -653,7 +653,7 @@ JS_DEFINE_NATIVE_FUNCTION(MathObject::log10)
         return js_nan();
 
     // 6. Return an implementation-approximated Number value representing the result of the base 10 logarithm of ℝ(n).
-    return Value(::log10(number.as_double()));
+    return Value(AK::log10(number.as_double()));
 }
 
 // 21.3.2.23 Math.log2 ( x ), https://tc39.es/ecma262/#sec-math.log2

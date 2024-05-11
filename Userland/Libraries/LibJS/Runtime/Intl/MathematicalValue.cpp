@@ -234,7 +234,7 @@ int MathematicalValue::logarithmic_floor() const
 {
     return m_value.visit(
         [](double value) {
-            return static_cast<int>(AK::floor(log10(value)));
+            return static_cast<int>(AK::floor(AK::log10(value)));
         },
         [&](Crypto::SignedBigInteger const& value) {
             // FIXME: Can we do this without string conversion?

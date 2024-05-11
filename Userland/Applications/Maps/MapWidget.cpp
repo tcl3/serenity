@@ -42,7 +42,7 @@ static double tile_y_to_latitude(double y, int zoom)
 
 static double nice_round_number(double number)
 {
-    double pow10 = AK::pow(10, AK::floor(log10(AK::floor(number))));
+    double pow10 = AK::pow(10, AK::floor(AK::log10(AK::floor(number))));
     double d = number / pow10;
     return pow10 * (d >= 10 ? 10 : (d >= 5 ? 5 : (d >= 3 ? 3 : (d >= 2 ? 2 : 1))));
 }

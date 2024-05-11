@@ -774,7 +774,7 @@ PDFErrorOr<void> PostScriptCalculatorFunction::execute(Vector<Token> const& toke
             TRY(stack.push(logf(TRY(stack.pop()))));
             break;
         case OperatorType::Log:
-            TRY(stack.push(log10f(TRY(stack.pop()))));
+            TRY(stack.push(AK::log10(TRY(stack.pop()))));
             break;
         case OperatorType::Mod: {
             float b = TRY(stack.pop());
