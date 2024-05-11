@@ -81,7 +81,7 @@ struct Sample {
     ALWAYS_INLINE float linear_to_log(float const change) const
     {
         // TODO: Add linear slope around 0
-        return VOLUME_A * exp(VOLUME_B * change);
+        return VOLUME_A * AK::exp(VOLUME_B * change);
     }
 
     ALWAYS_INLINE float log_to_linear(float const val) const

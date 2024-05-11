@@ -76,7 +76,7 @@ float DeltaE(CIELAB const& c1, CIELAB const& c2)
     float S_C = 1 + 0.045f * C_prime_bar;
     float S_H = 1 + 0.015f * C_prime_bar * T;
 
-    float R_T = -2 * AK::sqrt(AK::pow(C_prime_bar, 7.0f) / (AK::pow(C_prime_bar, 7.0f) + AK::pow(25, 7))) * sin_degrees(60 * exp(-AK::pow((h_prime_bar - 275) / 25, 2.0f)));
+    float R_T = -2 * AK::sqrt(AK::pow(C_prime_bar, 7.0f) / (AK::pow(C_prime_bar, 7.0f) + AK::pow(25, 7))) * sin_degrees(60 * AK::exp(-AK::pow((h_prime_bar - 275) / 25, 2.0f)));
 
     // "kL, kC, and kH are usually unity."
     float k_L = 1, k_C = 1, k_H = 1;

@@ -759,7 +759,7 @@ PDFErrorOr<void> PostScriptCalculatorFunction::execute(Vector<Token> const& toke
             break;
         }
         case OperatorType::Exp:
-            TRY(stack.push(expf(TRY(stack.pop()))));
+            TRY(stack.push(AK::exp(TRY(stack.pop()))));
             break;
         case OperatorType::Floor:
             TRY(stack.push(AK::floor(TRY(stack.pop()))));

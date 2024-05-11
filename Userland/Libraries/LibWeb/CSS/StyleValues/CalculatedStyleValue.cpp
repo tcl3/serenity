@@ -2000,7 +2000,7 @@ CalculatedStyleValue::CalculationResult ExpCalculationNode::resolve(Optional<Len
 {
     auto node_a = m_value->resolve(context, percentage_basis);
     auto node_a_value = resolve_value(node_a.value(), context);
-    auto result = exp(node_a_value);
+    auto result = AK::exp(node_a_value);
 
     return { Number(Number::Type::Number, result) };
 }

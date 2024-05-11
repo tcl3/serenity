@@ -444,7 +444,7 @@ ThrowCompletionOr<Value> MathObject::exp_impl(VM& vm, Value x)
         return Value(0);
 
     // 5. Return an implementation-approximated Number value representing the result of the exponential function of ℝ(n).
-    return Value(::exp(number.as_double()));
+    return Value(AK::exp(number.as_double()));
 }
 
 // 21.3.2.14 Math.exp ( x ), https://tc39.es/ecma262/#sec-math.exp
