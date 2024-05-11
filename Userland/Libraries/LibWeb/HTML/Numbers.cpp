@@ -7,7 +7,6 @@
 #include <AK/GenericLexer.h>
 #include <LibWeb/HTML/Numbers.h>
 #include <LibWeb/Infra/CharacterTypes.h>
-#include <math.h>
 
 namespace Web::HTML {
 

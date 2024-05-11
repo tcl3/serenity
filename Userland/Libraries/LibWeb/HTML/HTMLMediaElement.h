@@ -21,7 +21,6 @@
 #include <LibWeb/HTML/HTMLElement.h>
 #include <LibWeb/PixelUnits.h>
 #include <LibWeb/WebIDL/DOMException.h>
-#include <math.h>
 
 namespace Web::HTML {
 

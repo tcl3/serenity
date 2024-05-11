@@ -77,7 +77,6 @@
 #include <LibWeb/Painting/PaintableBox.h>
 #include <LibWeb/Platform/FontPlugin.h>
 #include <LibWeb/ReferrerPolicy/AbstractOperations.h>
-#include <math.h>
 #include <stdio.h>
 
 namespace AK {

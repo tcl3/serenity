@@ -5,7 +5,6 @@
  */
 
 #include <LibWeb/Layout/AvailableSpace.h>
-#include <math.h>
 
 namespace Web::Layout {
 

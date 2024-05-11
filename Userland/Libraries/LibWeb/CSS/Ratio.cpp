@@ -5,7 +5,6 @@
  */
 
 #include "Ratio.h"
-#include <math.h>
 
 namespace Web::CSS {
 

@@ -16,7 +16,6 @@
 #include <LibGfx/Forward.h>
 #include <LibGfx/Rect.h>
 #include <LibIPC/Forward.h>
-#include <math.h>
 
 namespace Web {
 

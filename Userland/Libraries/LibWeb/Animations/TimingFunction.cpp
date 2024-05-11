@@ -10,7 +10,6 @@
 #include <LibWeb/CSS/StyleValues/EasingStyleValue.h>
 #include <LibWeb/CSS/StyleValues/IntegerStyleValue.h>
 #include <LibWeb/CSS/StyleValues/NumberStyleValue.h>
-#include <math.h>
 
 namespace Web::Animations {
 
