@@ -164,7 +164,7 @@ ThrowCompletionOr<Vector<PatternPartitionWithUnit>> partition_relative_time_patt
         tense = "past"sv;
 
         // FIXME: The spec does not say to do this, but nothing makes sense after this with a negative value.
-        value = fabs(value);
+        value = AK::fabs(value);
     }
     // 18. Else,
     else {

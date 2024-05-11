@@ -48,7 +48,7 @@ float DeltaE(CIELAB const& c1, CIELAB const& c2)
     float delta_h_prime;
     if (C1_prime == 0 || C2_prime == 0)
         delta_h_prime = 0;
-    else if (fabsf(h1_prime - h2_prime) <= 180.f)
+    else if (AK::fabs(h1_prime - h2_prime) <= 180.f)
         delta_h_prime = h2_prime - h1_prime;
     else if (h2_prime <= h1_prime)
         delta_h_prime = h2_prime - h1_prime + 360;
@@ -63,7 +63,7 @@ float DeltaE(CIELAB const& c1, CIELAB const& c2)
     float h_prime_bar;
     if (C1_prime == 0 || C2_prime == 0)
         h_prime_bar = h1_prime + h2_prime;
-    else if (fabsf(h1_prime - h2_prime) <= 180.f)
+    else if (AK::fabs(h1_prime - h2_prime) <= 180.f)
         h_prime_bar = (h1_prime + h2_prime) / 2;
     else if (h1_prime + h2_prime < 360)
         h_prime_bar = (h1_prime + h2_prime + 360) / 2;

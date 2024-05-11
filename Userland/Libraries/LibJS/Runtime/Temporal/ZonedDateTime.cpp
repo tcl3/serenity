@@ -565,12 +565,12 @@ ThrowCompletionOr<NanosecondsToDaysResult> nanoseconds_to_days(VM& vm, Crypto::S
         return vm.throw_completion<RangeError>(ErrorType::TemporalNanosecondsConvertedToRemainderOfNanosecondsWithOppositeSign);
 
     // 23. If abs(nanoseconds) ≥ abs(dayLengthNs), throw a RangeError exception.
-    auto compare_result = nanoseconds.unsigned_value().compare_to_double(fabs(day_length_ns.to_double()));
+    auto compare_result = nanoseconds.unsigned_value().compare_to_double(AK::fabs(day_length_ns.to_double()));
     if (compare_result == Crypto::UnsignedBigInteger::CompareResult::DoubleLessThanBigInt || compare_result == Crypto::UnsignedBigInteger::CompareResult::DoubleEqualsBigInt)
         return vm.throw_completion<RangeError>(ErrorType::TemporalNanosecondsConvertedToRemainderOfNanosecondsLongerThanDayLength);
 
     // 24. Return the Record { [[Days]]: days, [[Nanoseconds]]: nanoseconds, [[DayLength]]: abs(dayLengthNs) }.
-    return NanosecondsToDaysResult { .days = days, .nanoseconds = move(nanoseconds), .day_length = fabs(day_length_ns.to_double()) };
+    return NanosecondsToDaysResult { .days = days, .nanoseconds = move(nanoseconds), .day_length = AK::fabs(day_length_ns.to_double()) };
 }
 
 // 6.5.8 DifferenceTemporalZonedDateTime ( operation, zonedDateTime, other, options ), https://tc39.es/proposal-temporal/#sec-temporal-differencetemporalzoneddatetime

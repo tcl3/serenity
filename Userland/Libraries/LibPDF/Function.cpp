@@ -726,7 +726,7 @@ PDFErrorOr<void> PostScriptCalculatorFunction::execute(Vector<Token> const& toke
             TRY(stack.push(token.value.get<float>()));
             break;
         case OperatorType::Abs:
-            TRY(stack.push(fabsf(TRY(stack.pop()))));
+            TRY(stack.push(AK::fabs(TRY(stack.pop()))));
             break;
         case OperatorType::Add: {
             float b = TRY(stack.pop());

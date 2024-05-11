@@ -54,7 +54,7 @@ PluralRules::PluralRules(Object& prototype)
     auto integer = integer_part.visit(
         [](Empty) -> u64 { VERIFY_NOT_REACHED(); },
         [](double value) {
-            return static_cast<u64>(fabs(value));
+            return static_cast<u64>(AK::fabs(value));
         },
         [](StringView value) {
             auto value_as_int = value.template to_number<i64>().value();
@@ -78,7 +78,7 @@ PluralRules::PluralRules(Object& prototype)
 
     // 12. Return a new Record { [[Number]]: abs(n), [[IntegerDigits]]: i, [[FractionDigits]]: f, [[NumberOfFractionDigits]]: fracDigitCount, [[FractionDigitsWithoutTrailing]]: significantFrac, [[NumberOfFractionDigitsWithoutTrailing]]: significantFracDigitCount }.
     return ::Locale::PluralOperands {
-        .number = fabs(number),
+        .number = AK::fabs(number),
         .integer_digits = integer,
         .fraction_digits = fraction,
         .number_of_fraction_digits = fraction_digit_count,

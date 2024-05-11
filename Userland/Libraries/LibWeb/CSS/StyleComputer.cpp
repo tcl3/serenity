@@ -1124,7 +1124,7 @@ static RefPtr<StyleValue const> interpolate_transform(DOM::Element& element, Sty
     static constexpr auto interpolate = [](DecomposedValues& from, DecomposedValues& to, float delta) -> DecomposedValues {
         auto product = clamp(from.rotation.dot(to.rotation), -1.0f, 1.0f);
         FloatVector4 interpolated_rotation;
-        if (fabsf(product) == 1.0f) {
+        if (AK::fabs(product) == 1.0f) {
             interpolated_rotation = from.rotation;
         } else {
             auto theta = acos(product);

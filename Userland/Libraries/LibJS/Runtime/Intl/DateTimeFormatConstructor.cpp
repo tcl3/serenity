@@ -495,7 +495,7 @@ String format_offset_time_zone_identifier(double offset_minutes)
     auto sign = offset_minutes >= 0.0 ? '+' : '-';
 
     // 2. Let absoluteMinutes be abs(offsetMinutes).
-    auto absolute_minutes = fabs(offset_minutes);
+    auto absolute_minutes = AK::fabs(offset_minutes);
 
     // 3. Let hours be floor(absoluteMinutes / 60).
     auto hours = static_cast<i64>(AK::floor(absolute_minutes / 60.0));

@@ -240,7 +240,7 @@ ThrowCompletionOr<String> format_iso_time_zone_offset_string(VM& vm, double offs
     auto sign = offset_nanoseconds >= 0 ? "+"sv : "-"sv;
 
     // 4. Set offsetNanoseconds to abs(offsetNanoseconds).
-    offset_nanoseconds = fabs(offset_nanoseconds);
+    offset_nanoseconds = AK::fabs(offset_nanoseconds);
 
     // 5. Let minutes be offsetNanoseconds / (60 × 10^9) modulo 60.
     auto minutes = AK::fmod(offset_nanoseconds / 60000000000, 60);
@@ -351,7 +351,7 @@ ThrowCompletionOr<double> get_offset_nanoseconds_for(VM& vm, TimeZoneMethods con
     auto offset_nanoseconds = offset_nanoseconds_value.as_double();
 
     // 6. If abs(offsetNanoseconds) ≥ nsPerDay, throw a RangeError exception.
-    if (fabs(offset_nanoseconds) >= ns_per_day)
+    if (AK::fabs(offset_nanoseconds) >= ns_per_day)
         return vm.throw_completion<RangeError>(ErrorType::TemporalInvalidOffsetNanosecondsValue);
 
     // 7. Return offsetNanoseconds.

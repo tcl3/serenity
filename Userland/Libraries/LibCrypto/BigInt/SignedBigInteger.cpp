@@ -6,6 +6,7 @@
  */
 
 #include "SignedBigInteger.h"
+#include <AK/Math.h>
 #include <AK/StringBuilder.h>
 #include <math.h>
 
@@ -13,7 +14,7 @@ namespace Crypto {
 
 SignedBigInteger::SignedBigInteger(double value)
     : m_sign(value < 0.0)
-    , m_unsigned_data(fabs(value))
+    , m_unsigned_data(AK::fabs(value))
 {
 }
 
@@ -372,7 +373,7 @@ UnsignedBigInteger::CompareResult SignedBigInteger::compare_to_double(double val
         return bigint_is_negative ? UnsignedBigInteger::CompareResult::DoubleGreaterThanBigInt : UnsignedBigInteger::CompareResult::DoubleLessThanBigInt;
 
     // Now both bigint and value have the same sign, so let's compare our magnitudes.
-    auto magnitudes_compare_result = m_unsigned_data.compare_to_double(fabs(value));
+    auto magnitudes_compare_result = m_unsigned_data.compare_to_double(AK::fabs(value));
 
     // If our mangnitudes are euqal, then we're equal.
     if (magnitudes_compare_result == UnsignedBigInteger::CompareResult::DoubleEqualsBigInt)

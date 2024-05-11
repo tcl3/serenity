@@ -2247,7 +2247,7 @@ void Painter::for_each_line_segment_on_elliptical_arc(FloatPoint p1, FloatPoint 
     if (theta_delta < 0) {
         swap(start, end);
         theta_1 = theta_1 + theta_delta;
-        theta_delta = fabsf(theta_delta);
+        theta_delta = AK::fabs(theta_delta);
         start_swapped = true;
     }
 

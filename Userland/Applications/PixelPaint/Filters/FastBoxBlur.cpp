@@ -19,8 +19,8 @@ void FastBoxBlur::apply(Gfx::Bitmap& target_bitmap) const
 
     if (m_use_asymmetric_radii) {
         if (m_use_vector) {
-            auto radius_x = m_radius * fabs(cos(AK::to_radians(static_cast<double>(m_angle))));
-            auto radius_y = m_radius * fabs(sin(AK::to_radians(static_cast<double>(m_angle))));
+            auto radius_x = m_radius * AK::fabs(cos(AK::to_radians(static_cast<double>(m_angle))));
+            auto radius_y = m_radius * AK::fabs(sin(AK::to_radians(static_cast<double>(m_angle))));
             filter.apply_single_pass(radius_x, radius_y);
             return;
         }

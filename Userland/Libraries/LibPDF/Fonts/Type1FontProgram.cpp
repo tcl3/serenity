@@ -618,7 +618,7 @@ ErrorOr<Type1FontProgram::Glyph> Type1FontProgram::parse_glyph(ReadonlyBytes con
                     float dx6, dy6;
                     auto dx = dx1 + dx2 + dx3 + dx4 + dx5;
                     auto dy = dy1 + dy2 + dy3 + dy4 + dy5;
-                    if (fabs(dx) > fabs(dy)) {
+                    if (AK::fabs(dx) > AK::fabs(dy)) {
                         dx6 = d6;
                         dy6 = -dy;
                     } else {

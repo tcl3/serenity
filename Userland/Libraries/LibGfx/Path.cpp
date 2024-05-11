@@ -53,7 +53,7 @@ void Path::approximate_elliptical_arc_with_cubic_beziers(FloatPoint center, Floa
     // FIXME: Come up with a more mathematically sound step size (using some error calculation).
     auto step = theta_delta;
     int step_count = 1;
-    while (fabs(step) > AK::Pi<float> / 4) {
+    while (AK::fabs(step) > AK::Pi<float> / 4) {
         step /= 2;
         step_count *= 2;
     }

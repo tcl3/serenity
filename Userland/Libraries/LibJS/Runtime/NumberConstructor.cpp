@@ -144,7 +144,7 @@ JS_DEFINE_NATIVE_FUNCTION(NumberConstructor::is_safe_integer)
     // 1. If IsIntegralNumber(number) is true, then
     if (number.is_integral_number()) {
         // a. If abs(ℝ(number)) ≤ 2^53 - 1, return true.
-        if (fabs(number.as_double()) <= MAX_SAFE_INTEGER_VALUE)
+        if (AK::fabs(number.as_double()) <= MAX_SAFE_INTEGER_VALUE)
             return Value(true);
     }
 

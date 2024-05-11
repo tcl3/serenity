@@ -1056,7 +1056,7 @@ ThrowCompletionOr<DateDurationRecord> balance_duration_relative(VM& vm, double y
         auto one_year_days = move_result.days;
 
         // e. Repeat, while abs(days) ≥ abs(oneYearDays),
-        while (fabs(days) >= fabs(one_year_days)) {
+        while (AK::fabs(days) >= AK::fabs(one_year_days)) {
             // i. Set days to days - oneYearDays.
             days -= one_year_days;
 
@@ -1086,7 +1086,7 @@ ThrowCompletionOr<DateDurationRecord> balance_duration_relative(VM& vm, double y
         auto one_month_days = move_result.days;
 
         // i. Repeat, while abs(days) ≥ abs(oneMonthDays),
-        while (fabs(days) >= fabs(one_month_days)) {
+        while (AK::fabs(days) >= AK::fabs(one_month_days)) {
             // i. Set days to days - oneMonthDays.
             days -= one_month_days;
 
@@ -1127,7 +1127,7 @@ ThrowCompletionOr<DateDurationRecord> balance_duration_relative(VM& vm, double y
         auto one_year_months = until_result->months();
 
         // p. Repeat, while abs(months) ≥ abs(oneYearMonths),
-        while (fabs(months) >= fabs(one_year_months)) {
+        while (AK::fabs(months) >= AK::fabs(one_year_months)) {
             // i. Set months to months - oneYearMonths.
             months -= one_year_months;
 
@@ -1168,7 +1168,7 @@ ThrowCompletionOr<DateDurationRecord> balance_duration_relative(VM& vm, double y
         auto one_month_days = move_result.days;
 
         // e. Repeat, while abs(days) ≥ abs(oneMonthDays),
-        while (fabs(days) >= fabs(one_month_days)) {
+        while (AK::fabs(days) >= AK::fabs(one_month_days)) {
             // i. Set days to days - oneMonthDays.
             days -= one_month_days;
 
@@ -1206,7 +1206,7 @@ ThrowCompletionOr<DateDurationRecord> balance_duration_relative(VM& vm, double y
         auto one_week_days = move_result.days;
 
         // f. Repeat, while abs(days) ≥ abs(oneWeekDays),
-        while (fabs(days) >= fabs(one_week_days)) {
+        while (AK::fabs(days) >= AK::fabs(one_week_days)) {
             // i. Set days to days - oneWeekDays.
             days -= one_week_days;
 
@@ -1259,7 +1259,7 @@ ThrowCompletionOr<DurationRecord> add_duration(VM& vm, double years1, double mon
         // NOTE: Nanoseconds is the only one that can overflow the safe integer range of a double
         //       so we have to check for that case.
         Crypto::SignedBigInteger sum_of_nano_seconds;
-        if (fabs(nanoseconds1 + nanoseconds2) >= MAX_ARRAY_LIKE_INDEX)
+        if (AK::fabs(nanoseconds1 + nanoseconds2) >= MAX_ARRAY_LIKE_INDEX)
             sum_of_nano_seconds = Crypto::SignedBigInteger { nanoseconds1 }.plus(Crypto::SignedBigInteger { nanoseconds2 });
         else
             sum_of_nano_seconds = Crypto::SignedBigInteger { nanoseconds1 + nanoseconds2 };
@@ -1310,7 +1310,7 @@ ThrowCompletionOr<DurationRecord> add_duration(VM& vm, double years1, double mon
         // NOTE: Nanoseconds is the only one that can overflow the safe integer range of a double
         //       so we have to check for that case.
         Crypto::SignedBigInteger sum_of_nano_seconds;
-        if (fabs(nanoseconds1 + nanoseconds2) >= MAX_ARRAY_LIKE_INDEX)
+        if (AK::fabs(nanoseconds1 + nanoseconds2) >= MAX_ARRAY_LIKE_INDEX)
             sum_of_nano_seconds = Crypto::SignedBigInteger { nanoseconds1 }.plus(Crypto::SignedBigInteger { nanoseconds2 });
         else
             sum_of_nano_seconds = Crypto::SignedBigInteger { nanoseconds1 + nanoseconds2 };
@@ -1560,7 +1560,7 @@ ThrowCompletionOr<RoundedDuration> round_duration(VM& vm, double years, double m
             return vm.throw_completion<RangeError>(ErrorType::TemporalInvalidCalendarFunctionResult, "dateAdd", "result implying a year is zero days long");
 
         // y. Let fractionalYears be years + fractionalDays / abs(oneYearDays).
-        auto fractional_years = years + fractional_days / fabs(one_year_days);
+        auto fractional_years = years + fractional_days / AK::fabs(one_year_days);
 
         // z. Set years to RoundNumberToIncrement(fractionalYears, increment, roundingMode).
         years = round_number_to_increment(fractional_years, increment, rounding_mode);
@@ -1654,7 +1654,7 @@ ThrowCompletionOr<RoundedDuration> round_duration(VM& vm, double years, double m
             return vm.throw_completion<RangeError>(ErrorType::TemporalInvalidCalendarFunctionResult, "dateAdd", "result implying a month is zero days long");
 
         // y. Let fractionalMonths be months + fractionalDays / abs(oneMonthDays).
-        auto fractional_months = months + fractional_days / fabs(one_month_days);
+        auto fractional_months = months + fractional_days / AK::fabs(one_month_days);
 
         // z. Set months to RoundNumberToIncrement(fractionalMonths, increment, roundingMode).
         months = round_number_to_increment(fractional_months, increment, rounding_mode);
@@ -1725,7 +1725,7 @@ ThrowCompletionOr<RoundedDuration> round_duration(VM& vm, double years, double m
             return vm.throw_completion<RangeError>(ErrorType::TemporalInvalidCalendarFunctionResult, "dateAdd", "result implying a month is zero days long");
 
         // r. Let fractionalWeeks be weeks + fractionalDays / abs(oneWeekDays).
-        auto fractional_weeks = weeks + fractional_days / fabs(one_week_days);
+        auto fractional_weeks = weeks + fractional_days / AK::fabs(one_week_days);
 
         // s. Set weeks to RoundNumberToIncrement(fractionalWeeks, increment, roundingMode).
         weeks = round_number_to_increment(fractional_weeks, increment, rounding_mode);
@@ -1924,28 +1924,28 @@ ThrowCompletionOr<String> temporal_duration_to_string(VM& vm, double years, doub
     // 9. If years is not 0, then
     if (years != 0) {
         // a. Set datePart to the string concatenation of abs(years) formatted as a decimal number and the code unit 0x0059 (LATIN CAPITAL LETTER Y).
-        date_part.appendff("{}", fabs(years));
+        date_part.appendff("{}", AK::fabs(years));
         date_part.append('Y');
     }
 
     // 10. If months is not 0, then
     if (months != 0) {
         // a. Set datePart to the string concatenation of datePart, abs(months) formatted as a decimal number, and the code unit 0x004D (LATIN CAPITAL LETTER M).
-        date_part.appendff("{}", fabs(months));
+        date_part.appendff("{}", AK::fabs(months));
         date_part.append('M');
     }
 
     // 11. If weeks is not 0, then
     if (weeks != 0) {
         // a. Set datePart to the string concatenation of datePart, abs(weeks) formatted as a decimal number, and the code unit 0x0057 (LATIN CAPITAL LETTER W).
-        date_part.appendff("{}", fabs(weeks));
+        date_part.appendff("{}", AK::fabs(weeks));
         date_part.append('W');
     }
 
     // 12. If days is not 0, then
     if (days != 0) {
         // a. Set datePart to the string concatenation of datePart, abs(days) formatted as a decimal number, and the code unit 0x0044 (LATIN CAPITAL LETTER D).
-        date_part.appendff("{}", fabs(days));
+        date_part.appendff("{}", AK::fabs(days));
         date_part.append('D');
     }
 
@@ -1955,21 +1955,21 @@ ThrowCompletionOr<String> temporal_duration_to_string(VM& vm, double years, doub
     // 14. If hours is not 0, then
     if (hours != 0) {
         // a. Set timePart to the string concatenation of abs(hours) formatted as a decimal number and the code unit 0x0048 (LATIN CAPITAL LETTER H).
-        time_part.appendff("{}", fabs(hours));
+        time_part.appendff("{}", AK::fabs(hours));
         time_part.append('H');
     }
 
     // 15. If minutes is not 0, then
     if (minutes != 0) {
         // a. Set timePart to the string concatenation of timePart, abs(minutes) formatted as a decimal number, and the code unit 0x004D (LATIN CAPITAL LETTER M).
-        time_part.appendff("{}", fabs(minutes));
+        time_part.appendff("{}", AK::fabs(minutes));
         time_part.append('M');
     }
 
     // 16. If any of seconds, milliseconds, microseconds, and nanoseconds are not 0; or years, months, weeks, days, hours, and minutes are all 0; or precision is not "auto"; then
     if ((seconds != 0 || milliseconds != 0 || microseconds != 0 || nanoseconds != 0) || (years == 0 && months == 0 && weeks == 0 && days == 0 && hours == 0 && minutes == 0) || (!precision.has<StringView>() || precision.get<StringView>() != "auto"sv)) {
         // a. Let fraction be abs(milliseconds) × 10^6 + abs(microseconds) × 10^3 + abs(nanoseconds).
-        auto fraction = fabs(milliseconds) * 1'000'000 + fabs(microseconds) * 1'000 + fabs(nanoseconds);
+        auto fraction = AK::fabs(milliseconds) * 1'000'000 + AK::fabs(microseconds) * 1'000 + AK::fabs(nanoseconds);
 
         // b. Let decimalPart be ToZeroPaddedDecimalString(fraction, 9).
         // NOTE: padding with zeros leads to weird results when applied to a double. Not sure if that's a bug in AK/Format.h or if I'm doing this wrong.
@@ -1994,7 +1994,7 @@ ThrowCompletionOr<String> temporal_duration_to_string(VM& vm, double years, doub
 
         // f. Let secondsPart be abs(seconds) formatted as a decimal number.
         StringBuilder seconds_part;
-        seconds_part.appendff("{}", fabs(seconds));
+        seconds_part.appendff("{}", AK::fabs(seconds));
 
         // g. If decimalPart is not "", then
         if (!decimal_part.is_empty()) {

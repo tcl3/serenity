@@ -288,7 +288,7 @@ Optional<bool> Value::to_bool() const
             return {};
         },
         [](Integer auto value) -> Optional<bool> { return static_cast<bool>(value); },
-        [](double value) -> Optional<bool> { return fabs(value) > NumericLimits<double>::epsilon(); },
+        [](double value) -> Optional<bool> { return AK::fabs(value) > NumericLimits<double>::epsilon(); },
         [](bool value) -> Optional<bool> { return value; },
         [](TupleValue const& value) -> Optional<bool> {
             for (auto const& element : value.values) {
@@ -469,7 +469,7 @@ int Value::compare(Value const& other) const
                 return 1;
 
             auto diff = value - *casted;
-            if (fabs(diff) < NumericLimits<double>::epsilon())
+            if (AK::fabs(diff) < NumericLimits<double>::epsilon())
                 return 0;
             return diff < 0 ? -1 : 1;
         },
