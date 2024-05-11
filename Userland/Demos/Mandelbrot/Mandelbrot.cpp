@@ -121,7 +121,7 @@ public:
     {
         auto iterations = mandelbrot(px, py, max_iterations);
         auto whole_iterations = floor(iterations);
-        auto partial_iterations = fmod(iterations, 1);
+        auto partial_iterations = AK::fmod(iterations, 1);
         double hue1 = whole_iterations * 360.0 / max_iterations;
         if (hue1 >= 360.0)
             hue1 = 0.0;

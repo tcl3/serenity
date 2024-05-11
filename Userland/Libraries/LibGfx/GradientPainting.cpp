@@ -241,7 +241,7 @@ static auto create_conic_gradient(ReadonlySpan<ColorStop> color_stops, FloatPoin
         [=](int x, int y) {
             auto point = FloatPoint { x, y } - center_point;
             // FIXME: We could probably get away with some approximation here:
-            auto loc = fmod((AK::to_degrees(AK::atan2(point.y(), point.x())) + 360.0f + normalized_start_angle), 360.0f);
+            auto loc = AK::fmod((AK::to_degrees(AK::atan2(point.y(), point.x())) + 360.0f + normalized_start_angle), 360.0f);
             return should_floor_angles ? floor(loc) : loc;
         }
     };

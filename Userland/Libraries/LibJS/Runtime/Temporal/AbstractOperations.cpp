@@ -1631,7 +1631,7 @@ ThrowCompletionOr<DurationRecord> parse_temporal_duration_string(VM& vm, StringV
     // 13. Else,
     else {
         // a. Let secondsMV be remainder(minutesMV, 1) × 60.
-        seconds = fmod(minutes, 1) * 60;
+        seconds = AK::fmod(minutes, static_cast<double>(1)) * 60;
     }
 
     double milliseconds;
@@ -1650,7 +1650,7 @@ ThrowCompletionOr<DurationRecord> parse_temporal_duration_string(VM& vm, StringV
     // 15. Else,
     else {
         // a. Let millisecondsMV be remainder(secondsMV, 1) × 1000.
-        milliseconds = fmod(seconds, 1) * 1000;
+        milliseconds = AK::fmod(seconds, static_cast<double>(1)) * 1000;
     }
 
     // FIXME: This suffers from floating point (im)precision issues - e.g. "PT0.0000001S" ends up
@@ -1659,10 +1659,10 @@ ThrowCompletionOr<DurationRecord> parse_temporal_duration_string(VM& vm, StringV
     //        mathematical values are not supposed to have this issue.
 
     // 16. Let microsecondsMV be remainder(millisecondsMV, 1) × 1000.
-    auto microseconds = fmod(milliseconds, 1) * 1000;
+    auto microseconds = AK::fmod(milliseconds, static_cast<double>(1)) * 1000;
 
     // 17. Let nanosecondsMV be remainder(microsecondsMV, 1) × 1000.
-    auto nanoseconds = fmod(microseconds, 1) * 1000;
+    auto nanoseconds = AK::fmod(microseconds, static_cast<double>(1)) * 1000;
 
     i8 factor;
 

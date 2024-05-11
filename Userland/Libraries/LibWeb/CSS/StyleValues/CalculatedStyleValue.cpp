@@ -2282,7 +2282,7 @@ CalculatedStyleValue::CalculationResult RemCalculationNode::resolve(Optional<Len
     auto node_a_value = resolve_value(node_a.value(), context);
     auto node_b_value = resolve_value(node_b.value(), context);
 
-    auto value = fmod(node_a_value, node_b_value);
+    auto value = AK::fmod(node_a_value, node_b_value);
     return to_resolved_type(resolved_type, value);
 }
 

@@ -116,8 +116,8 @@ WebIDL::ExceptionOr<void> CanvasPath::ellipse(float x, float y, float radius_x, 
         // So we slightly fudge the numbers here to correct for that.
         end_angle = tau * 0.9999f;
     } else {
-        start_angle = fmodf(start_angle, tau);
-        end_angle = fmodf(end_angle, tau);
+        start_angle = AK::fmod(start_angle, tau);
+        end_angle = AK::fmod(end_angle, tau);
     }
 
     // Then, figure out where the ends of the arc are.

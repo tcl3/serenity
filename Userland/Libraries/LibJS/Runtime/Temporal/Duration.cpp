@@ -1904,19 +1904,19 @@ ThrowCompletionOr<String> temporal_duration_to_string(VM& vm, double years, doub
     microseconds += AK::trunc(nanoseconds / 1000);
 
     // 3. Set nanoseconds to remainder(nanoseconds, 1000).
-    nanoseconds = fmod(nanoseconds, 1000);
+    nanoseconds = AK::fmod(nanoseconds, static_cast<double>(1000));
 
     // 4. Set milliseconds to milliseconds + truncate(microseconds / 1000).
     milliseconds += AK::trunc(microseconds / 1000);
 
     // 5. Set microseconds to remainder(microseconds, 1000).
-    microseconds = fmod(microseconds, 1000);
+    microseconds = AK::fmod(microseconds, static_cast<double>(1000));
 
     // 6. Set seconds to seconds + truncate(milliseconds / 1000).
     seconds += AK::trunc(milliseconds / 1000);
 
     // 7. Set milliseconds to remainder(milliseconds, 1000).
-    milliseconds = fmod(milliseconds, 1000);
+    milliseconds = AK::fmod(milliseconds, static_cast<double>(1000));
 
     // 8. Let datePart be "".
     StringBuilder date_part;

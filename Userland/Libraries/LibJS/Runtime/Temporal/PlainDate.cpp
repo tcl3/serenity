@@ -303,7 +303,7 @@ DateDurationRecord difference_iso_date(VM& vm, i32 year1, u8 month1, u8 day1, i3
             weeks = AK::trunc(days / 7);
 
             // ii. Set days to remainder(days, 7).
-            days = fmod(days, 7);
+            days = AK::fmod(days, static_cast<double>(7));
         }
 
         // i. Return ! CreateDateDurationRecord(0, 0, weeks, days).

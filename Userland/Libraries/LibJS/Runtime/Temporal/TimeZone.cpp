@@ -243,7 +243,7 @@ ThrowCompletionOr<String> format_iso_time_zone_offset_string(VM& vm, double offs
     offset_nanoseconds = fabs(offset_nanoseconds);
 
     // 5. Let minutes be offsetNanoseconds / (60 × 10^9) modulo 60.
-    auto minutes = fmod(offset_nanoseconds / 60000000000, 60);
+    auto minutes = AK::fmod(offset_nanoseconds / 60000000000, 60);
 
     // 6. Let hours be floor(offsetNanoseconds / (3600 × 10^9)).
     auto hours = floor(offset_nanoseconds / 3600000000000);

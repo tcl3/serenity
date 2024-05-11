@@ -506,7 +506,7 @@ AnimationDirection AnimationEffect::current_direction() const
     //       is infinity, let the current direction be forwards.
     if (isinf(d))
         return AnimationDirection::Forwards;
-    if (fmod(d, 2.0) == 0.0)
+    if (AK::fmod(d, 2.0) == 0.0)
         return AnimationDirection::Forwards;
     return AnimationDirection::Backwards;
 }
@@ -521,7 +521,7 @@ Optional<double> AnimationEffect::simple_iteration_progress() const
 
     // 2. If overall progress is infinity, let the simple iteration progress be iteration start % 1.0, otherwise, let
     //    the simple iteration progress be overall progress % 1.0.
-    double simple_iteration_progress = isinf(overall_progress.value()) ? fmod(m_iteration_start, 1.0) : fmod(overall_progress.value(), 1.0);
+    double simple_iteration_progress = isinf(overall_progress.value()) ? AK::fmod(m_iteration_start, 1.0) : AK::fmod(overall_progress.value(), 1.0);
 
     // 3. If all of the following conditions are true,
     //    - the simple iteration progress calculated above is zero, and

@@ -300,7 +300,7 @@ auto modulo(T x, U y)
     if constexpr (IsFloatingPoint<T> || IsFloatingPoint<U>) {
         if constexpr (IsFloatingPoint<U>)
             VERIFY(__builtin_isfinite(y));
-        auto r = fmod(x, y);
+        auto r = AK::fmod(x, static_cast<T>(y));
         return r < 0 ? r + y : r;
     } else {
         return ((x % y) + y) % y;
@@ -325,7 +325,7 @@ auto remainder(T x, U y)
     if constexpr (IsFloatingPoint<T> || IsFloatingPoint<U>) {
         if constexpr (IsFloatingPoint<U>)
             VERIFY(__builtin_isfinite(y));
-        return fmod(x, y);
+        return AK::fmod(x, y);
     } else {
         return x % y;
     }

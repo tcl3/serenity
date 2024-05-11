@@ -1086,7 +1086,7 @@ ThrowCompletionOr<u8> Value::to_u8_clamp(VM& vm) const
         return static_cast<u8>(int_val);
 
     // 8. If f is odd, return 𝔽(f + 1).
-    if (fmod(int_val, 2.0) == 1.0)
+    if (AK::fmod(int_val, 2.0) == 1.0)
         return static_cast<u8>(int_val + 1.0);
 
     // 9. Return 𝔽(f).
@@ -1899,7 +1899,7 @@ ThrowCompletionOr<Value> mod(VM& vm, Value lhs, Value rhs)
         // implemented by fmod.
         auto n = lhs_numeric.as_double();
         auto d = rhs_numeric.as_double();
-        return Value(fmod(n, d));
+        return Value(AK::fmod(n, d));
     }
     if (both_bigint(lhs_numeric, rhs_numeric)) {
         // 6.1.6.2.6 BigInt::remainder ( n, d ), https://tc39.es/ecma262/#sec-numeric-types-bigint-remainder
@@ -1944,7 +1944,7 @@ static Value exp_double(Value base, Value exponent)
 
     // 5. If base is -∞𝔽, then
     if (base.is_negative_infinity()) {
-        auto is_odd_integral_number = exponent.is_integral_number() && (fmod(exponent.as_double(), 2.0) != 0);
+        auto is_odd_integral_number = exponent.is_integral_number() && (AK::fmod(exponent.as_double(), 2.0) != 0);
 
         // a. If exponent > +0𝔽, then
         if (exponent.as_double() > 0) {
@@ -1966,7 +1966,7 @@ static Value exp_double(Value base, Value exponent)
 
     // 7. If base is -0𝔽, then
     if (base.is_negative_zero()) {
-        auto is_odd_integral_number = exponent.is_integral_number() && (fmod(exponent.as_double(), 2.0) != 0);
+        auto is_odd_integral_number = exponent.is_integral_number() && (AK::fmod(exponent.as_double(), 2.0) != 0);
 
         // a. If exponent > +0𝔽, then
         if (exponent.as_double() > 0) {

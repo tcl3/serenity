@@ -362,7 +362,7 @@ void paint_background(PaintContext& context, Layout::NodeWithStyleAndBoxModelMet
                 x_step = image_rect.width();
                 repeat_x = false;
             } else {
-                auto space = fmod(background_positioning_area.width().to_double(), image_rect.width().to_double());
+                auto space = AK::fmod(background_positioning_area.width().to_double(), image_rect.width().to_double());
                 x_step = image_rect.width() + CSSPixels::nearest_value_for(space / static_cast<double>(whole_images - 1));
                 repeat_x = true;
             }
@@ -393,7 +393,7 @@ void paint_background(PaintContext& context, Layout::NodeWithStyleAndBoxModelMet
                 y_step = image_rect.height();
                 repeat_y = false;
             } else {
-                auto space = fmod(background_positioning_area.height().to_float(), image_rect.height().to_float());
+                auto space = AK::fmod(background_positioning_area.height().to_float(), image_rect.height().to_float());
                 y_step = image_rect.height() + CSSPixels::nearest_value_for(static_cast<double>(space) / static_cast<double>(whole_images - 1));
                 repeat_y = true;
             }

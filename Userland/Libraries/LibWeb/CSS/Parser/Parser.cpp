@@ -2321,7 +2321,7 @@ Optional<Color> Parser::parse_rgb_or_hsl_color(StringView function_name, Vector<
 
             auto angle = Angle { numeric_value, angle_type.release_value() };
 
-            float h_val = fmod(angle.to_degrees(), 360.0);
+            float h_val = AK::fmod(angle.to_degrees(), 360.0);
             float s_val = params[1].percentage() / 100.0;
             float l_val = params[2].percentage() / 100.0;
 
@@ -2332,7 +2332,7 @@ Optional<Color> Parser::parse_rgb_or_hsl_color(StringView function_name, Vector<
             && params[1].is(Token::Type::Percentage)
             && params[2].is(Token::Type::Percentage)) {
 
-            float h_val = fmod(params[0].number_value(), 360.0);
+            float h_val = AK::fmod(params[0].number_value(), 360.0);
             float s_val = params[1].percentage() / 100.0;
             float l_val = params[2].percentage() / 100.0;
 

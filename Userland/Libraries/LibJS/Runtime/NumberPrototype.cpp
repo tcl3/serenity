@@ -455,7 +455,7 @@ JS_DEFINE_NATIVE_FUNCTION(NumberPrototype::to_string)
         backwards_characters.append('0');
     } else {
         while (int_part > 0) {
-            backwards_characters.append(digits[floor(fmod(int_part, radix))]);
+            backwards_characters.append(digits[floor(AK::fmod(int_part, static_cast<double>(radix)))]);
             int_part /= radix;
             int_part = floor(int_part);
         }

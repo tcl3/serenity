@@ -1900,12 +1900,12 @@ WebIDL::ExceptionOr<void> HTMLInputElement::step_up_or_down(bool is_down, WebIDL
 
     // 7. If value subtracted from the step base is not an integral multiple of the allowed value step, then set value to the nearest value that,
     // when subtracted from the step base, is an integral multiple of the allowed value step, and that is less than value if the method invoked was the stepDown() method, and more than value otherwise.
-    if (fmod(step_base() - value, allowed_value_step) != 0) {
+    if (AK::fmod(step_base() - value, allowed_value_step) != 0) {
         double diff = step_base() - value;
         if (is_down) {
-            value = diff - fmod(diff, allowed_value_step);
+            value = diff - AK::fmod(diff, allowed_value_step);
         } else {
-            value = diff + fmod(diff, allowed_value_step);
+            value = diff + AK::fmod(diff, allowed_value_step);
         }
     } else {
         // 1. Let n be the argument.
