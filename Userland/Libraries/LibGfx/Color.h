@@ -158,10 +158,10 @@ public:
         // PUT hue.to.rgb(m1, m2, h-1/3) IN b
         float b = hue_to_rgb(m1, m2, h - 1.0f / 3.0f);
         // RETURN (r, g, b)
-        u8 r_u8 = clamp(lroundf(r * 255.0f), 0, 255);
-        u8 g_u8 = clamp(lroundf(g * 255.0f), 0, 255);
-        u8 b_u8 = clamp(lroundf(b * 255.0f), 0, 255);
-        u8 a_u8 = clamp(lroundf(a * 255.0f), 0, 255);
+        u8 r_u8 = clamp(AK::round_to<i64>(r * 255.0f), 0, 255);
+        u8 g_u8 = clamp(AK::round_to<i64>(g * 255.0f), 0, 255);
+        u8 b_u8 = clamp(AK::round_to<i64>(b * 255.0f), 0, 255);
+        u8 a_u8 = clamp(AK::round_to<i64>(a * 255.0f), 0, 255);
         return Color(r_u8, g_u8, b_u8, a_u8);
     }
 
@@ -189,10 +189,10 @@ public:
         blue = linear_to_srgb(blue) * 255.f;
 
         return Color(
-            clamp(lroundf(red), 0, 255),
-            clamp(lroundf(green), 0, 255),
-            clamp(lroundf(blue), 0, 255),
-            clamp(lroundf(alpha * 255.f), 0, 255));
+            clamp(AK::round_to<i64>(red), 0, 255),
+            clamp(AK::round_to<i64>(green), 0, 255),
+            clamp(AK::round_to<i64>(blue), 0, 255),
+            clamp(AK::round_to<i64>(alpha * 255.f), 0, 255));
     }
 
     // https://bottosson.github.io/posts/oklab/
@@ -355,9 +355,9 @@ public:
         auto b = blue();
 
         return Color(
-            clamp(lroundf(r * r1 + g * r2 + b * r3), 0, 255),
-            clamp(lroundf(r * g1 + g * g2 + b * g3), 0, 255),
-            clamp(lroundf(r * b1 + g * b2 + b * b3), 0, 255),
+            clamp(AK::round_to<i64>(r * r1 + g * r2 + b * r3), 0, 255),
+            clamp(AK::round_to<i64>(r * g1 + g * g2 + b * g3), 0, 255),
+            clamp(AK::round_to<i64>(r * b1 + g * b2 + b * b3), 0, 255),
             alpha());
     }
 

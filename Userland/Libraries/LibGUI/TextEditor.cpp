@@ -524,7 +524,7 @@ Gfx::IntRect TextEditor::gutter_indicator_rect(size_t line_number, int indicator
     auto gutter_rect = gutter_content_rect(line_number);
     auto indicator_size = gutter_rect.height();
     return Gfx::IntRect {
-        gutter_rect.right() - 1 - static_cast<int>(lroundf(indicator_size * (indicator_position + 1.5f))),
+        gutter_rect.right() - 1 - AK::round_to<int>(indicator_size * (indicator_position + 1.5f)),
         gutter_rect.top(),
         indicator_size,
         indicator_size

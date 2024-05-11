@@ -2280,9 +2280,9 @@ Optional<Color> Parser::parse_rgb_or_hsl_color(StringView function_name, Vector<
             && params[1].is(Token::Type::Number)
             && params[2].is(Token::Type::Number)) {
 
-            u8 r_val = clamp(llroundf(params[0].number_value()), 0, 255);
-            u8 g_val = clamp(llroundf(params[1].number_value()), 0, 255);
-            u8 b_val = clamp(llroundf(params[2].number_value()), 0, 255);
+            u8 r_val = clamp(AK::round_to<i64>(params[0].number_value()), 0, 255);
+            u8 g_val = clamp(AK::round_to<i64>(params[1].number_value()), 0, 255);
+            u8 b_val = clamp(AK::round_to<i64>(params[2].number_value()), 0, 255);
 
             return Color(r_val, g_val, b_val, a_val);
         }
