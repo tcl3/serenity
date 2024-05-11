@@ -1402,9 +1402,9 @@ static FloatVector3 lab_from_xyz(FloatVector3 xyz, XYZ white_point)
     // A.3 PCS encodings
 
     auto f = [](float x) {
-        if (x > powf(6.f / 29.f, 3))
+        if (x > AK::pow(6.f / 29.f, 3.0f))
             return cbrtf(x);
-        return x / (3 * powf(6.f / 29.f, 2)) + 4.f / 29.f;
+        return x / (3 * AK::pow(6.f / 29.f, 2.f)) + 4.f / 29.f;
     };
 
     // "X/Xn is replaced by Xr/Xi (or Xa/Xmw)"
@@ -1453,8 +1453,8 @@ static FloatVector3 xyz_from_lab(FloatVector3 lab, XYZ white_point)
     // Inverse of f in lab_from_xyz().
     auto g = [](float x) {
         if (x >= 6.0f / 29.0f)
-            return powf(x, 3);
-        return (x - 4.0f / 29.0f) * (3 * powf(6.f / 29.f, 2));
+            return AK::pow(x, 3.0f);
+        return (x - 4.0f / 29.0f) * (3 * AK::pow(6.f / 29.f, 2.0f));
     };
 
     return { white_point.X * g(L), white_point.Y * g(M), white_point.Z * g(N) };

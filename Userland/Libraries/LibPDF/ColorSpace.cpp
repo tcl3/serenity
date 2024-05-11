@@ -277,7 +277,7 @@ constexpr float decode_l(float input)
         return -decode_l(-input);
     if (input >= 0.0f && input <= 8.0f)
         return input * decode_l_scaling_constant;
-    return powf(((input + 16.0f) / 116.0f), 3.0f);
+    return AK::pow(((input + 16.0f) / 116.0f), 3.0f);
 }
 
 constexpr Array<float, 3> scale_black_point(Array<float, 3> blackpoint, Array<float, 3> xyz)
@@ -327,7 +327,7 @@ constexpr Array<float, 3> convert_to_srgb(Array<float, 3> xyz)
     linear_srgb[2] = clamp(linear_srgb[2], 0.0f, 1.0f);
 
     // FIXME: Use the real sRGB curve by replacing this function with Gfx::ICC::sRGB().from_pcs().
-    return { pow(linear_srgb[0], 1.0f / 2.2f), pow(linear_srgb[1], 1.0f / 2.2f), pow(linear_srgb[2], 1.0f / 2.2f) };
+    return { AK::pow(linear_srgb[0], 1.0f / 2.2f), AK::pow(linear_srgb[1], 1.0f / 2.2f), AK::pow(linear_srgb[2], 1.0f / 2.2f) };
 }
 
 PDFErrorOr<NonnullRefPtr<CalGrayColorSpace>> CalGrayColorSpace::create(Document* document, Vector<Value>&& parameters)
@@ -373,7 +373,7 @@ PDFErrorOr<ColorOrStyle> CalGrayColorSpace::style(ReadonlySpan<float> arguments)
     VERIFY(arguments.size() == 1);
     auto a = clamp(arguments[0], 0.0f, 1.0f);
 
-    auto ag = powf(a, m_gamma);
+    auto ag = AK::pow(a, m_gamma);
 
     auto x = m_whitepoint[0] * ag;
     auto y = m_whitepoint[1] * ag;
@@ -461,9 +461,9 @@ PDFErrorOr<ColorOrStyle> CalRGBColorSpace::style(ReadonlySpan<float> arguments) 
     auto b = clamp(arguments[1], 0.0f, 1.0f);
     auto c = clamp(arguments[2], 0.0f, 1.0f);
 
-    auto agr = powf(a, m_gamma[0]);
-    auto bgg = powf(b, m_gamma[1]);
-    auto cgb = powf(c, m_gamma[2]);
+    auto agr = AK::pow(a, m_gamma[0]);
+    auto bgg = AK::pow(b, m_gamma[1]);
+    auto cgb = AK::pow(c, m_gamma[2]);
 
     auto x = m_matrix[0] * agr + m_matrix[3] * bgg + m_matrix[6] * cgb;
     auto y = m_matrix[1] * agr + m_matrix[4] * bgg + m_matrix[7] * cgb;
@@ -638,7 +638,7 @@ PDFErrorOr<ColorOrStyle> LabColorSpace::style(ReadonlySpan<float> arguments) con
 
     auto g = [](float x) {
         if (x >= 6.0f / 29.0f)
-            return powf(x, 3);
+            return AK::pow(x, 3.0f);
         return 108.0f / 841.0f * (x - 4.0f / 29.0f);
     };
 

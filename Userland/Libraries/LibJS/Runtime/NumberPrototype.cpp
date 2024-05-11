@@ -8,6 +8,7 @@
 
 #include <AK/Array.h>
 #include <AK/Function.h>
+#include <AK/Math.h>
 #include <AK/StringFloatingPointConversions.h>
 #include <AK/TypeCasts.h>
 #include <LibJS/Runtime/AbstractOperations.h>
@@ -144,7 +145,7 @@ JS_DEFINE_NATIVE_FUNCTION(NumberPrototype::to_exponential)
             fraction_digits = mantissa_length - 1;
         }
 
-        number = round(number / pow(10, exponent - fraction_digits));
+        number = round(number / AK::pow(10.0, exponent - fraction_digits));
 
         // c. Let m be the String value consisting of the digits of the decimal representation of n (in order, with no leading zeroes).
         number_string = number_to_byte_string(number, NumberToStringMode::WithoutExponent);
@@ -333,7 +334,7 @@ JS_DEFINE_NATIVE_FUNCTION(NumberPrototype::to_precision)
         // a. Let e and n be integers such that 10^(p-1) ≤ n < 10^p and for which n × 10^(e-p+1) - x is as close to zero as possible.
         //    If there are two such sets of e and n, pick the e and n for which n × 10^(e-p+1) is larger.
         exponent = static_cast<int>(AK::floor(log10(number)));
-        number = round(number / pow(10, exponent - precision + 1));
+        number = round(number / AK::pow(10.0, exponent - precision + 1));
 
         // b. Let m be the String value consisting of the digits of the decimal representation of n (in order, with no leading zeroes).
         number_string = number_to_byte_string(number, NumberToStringMode::WithoutExponent);

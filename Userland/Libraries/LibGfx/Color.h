@@ -169,7 +169,7 @@ public:
     static constexpr Color from_oklab(float L, float a, float b, float alpha = 1.0f)
     {
         auto linear_to_srgb = [](float c) {
-            return c >= 0.0031308f ? 1.055f * pow(c, 0.4166666f) - 0.055f : 12.92f * c;
+            return c >= 0.0031308f ? 1.055f * AK::pow(c, 0.4166666f) - 0.055f : 12.92f * c;
         };
 
         float l = L + 0.3963377774f * a + 0.2158037573f * b;
@@ -199,7 +199,7 @@ public:
     constexpr Oklab to_oklab()
     {
         auto srgb_to_linear = [](float c) {
-            return c >= 0.04045f ? pow((c + 0.055f) / 1.055f, 2.4f) : c / 12.92f;
+            return c >= 0.04045f ? AK::pow((c + 0.055f) / 1.055f, 2.4f) : c / 12.92f;
         };
 
         float r = srgb_to_linear(red() / 255.f);

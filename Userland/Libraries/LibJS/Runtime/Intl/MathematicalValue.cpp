@@ -4,6 +4,7 @@
  * SPDX-License-Identifier: BSD-2-Clause
  */
 
+#include <AK/IntegralMath.h>
 #include <LibJS/Runtime/AbstractOperations.h>
 #include <LibJS/Runtime/GlobalObject.h>
 #include <LibJS/Runtime/Intl/MathematicalValue.h>
@@ -190,7 +191,7 @@ MathematicalValue MathematicalValue::multiplied_by_power(Checked<i32> exponent) 
 {
     return m_value.visit(
         [&](double value) {
-            return MathematicalValue { value * pow(10, exponent.value()) };
+            return MathematicalValue { value * AK::pow(10, exponent.value()) };
         },
         [&](Crypto::SignedBigInteger const& value) {
             if (exponent < 0)
@@ -205,8 +206,8 @@ MathematicalValue MathematicalValue::divided_by_power(Checked<i32> exponent) con
     return m_value.visit(
         [&](double value) {
             if (exponent < 0)
-                return MathematicalValue { value * pow(10, -exponent.value()) };
-            return MathematicalValue { value / pow(10, exponent.value()) };
+                return MathematicalValue { value * AK::pow(10, -exponent.value()) };
+            return MathematicalValue { value / AK::pow(10, exponent.value()) };
         },
         [&](Crypto::SignedBigInteger const& value) {
             if (exponent < 0)

@@ -5,6 +5,7 @@
  */
 
 #include <AK/Find.h>
+#include <AK/IntegralMath.h>
 #include <AK/IterationDecision.h>
 #include <AK/NumericLimits.h>
 #include <AK/StringBuilder.h>
@@ -538,7 +539,7 @@ ThrowCompletionOr<Vector<PatternPartition>> format_date_time_pattern(VM& vm, Dat
             auto value = local_time.millisecond;
 
             // ii. Let v be floor(v × 10^(fractionalSecondDigits - 3)).
-            value = AK::floor(value * pow(10, static_cast<int>(*fractional_second_digits) - 3));
+            value = value * AK::pow(10, static_cast<int>(*fractional_second_digits) - 3);
 
             // iii. Let fv be FormatNumeric(nf3, v).
             auto formatted_value = format_numeric(vm, *number_format3, Value(value));
@@ -950,10 +951,10 @@ ThrowCompletionOr<Vector<PatternPartitionWithSource>> partition_date_time_range_
                 // 4. Let v2 be tm2.[[Millisecond]].
 
                 // 5. Let v1 be floor(v1 × 10( fractionalSecondDigits - 3 )).
-                start_value = AK::floor(start_value * pow(10, static_cast<int>(*fractional_second_digits) - 3));
+                start_value = start_value * AK::pow(10, static_cast<int>(*fractional_second_digits) - 3);
 
                 // 6. Let v2 be floor(v2 × 10( fractionalSecondDigits - 3 )).
-                end_value = AK::floor(end_value * pow(10, static_cast<int>(*fractional_second_digits) - 3));
+                end_value = end_value * AK::pow(10, static_cast<int>(*fractional_second_digits) - 3);
 
                 // 7. If v1 is not equal to v2, then
                 if (start_value != end_value) {
@@ -1164,7 +1165,7 @@ ThrowCompletionOr<LocalTime> to_local_time(VM& vm, Crypto::SignedBigInteger cons
         return LocalTime {
             // WeekDay(𝔽(floor(tz / 10^6)))
             .weekday = week_day(zoned_time),
-            // Let year be YearFromTime(𝔽(AK::floor(tz / 10^6))). If year < 1𝔽, return "BC", else return "AD".
+            // Let year be YearFromTime(𝔽(floor(tz / 10^6))). If year < 1𝔽, return "BC", else return "AD".
             .era = year < 1 ? ::Locale::Era::BC : ::Locale::Era::AD,
             // YearFromTime(𝔽(floor(tz / 10^6)))
             .year = year,
@@ -1172,17 +1173,17 @@ ThrowCompletionOr<LocalTime> to_local_time(VM& vm, Crypto::SignedBigInteger cons
             .related_year = js_undefined(),
             // undefined.
             .year_name = js_undefined(),
-            // MonthFromTime(𝔽(AK::floor(tz / 10^6)))
+            // MonthFromTime(𝔽(floor(tz / 10^6)))
             .month = month_from_time(zoned_time),
-            // DateFromTime(𝔽(AK::floor(tz / 10^6)))
+            // DateFromTime(𝔽(floor(tz / 10^6)))
             .day = date_from_time(zoned_time),
-            // HourFromTime(𝔽(AK::floor(tz / 10^6)))
+            // HourFromTime(𝔽(floor(tz / 10^6)))
             .hour = hour_from_time(zoned_time),
-            // MinFromTime(𝔽(AK::floor(tz / 10^6)))
+            // MinFromTime(𝔽(floor(tz / 10^6)))
             .minute = min_from_time(zoned_time),
-            // SecFromTime(𝔽(AK::floor(tz / 10^6)))
+            // SecFromTime(𝔽(floor(tz / 10^6)))
             .second = sec_from_time(zoned_time),
-            // msFromTime(𝔽(AK::floor(tz / 10^6)))
+            // msFromTime(𝔽(floor(tz / 10^6)))
             .millisecond = ms_from_time(zoned_time),
         };
     }

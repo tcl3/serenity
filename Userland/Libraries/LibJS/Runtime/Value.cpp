@@ -2021,7 +2021,7 @@ static Value exp_double(Value base, Value exponent)
         return js_nan();
 
     // 13. Return an implementation-approximated Number value representing the result of raising ℝ(base) to the ℝ(exponent) power.
-    return Value(::pow(base.as_double(), exponent.as_double()));
+    return Value(AK::pow(base.as_double(), exponent.as_double()));
 }
 
 // 13.6 Exponentiation Operator, https://tc39.es/ecma262/#sec-exp-operator

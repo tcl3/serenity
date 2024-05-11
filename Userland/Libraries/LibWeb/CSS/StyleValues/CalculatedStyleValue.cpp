@@ -1705,7 +1705,7 @@ CalculatedStyleValue::CalculationResult PowCalculationNode::resolve(Optional<Len
     auto node_b = m_y->resolve(context, percentage_basis);
     auto node_b_value = resolve_value(node_b.value(), context);
 
-    auto result = pow(node_a_value, node_b_value);
+    auto result = AK::pow(node_a_value, node_b_value);
 
     return { Number(Number::Type::Number, result) };
 }

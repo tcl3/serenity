@@ -312,7 +312,7 @@ PDFErrorOr<ReadonlySpan<float>> ExponentialInterpolationFunction::evaluate(Reado
     float const x = clamp(xs[0], m_domain.lower, m_domain.upper);
 
     for (size_t i = 0; i < m_c0.size(); ++i)
-        m_values[i] = m_c0[i] + pow(x, m_n) * (m_c1[i] - m_c0[i]);
+        m_values[i] = m_c0[i] + AK::pow(x, m_n) * (m_c1[i] - m_c0[i]);
 
     if (m_range.has_value()) {
         for (size_t i = 0; i < m_c0.size(); ++i)

@@ -415,7 +415,7 @@ void Scrollbar::update_animated_scroll()
     }
 
     double time_percent = m_animation_time_elapsed / ANIMATION_TIME;
-    double ease_percent = 1.0 - pow(1.0 - time_percent, 5.0); // Ease out quint
+    double ease_percent = 1.0 - AK::pow(1.0 - time_percent, 5.0); // Ease out quint
     double initial_distance = m_target_value - m_start_value;
     double new_distance = initial_distance * ease_percent;
     int new_value = m_start_value + (int)round(new_distance);

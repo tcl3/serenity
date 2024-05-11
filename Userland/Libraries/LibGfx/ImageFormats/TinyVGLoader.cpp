@@ -174,7 +174,7 @@ class TinyVGReader {
 public:
     TinyVGReader(Stream& stream, TinyVGHeader const& header, ReadonlySpan<Color> color_table)
         : m_stream(stream)
-        , m_scale(powf(0.5, header.scale))
+        , m_scale(AK::pow(0.5f, static_cast<float>(header.scale)))
         , m_coordinate_range(header.coordinate_range)
         , m_color_table(color_table)
     {

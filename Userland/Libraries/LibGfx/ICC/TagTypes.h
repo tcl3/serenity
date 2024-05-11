@@ -214,7 +214,7 @@ public:
             return x;
 
         if (values().size() == 1)
-            return powf(x, values()[0] / (float)0x100);
+            return AK::pow(x, values()[0] / (float)0x100);
 
         return lerp_1d(values().span(), x) / 65535.0f;
     }
@@ -228,7 +228,7 @@ public:
             return y;
 
         if (values().size() == 1)
-            return powf(y, 1.f / (values()[0] / (float)0x100));
+            return AK::pow(y, 1.f / (values()[0] / (float)0x100));
 
         // FIXME: Verify somewhere that:
         // * values() is non-decreasing
@@ -813,22 +813,22 @@ public:
 
         switch (function_type()) {
         case FunctionType::Type0:
-            return powf(x, (float)g());
+            return AK::pow(x, (float)g());
         case FunctionType::Type1:
             if (x >= -(float)b() / (float)a())
-                return powf((float)a() * x + (float)b(), (float)g());
+                return AK::pow((float)a() * x + (float)b(), (float)g());
             return 0;
         case FunctionType::Type2:
             if (x >= -(float)b() / (float)a())
-                return powf((float)a() * x + (float)b(), (float)g()) + (float)c();
+                return AK::pow((float)a() * x + (float)b(), (float)g()) + (float)c();
             return (float)c();
         case FunctionType::Type3:
             if (x >= (float)d())
-                return powf((float)a() * x + (float)b(), (float)g());
+                return AK::pow((float)a() * x + (float)b(), (float)g());
             return (float)c() * x;
         case FunctionType::Type4:
             if (x >= (float)d())
-                return powf((float)a() * x + (float)b(), (float)g()) + (float)e();
+                return AK::pow((float)a() * x + (float)b(), (float)g()) + (float)e();
             return (float)c() * x + (float)f();
         }
         VERIFY_NOT_REACHED();
@@ -855,19 +855,19 @@ public:
 
         switch (function_type()) {
         case FunctionType::Type0:
-            return powf(y, 1.f / (float)g());
+            return AK::pow(y, 1.f / (float)g());
         case FunctionType::Type1:
-            return (powf(y, 1.f / (float)g()) - (float)b()) / (float)a();
+            return (AK::pow(y, 1.f / (float)g()) - (float)b()) / (float)a();
         case FunctionType::Type2:
             // Only defined for Y >= c, so I suppose this requires c <= 0 in practice (?).
-            return (powf(y - (float)c(), 1.f / (float)g()) - (float)b()) / (float)a();
+            return (AK::pow(y - (float)c(), 1.f / (float)g()) - (float)b()) / (float)a();
         case FunctionType::Type3:
             if (y >= (float)c() * (float)d())
-                return (powf(y, 1.f / (float)g()) - (float)b()) / (float)a();
+                return (AK::pow(y, 1.f / (float)g()) - (float)b()) / (float)a();
             return y / (float)c();
         case FunctionType::Type4:
             if (y >= (float)c() * (float)d())
-                return (powf(y - (float)e(), 1.f / (float)g()) - (float)b()) / (float)a();
+                return (AK::pow(y - (float)e(), 1.f / (float)g()) - (float)b()) / (float)a();
             return (y - (float)f()) / (float)c();
         }
         VERIFY_NOT_REACHED();

@@ -1683,11 +1683,11 @@ ThrowCompletionOr<MathematicalValue> to_intl_mathematical_value(VM& vm, Value va
         return MathematicalValue::Symbol::NegativeZero;
 
     // 8. If mv is 10^10000 and str contains Infinity, return positive-infinity.
-    if (mathematical_value == pow(10, 10000) && string.contains("Infinity"sv))
+    if (mathematical_value == AK::pow(10.0, 10000.0) && string.contains("Infinity"sv))
         return MathematicalValue::Symbol::PositiveInfinity;
 
     // 9. If mv is -10^10000 and str contains Infinity, return negative-infinity.
-    if (mathematical_value == pow(-10, 10000) && string.contains("Infinity"sv))
+    if (mathematical_value == AK::pow(-10.0, 10000.0) && string.contains("Infinity"sv))
         return MathematicalValue::Symbol::NegativeInfinity;
 
     // 10. Return mv.

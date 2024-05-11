@@ -1280,7 +1280,7 @@ static NonnullRefPtr<StyleValue const> interpolate_value(DOM::Element& element, 
         auto from_number = log(from_ratio.value());
         auto to_number = log(to_ratio.value());
         auto interp_number = interpolate_raw(from_number, to_number, delta);
-        return RatioStyleValue::create(Ratio(pow(M_E, interp_number)));
+        return RatioStyleValue::create(Ratio(AK::pow(M_E, interp_number)));
     }
     case StyleValue::Type::Rect: {
         auto from_rect = from.as_rect().rect();

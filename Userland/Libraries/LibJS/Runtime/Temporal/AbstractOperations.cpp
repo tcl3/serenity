@@ -7,6 +7,7 @@
  */
 
 #include <AK/CharacterTypes.h>
+#include <AK/IntegralMath.h>
 #include <AK/String.h>
 #include <AK/TypeCasts.h>
 #include <AK/Variant.h>
@@ -409,20 +410,20 @@ ThrowCompletionOr<SecondsStringPrecision> to_seconds_string_precision_record(VM&
     // 15. If fractionalDigitCount is 1, 2, or 3, then
     if (fractional_digit_count == 1 || fractional_digit_count == 2 || fractional_digit_count == 3) {
         // a. Return the Record { [[Precision]]: fractionalDigitCount, [[Unit]]: "millisecond", [[Increment]]: 10^(3 - fractionalDigitCount) }.
-        return SecondsStringPrecision { .precision = fractional_digit_count, .unit = "millisecond"sv, .increment = (u32)pow(10, 3 - fractional_digit_count) };
+        return SecondsStringPrecision { .precision = fractional_digit_count, .unit = "millisecond"sv, .increment = (u32)AK::pow(10, 3 - fractional_digit_count) };
     }
 
     // 16. If fractionalDigitCount is 4, 5, or 6, then
     if (fractional_digit_count == 4 || fractional_digit_count == 5 || fractional_digit_count == 6) {
         // a. Return the Record { [[Precision]]: fractionalDigitCount, [[Unit]]: "microsecond", [[Increment]]: 10^(6 - fractionalDigitCount) }.
-        return SecondsStringPrecision { .precision = fractional_digit_count, .unit = "microsecond"sv, .increment = (u32)pow(10, 6 - fractional_digit_count) };
+        return SecondsStringPrecision { .precision = fractional_digit_count, .unit = "microsecond"sv, .increment = (u32)AK::pow(10, 6 - fractional_digit_count) };
     }
 
     // 17. Assert: fractionalDigitCount is 7, 8, or 9.
     VERIFY(fractional_digit_count == 7 || fractional_digit_count == 8 || fractional_digit_count == 9);
 
     // 18. Return the Record { [[Precision]]: fractionalDigitCount, [[Unit]]: "nanosecond", [[Increment]]: 10^(9 - fractionalDigitCount) }.
-    return SecondsStringPrecision { .precision = fractional_digit_count, .unit = "nanosecond"sv, .increment = (u32)pow(10, 9 - fractional_digit_count) };
+    return SecondsStringPrecision { .precision = fractional_digit_count, .unit = "nanosecond"sv, .increment = (u32)AK::pow(10, 9 - fractional_digit_count) };
 }
 
 struct TemporalUnit {
@@ -1598,7 +1599,7 @@ ThrowCompletionOr<DurationRecord> parse_temporal_duration_string(VM& vm, StringV
         auto f_hours_scale = (double)f_hours_digits.length();
 
         // d. Let minutesMV be ! ToIntegerOrInfinity(fHoursDigits) / 10^fHoursScale × 60.
-        minutes = f_hours_digits.to_number<double>().release_value() / pow(10., f_hours_scale) * 60;
+        minutes = f_hours_digits.to_number<double>().release_value() / AK::pow(10., f_hours_scale) * 60;
     }
     // 10. Else,
     else {
@@ -1621,7 +1622,7 @@ ThrowCompletionOr<DurationRecord> parse_temporal_duration_string(VM& vm, StringV
         auto f_minutes_scale = (double)f_minutes_digits.length();
 
         // d. Let secondsMV be ! ToIntegerOrInfinity(fMinutesDigits) / 10^fMinutesScale × 60.
-        seconds = f_minutes_digits.to_number<double>().release_value() / pow(10, f_minutes_scale) * 60;
+        seconds = f_minutes_digits.to_number<double>().release_value() / AK::pow(10.0, f_minutes_scale) * 60;
     }
     // 12. Else if seconds is not empty, then
     else if (seconds_part.has_value()) {
@@ -1645,7 +1646,7 @@ ThrowCompletionOr<DurationRecord> parse_temporal_duration_string(VM& vm, StringV
         auto f_seconds_scale = (double)f_seconds_digits.length();
 
         // c. Let millisecondsMV be ! ToIntegerOrInfinity(fSecondsDigits) / 10^fSecondsScale × 1000.
-        milliseconds = f_seconds_digits.to_number<double>().release_value() / pow(10, f_seconds_scale) * 1000;
+        milliseconds = f_seconds_digits.to_number<double>().release_value() / AK::pow(10.0, f_seconds_scale) * 1000;
     }
     // 15. Else,
     else {

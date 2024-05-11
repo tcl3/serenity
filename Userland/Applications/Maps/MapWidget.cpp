@@ -22,41 +22,41 @@ namespace Maps {
 // https://wiki.openstreetmap.org/wiki/Slippy_map_tilenames#Pseudo-code
 static double longitude_to_tile_x(double longitude, int zoom)
 {
-    return pow(2, zoom) * ((longitude + 180.0) / 360.0);
+    return AK::pow(2, zoom) * ((longitude + 180.0) / 360.0);
 }
 
 static double latitude_to_tile_y(double latitude, int zoom)
 {
-    return pow(2, zoom) * (1.0 - (log(tan(AK::to_radians(latitude)) + (1.0 / cos(AK::to_radians(latitude)))) / M_PI)) / 2.0;
+    return AK::pow(2, zoom) * (1.0 - (log(tan(AK::to_radians(latitude)) + (1.0 / cos(AK::to_radians(latitude)))) / M_PI)) / 2.0;
 }
 
 static double tile_x_to_longitude(double x, int zoom)
 {
-    return x / pow(2, zoom) * 360.0 - 180.0;
+    return x / AK::pow(2, zoom) * 360.0 - 180.0;
 }
 
 static double tile_y_to_latitude(double y, int zoom)
 {
-    return AK::to_degrees(atan(sinh(M_PI * (1.0 - 2.0 * y / pow(2, zoom)))));
+    return AK::to_degrees(atan(sinh(M_PI * (1.0 - 2.0 * y / AK::pow(2, zoom)))));
 }
 
 static double nice_round_number(double number)
 {
-    double pow10 = pow(10, AK::floor(log10(AK::floor(number))));
+    double pow10 = AK::pow(10, AK::floor(log10(AK::floor(number))));
     double d = number / pow10;
     return pow10 * (d >= 10 ? 10 : (d >= 5 ? 5 : (d >= 3 ? 3 : (d >= 2 ? 2 : 1))));
 }
 
 double MapWidget::LatLng::distance_to(LatLng const& other) const
 {
-    return EARTH_RADIUS * 2.0 * asin(sqrt(pow(sin((AK::to_radians(other.latitude) - AK::to_radians(latitude)) / 2.0), 2.0) + cos(AK::to_radians(latitude)) * cos(AK::to_radians(other.latitude)) * pow(sin((AK::to_radians(other.longitude) - AK::to_radians(longitude)) / 2.0), 2.0)));
+    return EARTH_RADIUS * 2.0 * asin(sqrt(AK::pow(sin((AK::to_radians(other.latitude) - AK::to_radians(latitude)) / 2.0), 2.0) + cos(AK::to_radians(latitude)) * cos(AK::to_radians(other.latitude)) * AK::pow(sin((AK::to_radians(other.longitude) - AK::to_radians(longitude)) / 2.0), 2.0)));
 }
 
 int MapWidget::LatLngBounds::get_zoom() const
 {
     double distance_meters = north_west.distance_to(south_east);
     int zoom = ZOOM_MIN;
-    while (distance_meters < EARTH_RADIUS / pow(2, zoom - 1) && zoom != ZOOM_MAX)
+    while (distance_meters < EARTH_RADIUS / AK::pow(2, zoom - 1) && zoom != ZOOM_MAX)
         ++zoom;
     return min(zoom + 1, ZOOM_MAX);
 }
@@ -453,7 +453,7 @@ void MapWidget::paint_map(GUI::Painter& painter)
         int tile_y = center_tile_y + delta.y();
 
         // Only draw tiles that exist
-        if (tile_x < 0 || tile_y < 0 || tile_x > pow(2, m_zoom) - 1 || tile_y > pow(2, m_zoom) - 1)
+        if (tile_x < 0 || tile_y < 0 || tile_x > AK::pow(2, m_zoom) - 1 || tile_y > AK::pow(2, m_zoom) - 1)
             continue;
 
         auto tile_rect = Gfx::IntRect {
