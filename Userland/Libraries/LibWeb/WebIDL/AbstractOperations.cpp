@@ -323,7 +323,7 @@ JS::Completion construct(WebIDL::CallbackType& callback, JS::MarkedVector<JS::Va
 double integer_part(double n)
 {
     // 1. Let r be floor(abs(n)).
-    auto r = floor(abs(n));
+    auto r = AK::floor(abs(n));
 
     // 2. If n < 0, then return -1 × r.
     if (n < 0)

@@ -161,8 +161,8 @@ ISOYearMonth balance_iso_year_month(double year, double month)
     // 1. Assert: year and month are integers.
     VERIFY(year == AK::trunc(year) && month == AK::trunc(month));
 
-    // 2. Set year to year + floor((month - 1) / 12).
-    year += floor((month - 1) / 12);
+    // 2. Set year to year + AK::floor((month - 1) / 12).
+    year += AK::floor((month - 1) / 12);
 
     // 3. Set month to ((month - 1) modulo 12) + 1.
     month = modulo(month - 1, 12) + 1;

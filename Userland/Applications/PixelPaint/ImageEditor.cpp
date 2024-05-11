@@ -215,7 +215,7 @@ void ImageEditor::paint_event(GUI::PaintEvent& event)
 
         // Horizontal ruler
         painter.draw_line({ 0, m_ruler_thickness }, { rect().width(), m_ruler_thickness }, ruler_fg_color);
-        auto const x_start = floor(editor_origin_to_image.x()) - ((int)floor(editor_origin_to_image.x()) % ruler_step) - ruler_step;
+        auto const x_start = AK::floor(editor_origin_to_image.x()) - ((int)AK::floor(editor_origin_to_image.x()) % ruler_step) - ruler_step;
         for (int x = x_start; x < editor_max_to_image.x(); x += ruler_step) {
             int const num_sub_divisions = min(ruler_step, 10);
             for (int x_sub = 0; x_sub < num_sub_divisions; ++x_sub) {
@@ -232,7 +232,7 @@ void ImageEditor::paint_event(GUI::PaintEvent& event)
 
         // Vertical ruler
         painter.draw_line({ m_ruler_thickness, 0 }, { m_ruler_thickness, rect().height() }, ruler_fg_color);
-        auto const y_start = floor(editor_origin_to_image.y()) - ((int)floor(editor_origin_to_image.y()) % ruler_step) - ruler_step;
+        auto const y_start = AK::floor(editor_origin_to_image.y()) - ((int)AK::floor(editor_origin_to_image.y()) % ruler_step) - ruler_step;
         for (int y = y_start; y < editor_max_to_image.y(); y += ruler_step) {
             int const num_sub_divisions = min(ruler_step, 10);
             for (int y_sub = 0; y_sub < num_sub_divisions; ++y_sub) {

@@ -41,7 +41,7 @@ DevicePixels PaintContext::enclosing_device_pixels(CSSPixels css_pixels) const
 
 DevicePixels PaintContext::floored_device_pixels(CSSPixels css_pixels) const
 {
-    return floor(css_pixels.to_double() * m_device_pixels_per_css_pixel);
+    return AK::floor(css_pixels.to_double() * m_device_pixels_per_css_pixel);
 }
 
 DevicePixelPoint PaintContext::rounded_device_point(CSSPixelPoint point) const
@@ -55,16 +55,16 @@ DevicePixelPoint PaintContext::rounded_device_point(CSSPixelPoint point) const
 DevicePixelPoint PaintContext::floored_device_point(CSSPixelPoint point) const
 {
     return {
-        floor(point.x().to_double() * m_device_pixels_per_css_pixel),
-        floor(point.y().to_double() * m_device_pixels_per_css_pixel)
+        AK::floor(point.x().to_double() * m_device_pixels_per_css_pixel),
+        AK::floor(point.y().to_double() * m_device_pixels_per_css_pixel)
     };
 }
 
 DevicePixelRect PaintContext::enclosing_device_rect(CSSPixelRect rect) const
 {
     return {
-        floor(rect.x().to_double() * m_device_pixels_per_css_pixel),
-        floor(rect.y().to_double() * m_device_pixels_per_css_pixel),
+        AK::floor(rect.x().to_double() * m_device_pixels_per_css_pixel),
+        AK::floor(rect.y().to_double() * m_device_pixels_per_css_pixel),
         ceil(rect.width().to_double() * m_device_pixels_per_css_pixel),
         ceil(rect.height().to_double() * m_device_pixels_per_css_pixel)
     };

@@ -86,7 +86,7 @@ void AntiAliasingPainter::draw_anti_aliased_line(FloatPoint actual_from, FloatPo
     int scan_line_length = AK::ceil(AK::sqrt((gradient * gradient + 1) * thickness * thickness) / gradient);
 
     auto x_gradient = 1 / gradient;
-    int x_step = floorf(x_gradient);
+    int x_step = AK::floor(x_gradient);
 
     float x_error = 0;
     float x_error_per_y = x_gradient - x_step;
@@ -215,8 +215,8 @@ void AntiAliasingPainter::fill_rect(FloatRect const& float_rect, Color color)
     float bottom_y = float_rect.y() + float_rect.height();
     int x1 = ceilf(float_rect.x());
     int y1 = ceilf(float_rect.y());
-    int x2 = floorf(right_x);
-    int y2 = floorf(bottom_y);
+    int x2 = AK::floor(right_x);
+    int y2 = AK::floor(bottom_y);
     auto solid_rect = Gfx::IntRect::from_two_points({ x1, y1 }, { x2, y2 });
     m_underlying_painter.fill_rect(solid_rect, color);
 

@@ -66,11 +66,11 @@ ErrorOr<int> serenity_main(Main::Arguments arguments)
         if (show_sample_progress) {
             out("{}/{}", audio_client->total_played_samples(), loader->total_samples());
         } else {
-            auto playing_seconds = static_cast<int>(floor(static_cast<double>(audio_client->total_played_samples()) / static_cast<double>(loader->sample_rate())));
+            auto playing_seconds = static_cast<int>(AK::floor(static_cast<double>(audio_client->total_played_samples()) / static_cast<double>(loader->sample_rate())));
             auto playing_minutes = playing_seconds / 60;
             auto playing_seconds_of_minute = playing_seconds % 60;
 
-            auto total_seconds = static_cast<int>(floor(static_cast<double>(loader->total_samples()) / static_cast<double>(loader->sample_rate())));
+            auto total_seconds = static_cast<int>(AK::floor(static_cast<double>(loader->total_samples()) / static_cast<double>(loader->sample_rate())));
             auto total_minutes = total_seconds / 60;
             auto total_seconds_of_minute = total_seconds % 60;
 

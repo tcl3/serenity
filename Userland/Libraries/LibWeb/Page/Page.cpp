@@ -146,8 +146,8 @@ DevicePixelRect Page::enclosing_device_rect(CSSPixelRect rect) const
 {
     auto scale = client().device_pixels_per_css_pixel();
     return DevicePixelRect(
-        floor(rect.x().to_double() * scale),
-        floor(rect.y().to_double() * scale),
+        AK::floor(rect.x().to_double() * scale),
+        AK::floor(rect.y().to_double() * scale),
         ceil(rect.width().to_double() * scale),
         ceil(rect.height().to_double() * scale));
 }

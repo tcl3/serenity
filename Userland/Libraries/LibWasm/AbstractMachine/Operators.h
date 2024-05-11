@@ -466,10 +466,8 @@ struct Floor {
     template<typename Lhs>
     auto operator()(Lhs lhs) const
     {
-        if constexpr (IsSame<Lhs, float>)
-            return floorf(lhs);
-        else if constexpr (IsSame<Lhs, double>)
-            return floor(lhs);
+        if constexpr (FloatingPoint<Lhs>)
+            return AK::floor(lhs);
         else
             VERIFY_NOT_REACHED();
     }

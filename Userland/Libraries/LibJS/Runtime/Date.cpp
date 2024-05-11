@@ -70,7 +70,7 @@ ErrorOr<String> Date::iso_date_string() const
 double day(double time_value)
 {
     // 1. Return 𝔽(floor(ℝ(t / msPerDay))).
-    return floor(time_value / ms_per_day);
+    return AK::floor(time_value / ms_per_day);
 }
 
 // 21.4.1.4 TimeWithinDay ( t ), https://tc39.es/ecma262/#sec-timewithinday
@@ -115,13 +115,13 @@ double day_from_year(i32 y)
     auto num_years_1 = ry - 1970;
 
     // 4. Let numYears4 be floor((ry - 1969) / 4).
-    auto num_years_4 = floor((ry - 1969) / 4.0);
+    auto num_years_4 = AK::floor((ry - 1969) / 4.0);
 
     // 5. Let numYears100 be floor((ry - 1901) / 100).
-    auto num_years_100 = floor((ry - 1901) / 100.0);
+    auto num_years_100 = AK::floor((ry - 1901) / 100.0);
 
     // 6. Let numYears400 be floor((ry - 1601) / 400).
-    auto num_years_400 = floor((ry - 1601) / 400.0);
+    auto num_years_400 = AK::floor((ry - 1601) / 400.0);
 
     // 7. Return 𝔽(365 × numYears1 + numYears4 - numYears100 + numYears400).
     return 365.0 * num_years_1 + num_years_4 - num_years_100 + num_years_400;
@@ -142,7 +142,7 @@ i32 year_from_time(double t)
         return NumericLimits<i32>::max();
 
     // Approximation using average number of milliseconds per year. We might have to adjust this guess afterwards.
-    auto year = static_cast<i32>(floor(t / (365.2425 * ms_per_day) + 1970));
+    auto year = static_cast<i32>(AK::floor(t / (365.2425 * ms_per_day) + 1970));
 
     auto year_t = time_from_year(year);
     if (year_t > t)
@@ -310,7 +310,7 @@ u8 hour_from_time(double t)
         return 0;
 
     // 1. Return 𝔽(floor(ℝ(t / msPerHour)) modulo HoursPerDay).
-    return static_cast<u8>(modulo(floor(t / ms_per_hour), hours_per_day));
+    return static_cast<u8>(modulo(AK::floor(t / ms_per_hour), hours_per_day));
 }
 
 // 21.4.1.15 MinFromTime ( t ), https://tc39.es/ecma262/#sec-minfromtime
@@ -320,7 +320,7 @@ u8 min_from_time(double t)
         return 0;
 
     // 1. Return 𝔽(floor(ℝ(t / msPerMinute)) modulo MinutesPerHour).
-    return static_cast<u8>(modulo(floor(t / ms_per_minute), minutes_per_hour));
+    return static_cast<u8>(modulo(AK::floor(t / ms_per_minute), minutes_per_hour));
 }
 
 // 21.4.1.16 SecFromTime ( t ), https://tc39.es/ecma262/#sec-secfromtime
@@ -330,7 +330,7 @@ u8 sec_from_time(double t)
         return 0;
 
     // 1. Return 𝔽(floor(ℝ(t / msPerSecond)) modulo SecondsPerMinute).
-    return static_cast<u8>(modulo(floor(t / ms_per_second), seconds_per_minute));
+    return static_cast<u8>(modulo(AK::floor(t / ms_per_second), seconds_per_minute));
 }
 
 // 21.4.1.17 msFromTime ( t ), https://tc39.es/ecma262/#sec-msfromtime
@@ -580,7 +580,7 @@ double make_day(double year, double month, double date)
     // 4. Let dt be 𝔽(! ToIntegerOrInfinity(date)).
     auto dt = to_integer_or_infinity(date);
     // 5. Let ym be y + 𝔽(floor(ℝ(m) / 12)).
-    auto ym = y + floor(m / 12);
+    auto ym = y + AK::floor(m / 12);
     // 6. If ym is not finite, return NaN.
     if (!__builtin_isfinite(ym))
         return NumericLimits<double>::quiet_nan();
@@ -622,7 +622,7 @@ double time_clip(double time)
         return NumericLimits<double>::quiet_nan();
 
     // 2. If abs(ℝ(time)) > 8.64 × 10^15, return NaN.
-    if (fabs(time) > 8.64E15)
+    if (AK::fabs(time) > 8.64E15)
         return NumericLimits<double>::quiet_nan();
 
     // 3. Return 𝔽(! ToIntegerOrInfinity(time)).

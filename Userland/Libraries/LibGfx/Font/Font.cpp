@@ -12,7 +12,7 @@ GlyphRasterPosition GlyphRasterPosition::get_nearest_fit_for(FloatPoint position
 {
     constexpr auto subpixel_divisions = GlyphSubpixelOffset::subpixel_divisions();
     auto fit = [](float pos, int& blit_pos, u8& subpixel_offset) {
-        blit_pos = floorf(pos);
+        blit_pos = AK::floor(pos);
         subpixel_offset = round_to<u8>((pos - blit_pos) * subpixel_divisions);
         if (subpixel_offset >= subpixel_divisions) {
             blit_pos += 1;

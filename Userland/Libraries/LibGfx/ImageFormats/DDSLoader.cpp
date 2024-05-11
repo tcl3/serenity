@@ -256,7 +256,7 @@ static ErrorOr<void> decode_dx5_alpha_block(Stream& stream, DDSLoadingContext& c
     for (size_t y = 0; y < 4 && bitmap_y + y < static_cast<u64>(context.bitmap->height()); y++) {
         for (size_t x = 0; x < 4 && bitmap_x + x < static_cast<u64>(context.bitmap->width()); x++) {
             u8 index = 3 * (4 * y + x);
-            u8 bit_location = floor(index / 8.0);
+            u8 bit_location = AK::floor(index / 8.0);
             u8 adjusted_index = index - (bit_location * 8);
 
             u8 code = (codes[bit_location] >> adjusted_index) & 7;

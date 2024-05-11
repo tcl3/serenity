@@ -1017,7 +1017,7 @@ static RawPrecisionResult to_raw_precision_function(MathematicalValue const& num
 
         switch (mode) {
         case PreferredResult::LessThanNumber:
-            result.number = MathematicalValue { floor(result.number.as_number()) };
+            result.number = MathematicalValue { AK::floor(result.number.as_number()) };
             break;
         case PreferredResult::GreaterThanNumber:
             result.number = MathematicalValue { ceil(result.number.as_number()) };
@@ -1166,7 +1166,7 @@ static RawFixedResult to_raw_fixed_function(MathematicalValue const& number, int
 
         switch (mode) {
         case PreferredResult::LessThanNumber:
-            result.number = MathematicalValue { floor(result.number.as_number()) };
+            result.number = MathematicalValue { AK::floor(result.number.as_number()) };
             break;
         case PreferredResult::GreaterThanNumber:
             result.number = MathematicalValue { ceil(result.number.as_number()) };
@@ -1612,7 +1612,7 @@ int compute_exponent_for_magnitude(NumberFormat& number_format, int magnitude)
     // 4. Else if notation is "engineering", then
     case NumberFormat::Notation::Engineering: {
         // a. Let thousands be the greatest integer that is not greater than magnitude / 3.
-        double thousands = floor(static_cast<double>(magnitude) / 3.0);
+        double thousands = AK::floor(static_cast<double>(magnitude) / 3.0);
 
         // b. Return thousands × 3.
         return static_cast<int>(thousands) * 3;

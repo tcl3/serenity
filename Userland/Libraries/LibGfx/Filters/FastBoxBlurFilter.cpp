@@ -164,7 +164,7 @@ void FastBoxBlurFilter::apply_three_passes(size_t radius)
 
     constexpr size_t no_of_passes = 3;
     double w_ideal = sqrt((12 * radius * radius / (double)no_of_passes) + 1);
-    int wl = floor(w_ideal);
+    int wl = AK::floor(w_ideal);
     if (wl % 2 == 0)
         wl--;
     int wu = wl - 2;

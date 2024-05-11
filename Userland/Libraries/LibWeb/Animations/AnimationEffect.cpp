@@ -550,13 +550,13 @@ Optional<double> AnimationEffect::current_iteration() const
     if (is_in_the_after_phase() && isinf(m_iteration_count))
         return m_iteration_count;
 
-    // 3. If the simple iteration progress is 1.0, return floor(overall progress) - 1.
+    // 3. If the simple iteration progress is 1.0, return AK::floor(overall progress) - 1.
     auto simple_iteration_progress = this->simple_iteration_progress();
     if (simple_iteration_progress.has_value() && simple_iteration_progress.value() == 1.0)
-        return floor(overall_progress().value()) - 1.0;
+        return AK::floor(overall_progress().value()) - 1.0;
 
     // 4. Otherwise, return floor(overall progress).
-    return floor(overall_progress().value());
+    return AK::floor(overall_progress().value());
 }
 
 // https://www.w3.org/TR/web-animations-1/#transformed-progress

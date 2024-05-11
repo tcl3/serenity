@@ -187,8 +187,8 @@ void AbstractZoomPanWidget::fit_content_to_rect(Gfx::IntRect const& viewport_rec
 {
     float const border_ratio = 0.95f;
     auto image_size = m_original_rect.size();
-    auto height_ratio = floorf(border_ratio * viewport_rect.height()) / image_size.height();
-    auto width_ratio = floorf(border_ratio * viewport_rect.width()) / image_size.width();
+    auto height_ratio = AK::floor(border_ratio * viewport_rect.height()) / image_size.height();
+    auto width_ratio = AK::floor(border_ratio * viewport_rect.width()) / image_size.width();
 
     float new_scale = 1.0f;
     switch (type) {

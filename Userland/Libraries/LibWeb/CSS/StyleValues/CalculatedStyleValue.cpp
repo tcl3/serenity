@@ -2087,7 +2087,7 @@ CalculatedStyleValue::CalculationResult RoundCalculationNode::resolve(Optional<L
     auto node_b_value = resolve_value(node_b.value(), context);
 
     auto upper_b = ceil(node_a_value / node_b_value) * node_b_value;
-    auto lower_b = floor(node_a_value / node_b_value) * node_b_value;
+    auto lower_b = AK::floor(node_a_value / node_b_value) * node_b_value;
 
     if (m_strategy == RoundingStrategy::Nearest) {
         auto upper_diff = fabs(upper_b - node_a_value);
@@ -2196,7 +2196,7 @@ CalculatedStyleValue::CalculationResult ModCalculationNode::resolve(Optional<Len
     auto node_a_value = resolve_value(node_a.value(), context);
     auto node_b_value = resolve_value(node_b.value(), context);
 
-    auto quotient = floor(node_a_value / node_b_value);
+    auto quotient = AK::floor(node_a_value / node_b_value);
     auto value = node_a_value - (node_b_value * quotient);
     return to_resolved_type(resolved_type, value);
 }

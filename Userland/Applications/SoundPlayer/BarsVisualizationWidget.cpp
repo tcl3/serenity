@@ -41,8 +41,8 @@ void BarsVisualizationWidget::render(GUI::PaintEvent& event, FixedArray<float> c
         auto const log_bar_size = static_cast<float>(bar_count) / AK::log2(fft_size);
 
         for (size_t i = 0; i < bar_count; ++i) {
-            auto const bar_start = i == 0 ? 0 : static_cast<size_t>(floor(AK::pow(2.f, static_cast<float>(i) / log_bar_size)));
-            auto const bar_end = clamp(static_cast<size_t>(floor(AK::pow(2.f, static_cast<float>(i + 1) / log_bar_size))), bar_start + 1, cutoff);
+            auto const bar_start = i == 0 ? 0 : static_cast<size_t>(AK::floor(AK::pow(2.f, static_cast<float>(i) / log_bar_size)));
+            auto const bar_end = clamp(static_cast<size_t>(AK::floor(AK::pow(2.f, static_cast<float>(i + 1) / log_bar_size))), bar_start + 1, cutoff);
             auto const values_in_bar = bar_end - bar_start;
 
             for (size_t sample_index = bar_start; sample_index < bar_start + values_in_bar; sample_index++) {

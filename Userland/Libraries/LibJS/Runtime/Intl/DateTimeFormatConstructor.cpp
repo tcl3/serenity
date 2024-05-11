@@ -498,7 +498,7 @@ String format_offset_time_zone_identifier(double offset_minutes)
     auto absolute_minutes = fabs(offset_minutes);
 
     // 3. Let hours be floor(absoluteMinutes / 60).
-    auto hours = static_cast<i64>(floor(absolute_minutes / 60.0));
+    auto hours = static_cast<i64>(AK::floor(absolute_minutes / 60.0));
 
     // 4. Let minutes be absoluteMinutes modulo 60.
     auto minutes = static_cast<i64>(modulo(absolute_minutes, 60.0));

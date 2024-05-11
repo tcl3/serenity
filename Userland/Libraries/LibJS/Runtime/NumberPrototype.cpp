@@ -132,7 +132,7 @@ JS_DEFINE_NATIVE_FUNCTION(NumberPrototype::to_exponential)
         // b. Else,
         //     i. Let e, n, and f be integers such that f ≥ 0, 10^f ≤ n < 10^(f+1), 𝔽(n × 10^(e-f)) is 𝔽(x), and f is as small as possible.
         //        Note that the decimal representation of n has f + 1 digits, n is not divisible by 10, and the least significant digit of n is not necessarily uniquely determined by these criteria.
-        exponent = static_cast<int>(floor(log10(number)));
+        exponent = static_cast<int>(AK::floor(log10(number)));
 
         if (fraction_digits_value.is_undefined()) {
             auto mantissa = convert_floating_point_to_decimal_exponential_form(number).fraction;
@@ -332,7 +332,7 @@ JS_DEFINE_NATIVE_FUNCTION(NumberPrototype::to_precision)
     else {
         // a. Let e and n be integers such that 10^(p-1) ≤ n < 10^p and for which n × 10^(e-p+1) - x is as close to zero as possible.
         //    If there are two such sets of e and n, pick the e and n for which n × 10^(e-p+1) is larger.
-        exponent = static_cast<int>(floor(log10(number)));
+        exponent = static_cast<int>(AK::floor(log10(number)));
         number = round(number / pow(10, exponent - precision + 1));
 
         // b. Let m be the String value consisting of the digits of the decimal representation of n (in order, with no leading zeroes).
@@ -445,7 +445,7 @@ JS_DEFINE_NATIVE_FUNCTION(NumberPrototype::to_string)
     if (negative)
         number *= -1;
 
-    double int_part = floor(number);
+    double int_part = AK::floor(number);
     double decimal_part = number - int_part;
 
     int radix = (int)radix_mv;
@@ -455,9 +455,9 @@ JS_DEFINE_NATIVE_FUNCTION(NumberPrototype::to_string)
         backwards_characters.append('0');
     } else {
         while (int_part > 0) {
-            backwards_characters.append(digits[floor(AK::fmod(int_part, static_cast<double>(radix)))]);
+            backwards_characters.append(digits[AK::floor(AK::fmod(int_part, static_cast<double>(radix)))]);
             int_part /= radix;
-            int_part = floor(int_part);
+            int_part = AK::floor(int_part);
         }
     }
 
@@ -478,7 +478,7 @@ JS_DEFINE_NATIVE_FUNCTION(NumberPrototype::to_string)
 
         for (u8 i = 0; i < precision; ++i) {
             decimal_part *= radix;
-            u64 integral = floor(decimal_part);
+            u64 integral = AK::floor(decimal_part);
             characters.append(digits[integral]);
             decimal_part -= integral;
         }

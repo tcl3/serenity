@@ -654,7 +654,7 @@ ThrowCompletionOr<Optional<int>> default_number_option(VM& vm, Value value, int 
         return vm.throw_completion<RangeError>(ErrorType::IntlNumberIsNaNOrOutOfRange, value, minimum, maximum);
 
     // 4. Return floor(value).
-    return floor(value.as_double());
+    return AK::floor(value.as_double());
 }
 
 // 9.2.16 GetNumberOption ( options, property, minimum, maximum, fallback ), https://tc39.es/ecma402/#sec-getnumberoption

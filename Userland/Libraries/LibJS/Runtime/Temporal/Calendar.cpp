@@ -908,8 +908,8 @@ YearWeekRecord to_iso_week_of_year(i32 year, u8 month, u8 day)
     // 9. Let dayOfWeek be ToISODayOfWeek(year, month, day).
     auto day_of_week = to_iso_day_of_week(year, month, day);
 
-    // 10. Let week be floor((dayOfYear + daysInWeek - dayOfWeek + wednesday ) / daysInWeek).
-    auto week = static_cast<i32>(floor(static_cast<double>(day_of_year + days_in_week - day_of_week + wednesday) / days_in_week));
+    // 10. Let week be AK::floor((dayOfYear + daysInWeek - dayOfWeek + wednesday ) / daysInWeek).
+    auto week = static_cast<i32>(AK::floor(static_cast<double>(day_of_year + days_in_week - day_of_week + wednesday) / days_in_week));
 
     // 11. If week < 1, then
     if (week < 1) {

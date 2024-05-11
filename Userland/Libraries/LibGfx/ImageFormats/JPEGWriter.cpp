@@ -387,7 +387,7 @@ private:
         if (coefficient == 0)
             return 0;
 
-        return floor(log2(abs(coefficient))) + 1;
+        return AK::floor(log2(abs(coefficient))) + 1;
     }
 
     QuantizationTable m_luminance_quantization_table {};

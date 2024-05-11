@@ -911,7 +911,7 @@ ThrowCompletionOr<i32> Value::to_i32_slow_case(VM& vm) const
 
     // 3. Let int be the mathematical value whose sign is the sign of number and whose magnitude is floor(abs(ℝ(number))).
     auto abs = fabs(number);
-    auto int_val = floor(abs);
+    auto int_val = AK::floor(abs);
     if (signbit(number))
         int_val = -int_val;
 
@@ -947,7 +947,7 @@ ThrowCompletionOr<u32> Value::to_u32(VM& vm) const
         return 0;
 
     // 3. Let int be the mathematical value whose sign is the sign of number and whose magnitude is floor(abs(ℝ(number))).
-    auto int_val = floor(fabs(number));
+    auto int_val = AK::floor(fabs(number));
     if (signbit(number))
         int_val = -int_val;
 
@@ -972,7 +972,7 @@ ThrowCompletionOr<i16> Value::to_i16(VM& vm) const
 
     // 3. Let int be the mathematical value whose sign is the sign of number and whose magnitude is floor(abs(ℝ(number))).
     auto abs = fabs(number);
-    auto int_val = floor(abs);
+    auto int_val = AK::floor(abs);
     if (signbit(number))
         int_val = -int_val;
 
@@ -996,7 +996,7 @@ ThrowCompletionOr<u16> Value::to_u16(VM& vm) const
         return 0;
 
     // 3. Let int be the mathematical value whose sign is the sign of number and whose magnitude is floor(abs(ℝ(number))).
-    auto int_val = floor(fabs(number));
+    auto int_val = AK::floor(fabs(number));
     if (signbit(number))
         int_val = -int_val;
 
@@ -1019,7 +1019,7 @@ ThrowCompletionOr<i8> Value::to_i8(VM& vm) const
 
     // 3. Let int be the mathematical value whose sign is the sign of number and whose magnitude is floor(abs(ℝ(number))).
     auto abs = fabs(number);
-    auto int_val = floor(abs);
+    auto int_val = AK::floor(abs);
     if (signbit(number))
         int_val = -int_val;
 
@@ -1043,7 +1043,7 @@ ThrowCompletionOr<u8> Value::to_u8(VM& vm) const
         return 0;
 
     // 3. Let int be the mathematical value whose sign is the sign of number and whose magnitude is floor(abs(ℝ(number))).
-    auto int_val = floor(fabs(number));
+    auto int_val = AK::floor(fabs(number));
     if (signbit(number))
         int_val = -int_val;
 
@@ -1075,7 +1075,7 @@ ThrowCompletionOr<u8> Value::to_u8_clamp(VM& vm) const
         return 255;
 
     // 5. Let f be floor(ℝ(number)).
-    auto int_val = floor(value);
+    auto int_val = AK::floor(value);
 
     // 6. If f + 0.5 < ℝ(number), return 𝔽(f + 1).
     if (int_val + 0.5 < value)
@@ -1160,7 +1160,7 @@ ThrowCompletionOr<double> Value::to_integer_or_infinity(VM& vm) const
         return number.as_double();
 
     // 5. Let integer be floor(abs(ℝ(number))).
-    auto integer = floor(fabs(number.as_double()));
+    auto integer = AK::floor(fabs(number.as_double()));
 
     // 6. If number < -0𝔽, set integer to -integer.
     // NOTE: The zero check is required as 'integer' is a double here but an MV in the spec,
@@ -1190,7 +1190,7 @@ double to_integer_or_infinity(double number)
         return -NumericLimits<double>::infinity();
 
     // 5. Let integer be floor(abs(ℝ(number))).
-    auto integer = floor(fabs(number));
+    auto integer = AK::floor(fabs(number));
 
     // 6. If number < -0𝔽, set integer to -integer.
     // NOTE: The zero check is required as 'integer' is a double here but an MV in the spec,

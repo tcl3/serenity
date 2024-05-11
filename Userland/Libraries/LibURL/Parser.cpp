@@ -237,7 +237,7 @@ static ErrorOr<String> serialize_ipv4_address(IPv4Address address)
         // 2. If i is not 4, then prepend U+002E (.) to output.
         // NOTE: done at end
 
-        // 3. Set n to floor(n / 256).
+        // 3. Set n to AK::floor(n / 256).
         n /= 256;
     }
 

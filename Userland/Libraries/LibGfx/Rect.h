@@ -1042,8 +1042,8 @@ using DoubleRect = Rect<double>;
 
 [[nodiscard]] ALWAYS_INLINE IntRect enclosing_int_rect(FloatRect const& float_rect)
 {
-    int x1 = floorf(float_rect.x());
-    int y1 = floorf(float_rect.y());
+    int x1 = AK::floor(float_rect.x());
+    int y1 = AK::floor(float_rect.y());
     int x2 = ceilf(float_rect.right());
     int y2 = ceilf(float_rect.bottom());
     return Gfx::IntRect::from_two_points({ x1, y1 }, { x2, y2 });

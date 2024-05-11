@@ -1112,7 +1112,7 @@ double round_number_to_increment(double x, u64 increment, StringView rounding_mo
     auto unsigned_rounding_mode = get_unsigned_rounding_mode(rounding_mode, is_negative);
 
     // 5. Let r1 be the largest integer such that r1 ≤ quotient.
-    auto r1 = floor(quotient);
+    auto r1 = AK::floor(quotient);
 
     // 6. Let r2 be the smallest integer such that r2 > quotient.
     auto r2 = ceil(quotient);
@@ -1654,7 +1654,7 @@ ThrowCompletionOr<DurationRecord> parse_temporal_duration_string(VM& vm, StringV
     }
 
     // FIXME: This suffers from floating point (im)precision issues - e.g. "PT0.0000001S" ends up
-    //        getting parsed as 99.999999 nanoseconds, which is floor()'d to 99 instead of the
+    //        getting parsed as 99.999999 nanoseconds, which is AK::floor()'d to 99 instead of the
     //        expected 100. Oof. This is the reason all of these are suffixed with "MV" in the spec:
     //        mathematical values are not supposed to have this issue.
 
@@ -1677,8 +1677,8 @@ ThrowCompletionOr<DurationRecord> parse_temporal_duration_string(VM& vm, StringV
         factor = 1;
     }
 
-    // 20. Return ? CreateDurationRecord(yearsMV × factor, monthsMV × factor, weeksMV × factor, daysMV × factor, hoursMV × factor, floor(minutesMV) × factor, floor(secondsMV) × factor, floor(millisecondsMV) × factor, floor(microsecondsMV) × factor, floor(nanosecondsMV) × factor).
-    return create_duration_record(vm, years * factor, months * factor, weeks * factor, days * factor, hours * factor, floor(minutes) * factor, floor(seconds) * factor, floor(milliseconds) * factor, floor(microseconds) * factor, floor(nanoseconds) * factor);
+    // 20. Return ? CreateDurationRecord(yearsMV × factor, monthsMV × factor, weeksMV × factor, daysMV × factor, hoursMV × factor, AK::floor(minutesMV) × factor, AK::floor(secondsMV) × factor, AK::floor(millisecondsMV) × factor, AK::floor(microsecondsMV) × factor, AK::floor(nanosecondsMV) × factor).
+    return create_duration_record(vm, years * factor, months * factor, weeks * factor, days * factor, hours * factor, AK::floor(minutes) * factor, AK::floor(seconds) * factor, AK::floor(milliseconds) * factor, AK::floor(microseconds) * factor, AK::floor(nanoseconds) * factor);
 }
 
 // 13.35 ParseTemporalMonthDayString ( isoString ), https://tc39.es/proposal-temporal/#sec-temporal-parsetemporalmonthdaystring

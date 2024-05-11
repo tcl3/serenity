@@ -103,7 +103,7 @@ public:
     {
         i32 raw_value = 0;
         if (!__builtin_isnan(value))
-            raw_value = AK::clamp_to<int>(floor(value * fixed_point_denominator));
+            raw_value = AK::clamp_to<int>(AK::floor(value * fixed_point_denominator));
         return from_raw(raw_value);
     }
 

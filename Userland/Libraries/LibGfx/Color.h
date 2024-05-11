@@ -91,7 +91,7 @@ public:
         g = clamp(g, 0.0f, 1.0f);
         b = clamp(b, 0.0f, 1.0f);
 
-        return { static_cast<u8>(floorf(r * 255.0f)), static_cast<u8>(floorf(g * 255.0f)), static_cast<u8>(floorf(b * 255.0f)) };
+        return { static_cast<u8>(AK::floor(r * 255.0f)), static_cast<u8>(AK::floor(g * 255.0f)), static_cast<u8>(AK::floor(b * 255.0f)) };
     }
 
     // https://www.itu.int/rec/R-REC-BT.1700-0-200502-I/en Table 4

@@ -106,7 +106,7 @@ static DevicePixels half_ceil(DevicePixels width)
 
 static DevicePixels half_floor(DevicePixels width)
 {
-    return floor(static_cast<double>(width.value()) / 2);
+    return AK::floor(static_cast<double>(width.value()) / 2);
 }
 
 static BorderEdgePaintingInfo make_right_cell_edge(

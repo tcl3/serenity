@@ -305,7 +305,7 @@ static CSSPixels snap_a_length_as_a_border_width(double device_pixels_per_css_pi
 
     // 4. If len is greater than 1 device pixel, round it down to the nearest integer number of device pixels.
     if (device_pixels > 1)
-        return CSSPixels::nearest_value_for(floor(device_pixels) / device_pixels_per_css_pixel);
+        return CSSPixels::nearest_value_for(AK::floor(device_pixels) / device_pixels_per_css_pixel);
 
     return length;
 }

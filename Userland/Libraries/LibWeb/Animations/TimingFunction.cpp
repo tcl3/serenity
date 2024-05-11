@@ -124,8 +124,8 @@ double CubicBezierTimingFunction::operator()(double input_progress, bool) const
 // https://www.w3.org/TR/css-easing-1/#step-easing-algo
 double StepsTimingFunction::operator()(double input_progress, bool before_flag) const
 {
-    // 1. Calculate the current step as floor(input progress value × steps).
-    auto current_step = floor(input_progress * number_of_steps);
+    // 1. Calculate the current step as AK::floor(input progress value × steps).
+    auto current_step = AK::floor(input_progress * number_of_steps);
 
     // 2. If the step position property is one of:
     //    - jump-start,

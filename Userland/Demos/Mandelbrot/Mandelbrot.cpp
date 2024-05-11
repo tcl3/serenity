@@ -120,7 +120,7 @@ public:
     void calculate_pixel(int px, int py, int max_iterations)
     {
         auto iterations = mandelbrot(px, py, max_iterations);
-        auto whole_iterations = floor(iterations);
+        auto whole_iterations = AK::floor(iterations);
         auto partial_iterations = AK::fmod(iterations, 1);
         double hue1 = whole_iterations * 360.0 / max_iterations;
         if (hue1 >= 360.0)

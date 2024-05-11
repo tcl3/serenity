@@ -118,7 +118,7 @@ public:
             }
             return loc;
         };
-        auto int_loc = static_cast<i64>(floor(loc));
+        auto int_loc = static_cast<i64>(AK::floor(loc));
         auto blend = loc - int_loc;
         auto color = get_color(repeat_wrap_if_required(int_loc));
         // Blend between the two neighboring colors (this fixes some nasty aliasing issues at small angles)
@@ -242,7 +242,7 @@ static auto create_conic_gradient(ReadonlySpan<ColorStop> color_stops, FloatPoin
             auto point = FloatPoint { x, y } - center_point;
             // FIXME: We could probably get away with some approximation here:
             auto loc = AK::fmod((AK::to_degrees(AK::atan2(point.y(), point.x())) + 360.0f + normalized_start_angle), 360.0f);
-            return should_floor_angles ? floor(loc) : loc;
+            return should_floor_angles ? AK::floor(loc) : loc;
         }
     };
 }

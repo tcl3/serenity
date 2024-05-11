@@ -484,7 +484,7 @@ ThrowCompletionOr<Value> MathObject::floor_impl(VM& vm, Value x)
     // 3. If n < 1𝔽 and n > +0𝔽, return +0𝔽.
     // 4. If n is an integral Number, return n.
     // 5. Return the greatest (closest to +∞) integral Number value that is not greater than n.
-    return Value(::floor(number.as_double()));
+    return Value(AK::floor(number.as_double()));
 }
 
 // 21.3.2.16 Math.floor ( x ), https://tc39.es/ecma262/#sec-math.floor
@@ -933,7 +933,7 @@ JS_DEFINE_NATIVE_FUNCTION(MathObject::trunc)
     // 5. Return the integral Number nearest n in the direction of +0𝔽.
     return Value(number.as_double() < 0
             ? ::ceil(number.as_double())
-            : ::floor(number.as_double()));
+            : AK::floor(number.as_double()));
 }
 
 }

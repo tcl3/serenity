@@ -233,7 +233,7 @@ int MathematicalValue::logarithmic_floor() const
 {
     return m_value.visit(
         [](double value) {
-            return static_cast<int>(floor(log10(value)));
+            return static_cast<int>(AK::floor(log10(value)));
         },
         [&](Crypto::SignedBigInteger const& value) {
             // FIXME: Can we do this without string conversion?
@@ -248,7 +248,7 @@ bool MathematicalValue::is_equal_to(MathematicalValue const& other) const
     return m_value.visit(
         [&](double value) {
             static constexpr double epsilon = 5e-14;
-            return fabs(value - other.as_number()) < epsilon;
+            return AK::fabs(value - other.as_number()) < epsilon;
         },
         [&](Crypto::SignedBigInteger const& value) {
             return value == other.as_bigint();

@@ -762,7 +762,7 @@ PDFErrorOr<void> PostScriptCalculatorFunction::execute(Vector<Token> const& toke
             TRY(stack.push(expf(TRY(stack.pop()))));
             break;
         case OperatorType::Floor:
-            TRY(stack.push(floorf(TRY(stack.pop()))));
+            TRY(stack.push(AK::floor(TRY(stack.pop()))));
             break;
         case OperatorType::Idiv: {
             int b = (int)TRY(stack.pop());

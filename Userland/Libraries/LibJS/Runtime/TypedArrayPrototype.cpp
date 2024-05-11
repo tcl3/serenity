@@ -1287,7 +1287,7 @@ JS_DEFINE_NATIVE_FUNCTION(TypedArrayPrototype::reverse)
     // 3. Let len be TypedArrayLength(taRecord).
     auto length = typed_array_length(typed_array_record);
 
-    // 4. Let middle be floor(len / 2).
+    // 4. Let middle be AK::floor(len / 2).
     auto middle = length / 2;
 
     // 5. Let lower be 0.

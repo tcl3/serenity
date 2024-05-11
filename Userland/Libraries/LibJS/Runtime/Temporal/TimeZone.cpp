@@ -135,7 +135,7 @@ ISODateTime get_iso_parts_from_epoch(VM& vm, Crypto::SignedBigInteger const& epo
     auto millisecond = ms_from_time(epoch_milliseconds);
 
     // 11. Let microsecond be floor(remainderNs / 1000).
-    auto microsecond = floor(remainder_ns / 1000);
+    auto microsecond = AK::floor(remainder_ns / 1000);
 
     // 12. Assert: microsecond < 1000.
     VERIFY(microsecond < 1000);
@@ -245,8 +245,8 @@ ThrowCompletionOr<String> format_iso_time_zone_offset_string(VM& vm, double offs
     // 5. Let minutes be offsetNanoseconds / (60 × 10^9) modulo 60.
     auto minutes = AK::fmod(offset_nanoseconds / 60000000000, 60);
 
-    // 6. Let hours be floor(offsetNanoseconds / (3600 × 10^9)).
-    auto hours = floor(offset_nanoseconds / 3600000000000);
+    // 6. Let hours be AK::floor(offsetNanoseconds / (3600 × 10^9)).
+    auto hours = AK::floor(offset_nanoseconds / 3600000000000);
 
     // 7. Let h be ToZeroPaddedDecimalString(hours, 2).
     // 8. Let m be ToZeroPaddedDecimalString(minutes, 2).

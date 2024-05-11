@@ -1834,7 +1834,7 @@ public:
         current_predictions.subpred[3] = N3 - ((predictions_NW.true_err * wp_params.wp_p3a + predictions_N.true_err * wp_params.wp_p3b + predictions_NE.true_err * wp_params.wp_p3c + (NN3 - N3) * wp_params.wp_p3d + (NW3 - W3) * wp_params.wp_p3e) >> 5);
 
         auto const error2weight = [](i32 err_sum, u8 maxweight) -> i32 {
-            i32 shift = floor(log2(err_sum + 1)) - 5;
+            i32 shift = AK::floor(log2(err_sum + 1)) - 5;
             if (shift < 0)
                 shift = 0;
             return 4 + ((static_cast<u64>(maxweight) * ((1 << 24) / ((err_sum >> shift) + 1))) >> shift);
@@ -1849,7 +1849,7 @@ public:
         }
 
         auto sum_weights = weight[0] + weight[1] + weight[2] + weight[3];
-        i32 const log_weight = floor(log2(sum_weights)) + 1;
+        i32 const log_weight = AK::floor(log2(sum_weights)) + 1;
         for (u8 i = 0; i < 4; i++)
             weight[i] = weight[i] >> (log_weight - 5);
         sum_weights = weight[0] + weight[1] + weight[2] + weight[3];
