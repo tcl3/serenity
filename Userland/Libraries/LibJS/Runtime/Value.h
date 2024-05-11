@@ -533,7 +533,7 @@ inline Value js_null()
 
 inline Value js_nan()
 {
-    return Value(NAN);
+    return Value(NumericLimits<double>::quiet_nan());
 }
 
 inline Value js_infinity()

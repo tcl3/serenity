@@ -1154,7 +1154,7 @@ CalculatedStyleValue::CalculationResult ConstantCalculationNode::resolve([[maybe
     case CalculationNode::ConstantType::MinusInfinity:
         return { Number(Number::Type::Number, NumericLimits<double>::lowest()) };
     case CalculationNode::ConstantType::NaN:
-        return { Number(Number::Type::Number, NAN) };
+        return { Number(Number::Type::Number, NumericLimits<double>::quiet_nan()) };
     }
 
     VERIFY_NOT_REACHED();

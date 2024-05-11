@@ -129,7 +129,7 @@ static double parse_simplified_iso8601(ByteString const& iso_8601)
     auto lex_time = [&]() { return lex_hours_minutes(hours, minutes) && (!lexer.consume_specific(':') || lex_seconds_milliseconds()) && lex_timezone(); };
 
     if (!lex_date() || (lexer.consume_specific('T') && !lex_time()) || !lexer.is_eof()) {
-        return NAN;
+        return NumericLimits<double>::quiet_nan();
     }
 
     // We parsed a valid date simplified ISO 8601 string.
@@ -187,7 +187,7 @@ static double parse_date_string(ByteString const& date_string)
             return 1000.0 * maybe_datetime->timestamp();
     }
 
-    return NAN;
+    return NumericLimits<double>::quiet_nan();
 }
 
 DateConstructor::DateConstructor(Realm& realm)

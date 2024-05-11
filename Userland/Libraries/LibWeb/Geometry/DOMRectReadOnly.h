@@ -44,28 +44,28 @@ public:
     double top() const
     {
         if (__builtin_isnan(y()) || __builtin_isnan(height()))
-            return NAN;
+            return NumericLimits<double>::quiet_nan();
         return min(y(), y() + height());
     }
 
     double right() const
     {
         if (__builtin_isnan(x()) || __builtin_isnan(width()))
-            return NAN;
+            return NumericLimits<double>::quiet_nan();
         return max(x(), x() + width());
     }
 
     double bottom() const
     {
         if (__builtin_isnan(y()) || __builtin_isnan(height()))
-            return NAN;
+            return NumericLimits<double>::quiet_nan();
         return max(y(), y() + height());
     }
 
     double left() const
     {
         if (__builtin_isnan(x()) || __builtin_isnan(width()))
-            return NAN;
+            return NumericLimits<double>::quiet_nan();
         return min(x(), x() + width());
     }
 

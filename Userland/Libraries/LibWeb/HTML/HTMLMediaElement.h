@@ -240,7 +240,7 @@ private:
     bool m_show_poster { true };
 
     // https://html.spec.whatwg.org/multipage/media.html#dom-media-duration
-    double m_duration { NAN };
+    double m_duration { NumericLimits<double>::quiet_nan() };
 
     // https://html.spec.whatwg.org/multipage/media.html#list-of-pending-play-promises
     Vector<JS::NonnullGCPtr<WebIDL::Promise>> m_pending_play_promises;

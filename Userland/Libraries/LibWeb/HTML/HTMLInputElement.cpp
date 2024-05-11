@@ -1828,11 +1828,11 @@ double HTMLInputElement::value_as_number() const
 {
     // On getting, if the valueAsNumber attribute does not apply, as defined for the input element's type attribute's current state, then return a Not-a-Number (NaN) value.
     if (!value_as_number_applies())
-        return NAN;
+        return NumericLimits<double>::quiet_nan();
 
     // Otherwise, run the algorithm to convert a string to a number defined for that state to the element's value;
     // if the algorithm returned a number, then return it, otherwise, return a Not-a-Number (NaN) value.
-    return convert_string_to_number(value()).value_or(NAN);
+    return convert_string_to_number(value()).value_or(NumericLimits<double>::quiet_nan());
 }
 
 // https://html.spec.whatwg.org/multipage/input.html#dom-input-valueasnumber
@@ -1847,7 +1847,7 @@ WebIDL::ExceptionOr<void> HTMLInputElement::set_value_as_number(double value)
         return WebIDL::InvalidStateError::create(realm(), "valueAsNumber: Invalid input type used"_fly_string);
 
     // Otherwise, if the new value is a Not-a-Number (NaN) value, then set the value of the element to the empty string.
-    if (value == NAN) {
+    if (value == NumericLimits<double>::quiet_nan()) {
         TRY(set_value(String {}));
         return {};
     }

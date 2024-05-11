@@ -538,7 +538,7 @@ WebIDL::ExceptionOr<void> HTMLMediaElement::load_element()
         // FIXME: 9. Set the timeline offset to Not-a-Number (NaN).
 
         // 10. Update the duration attribute to Not-a-Number (NaN).
-        set_duration(NAN);
+        set_duration(NumericLimits<double>::quiet_nan());
     }
 
     // FIXME: 7. Set the playbackRate attribute to the value of the defaultPlaybackRate attribute.

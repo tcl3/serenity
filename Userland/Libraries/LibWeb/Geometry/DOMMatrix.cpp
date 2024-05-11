@@ -581,7 +581,7 @@ JS::NonnullGCPtr<DOMMatrix> DOMMatrix::invert_self()
     if (!is_invertible) {
         for (u8 i = 0; i < 4; i++) {
             for (u8 j = 0; j < 4; j++)
-                m_matrix.elements()[j][i] = NAN;
+                m_matrix.elements()[j][i] = NumericLimits<double>::quiet_nan();
         }
         m_is_2d = false;
     }

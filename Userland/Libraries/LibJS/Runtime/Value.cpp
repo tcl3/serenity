@@ -669,7 +669,7 @@ double string_to_number(StringView string)
 
     // 3. If literal is a List of errors, return NaN.
     if (!result.has_value())
-        return NAN;
+        return NumericLimits<double>::quiet_nan();
 
     // 4. Return StringNumericValue of literal.
     if (result->base != 10) {
@@ -679,7 +679,7 @@ double string_to_number(StringView string)
 
     auto maybe_double = text.to_number<double>(AK::TrimWhitespace::No);
     if (!maybe_double.has_value())
-        return NAN;
+        return NumericLimits<double>::quiet_nan();
 
     return *maybe_double;
 }

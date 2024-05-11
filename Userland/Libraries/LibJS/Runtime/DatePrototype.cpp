@@ -1294,7 +1294,7 @@ JS_DEFINE_NATIVE_FUNCTION(DatePrototype::set_year)
     // 4. If y is NaN, then
     if (__builtin_isnan(year)) {
         // a. Set the [[DateValue]] internal slot of this Date object to NaN.
-        this_object->set_date_value(NAN);
+        this_object->set_date_value(NumericLimits<double>::quiet_nan());
 
         // b. Return NaN.
         return js_nan();

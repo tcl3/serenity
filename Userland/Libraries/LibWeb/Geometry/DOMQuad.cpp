@@ -64,13 +64,13 @@ JS::NonnullGCPtr<DOMRect> DOMQuad::get_bounds() const
 {
     auto nan_safe_minimum = [](double a, double b, double c, double d) -> double {
         if (__builtin_isnan(a) || __builtin_isnan(b) || __builtin_isnan(c) || __builtin_isnan(d))
-            return NAN;
+            return NumericLimits<double>::quiet_nan();
         return min(a, min(b, min(c, d)));
     };
 
     auto nan_safe_maximum = [](double a, double b, double c, double d) -> double {
         if (__builtin_isnan(a) || __builtin_isnan(b) || __builtin_isnan(c) || __builtin_isnan(d))
-            return NAN;
+            return NumericLimits<double>::quiet_nan();
         return max(a, max(b, max(c, d)));
     };
 

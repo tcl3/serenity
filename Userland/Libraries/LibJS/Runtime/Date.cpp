@@ -549,7 +549,7 @@ double make_time(double hour, double min, double sec, double ms)
 {
     // 1. If hour is not finite or min is not finite or sec is not finite or ms is not finite, return NaN.
     if (!__builtin_isfinite(hour) || !__builtin_isfinite(min) || !__builtin_isfinite(sec) || !__builtin_isfinite(ms))
-        return NAN;
+        return NumericLimits<double>::quiet_nan();
 
     // 2. Let h be 𝔽(! ToIntegerOrInfinity(hour)).
     auto h = to_integer_or_infinity(hour);
@@ -571,7 +571,7 @@ double make_day(double year, double month, double date)
 {
     // 1. If year is not finite or month is not finite or date is not finite, return NaN.
     if (!__builtin_isfinite(year) || !__builtin_isfinite(month) || !__builtin_isfinite(date))
-        return NAN;
+        return NumericLimits<double>::quiet_nan();
 
     // 2. Let y be 𝔽(! ToIntegerOrInfinity(year)).
     auto y = to_integer_or_infinity(year);
@@ -583,13 +583,13 @@ double make_day(double year, double month, double date)
     auto ym = y + floor(m / 12);
     // 6. If ym is not finite, return NaN.
     if (!__builtin_isfinite(ym))
-        return NAN;
+        return NumericLimits<double>::quiet_nan();
     // 7. Let mn be 𝔽(ℝ(m) modulo 12).
     auto mn = modulo(m, 12);
 
     // 8. Find a finite time value t such that YearFromTime(t) is ym and MonthFromTime(t) is mn and DateFromTime(t) is 1𝔽; but if this is not possible (because some argument is out of range), return NaN.
     if (!AK::is_within_range<int>(ym) || !AK::is_within_range<int>(mn + 1))
-        return NAN;
+        return NumericLimits<double>::quiet_nan();
     auto t = days_since_epoch(static_cast<int>(ym), static_cast<int>(mn) + 1, 1) * ms_per_day;
 
     // 9. Return Day(t) + dt - 1𝔽.
@@ -601,14 +601,14 @@ double make_date(double day, double time)
 {
     // 1. If day is not finite or time is not finite, return NaN.
     if (!__builtin_isfinite(day) || !__builtin_isfinite(time))
-        return NAN;
+        return NumericLimits<double>::quiet_nan();
 
     // 2. Let tv be day × msPerDay + time.
     auto tv = day * ms_per_day + time;
 
     // 3. If tv is not finite, return NaN.
     if (!__builtin_isfinite(tv))
-        return NAN;
+        return NumericLimits<double>::quiet_nan();
 
     // 4. Return tv.
     return tv;
@@ -619,11 +619,11 @@ double time_clip(double time)
 {
     // 1. If time is not finite, return NaN.
     if (!__builtin_isfinite(time))
-        return NAN;
+        return NumericLimits<double>::quiet_nan();
 
     // 2. If abs(ℝ(time)) > 8.64 × 10^15, return NaN.
     if (fabs(time) > 8.64E15)
-        return NAN;
+        return NumericLimits<double>::quiet_nan();
 
     // 3. Return 𝔽(! ToIntegerOrInfinity(time)).
     return to_integer_or_infinity(time);
