@@ -1403,7 +1403,7 @@ static FloatVector3 lab_from_xyz(FloatVector3 xyz, XYZ white_point)
 
     auto f = [](float x) {
         if (x > AK::pow(6.f / 29.f, 3.0f))
-            return cbrtf(x);
+            return AK::cbrt(x);
         return x / (3 * AK::pow(6.f / 29.f, 2.f)) + 4.f / 29.f;
     };
 

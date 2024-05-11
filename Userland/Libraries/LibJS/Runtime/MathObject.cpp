@@ -346,7 +346,7 @@ JS_DEFINE_NATIVE_FUNCTION(MathObject::cbrt)
         return number;
 
     // 3. Return an implementation-approximated Number value representing the result of the cube root of ℝ(n).
-    return Value(::cbrt(number.as_double()));
+    return Value(AK::cbrt(number.as_double()));
 }
 
 // 21.3.2.10 Math.ceil ( x ), https://tc39.es/ecma262/#sec-math.ceil
