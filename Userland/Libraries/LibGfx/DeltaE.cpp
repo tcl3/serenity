@@ -55,8 +55,8 @@ float DeltaE(CIELAB const& c1, CIELAB const& c2)
     else
         delta_h_prime = h2_prime - h1_prime - 360;
 
-    auto sin_degrees = [](float x) { return sinf(AK::to_radians(x)); };
-    auto cos_degrees = [](float x) { return cosf(AK::to_radians(x)); };
+    auto sin_degrees = [](float x) { return AK::sin(AK::to_radians(x)); };
+    auto cos_degrees = [](float x) { return AK::cos(AK::to_radians(x)); };
 
     float delta_H_prime = 2 * AK::sqrt(C1_prime * C2_prime) * sin_degrees(delta_h_prime / 2);
 

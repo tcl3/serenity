@@ -422,7 +422,7 @@ Path Path::stroke_to_fill(float thickness) const
     if (thickness > flatness) {
         pen_vertex_count = max(
             static_cast<int>(AK::ceil(AK::Pi<float>
-                / acosf(1 - (2 * flatness) / thickness))),
+                / AK::acos(1 - (2 * flatness) / thickness))),
             pen_vertex_count);
     }
 

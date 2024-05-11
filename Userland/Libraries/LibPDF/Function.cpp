@@ -744,7 +744,7 @@ PDFErrorOr<void> PostScriptCalculatorFunction::execute(Vector<Token> const& toke
             TRY(stack.push(AK::ceil(TRY(stack.pop()))));
             break;
         case OperatorType::Cos:
-            TRY(stack.push(cosf(AK::to_radians(TRY(stack.pop())))));
+            TRY(stack.push(AK::cos(AK::to_radians(TRY(stack.pop())))));
             break;
         case OperatorType::Cvi:
             TRY(stack.push((int)TRY(stack.pop())));
@@ -795,7 +795,7 @@ PDFErrorOr<void> PostScriptCalculatorFunction::execute(Vector<Token> const& toke
             TRY(stack.push(AK::round(TRY(stack.pop()))));
             break;
         case OperatorType::Sin:
-            TRY(stack.push(sinf(AK::to_radians(TRY(stack.pop())))));
+            TRY(stack.push(AK::sin(AK::to_radians(TRY(stack.pop())))));
             break;
         case OperatorType::Sqrt:
             TRY(stack.push(AK::sqrt(TRY(stack.pop()))));

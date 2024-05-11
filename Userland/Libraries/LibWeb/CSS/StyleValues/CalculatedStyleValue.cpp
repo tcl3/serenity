@@ -1217,7 +1217,7 @@ CalculatedStyleValue::CalculationResult SinCalculationNode::resolve(Optional<Len
 {
     auto node_a = m_value->resolve(context, percentage_basis);
     auto node_a_value = resolve_value_radians(node_a.value());
-    auto result = sin(node_a_value);
+    auto result = AK::sin(node_a_value);
 
     return { Number(Number::Type::Number, result) };
 }
@@ -1353,7 +1353,7 @@ CalculatedStyleValue::CalculationResult TanCalculationNode::resolve(Optional<Len
 {
     auto node_a = m_value->resolve(context, percentage_basis);
     auto node_a_value = resolve_value_radians(node_a.value());
-    auto result = tan(node_a_value);
+    auto result = AK::tan(node_a_value);
 
     return { Number(Number::Type::Number, result) };
 }
@@ -1421,7 +1421,7 @@ CalculatedStyleValue::CalculationResult AsinCalculationNode::resolve(Optional<Le
 {
     auto node_a = m_value->resolve(context, percentage_basis);
     auto node_a_value = resolve_value(node_a.value(), context);
-    auto result = asin(node_a_value);
+    auto result = AK::asin(node_a_value);
 
     return { Angle(result, Angle::Type::Rad) };
 }
@@ -1489,7 +1489,7 @@ CalculatedStyleValue::CalculationResult AcosCalculationNode::resolve(Optional<Le
 {
     auto node_a = m_value->resolve(context, percentage_basis);
     auto node_a_value = resolve_value(node_a.value(), context);
-    auto result = acos(node_a_value);
+    auto result = AK::acos(node_a_value);
 
     return { Angle(result, Angle::Type::Rad) };
 }

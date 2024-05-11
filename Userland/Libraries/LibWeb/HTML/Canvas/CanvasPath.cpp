@@ -129,7 +129,7 @@ WebIDL::ExceptionOr<void> CanvasPath::ellipse(float x, float y, float radius_x, 
     AK::sincos(rotation, sin_rotation, cos_rotation);
 
     auto resolve_point_with_angle = [&](float angle) {
-        auto tan_relative = tanf(angle);
+        auto tan_relative = AK::tan(angle);
         auto tan2 = tan_relative * tan_relative;
 
         auto ab = radius_x * radius_y;
@@ -143,7 +143,7 @@ WebIDL::ExceptionOr<void> CanvasPath::ellipse(float x, float y, float radius_x, 
         // Make sure to set the correct sign
         // -1 if 0 ≤ θ < 90° or 270°< θ ≤ 360°
         //  1 if 90° < θ< 270°
-        float sn = cosf(angle) >= 0 ? 1 : -1;
+        float sn = AK::cos(angle) >= 0 ? 1 : -1;
         relative_x_position *= sn;
         relative_y_position *= sn;
 
@@ -228,7 +228,7 @@ WebIDL::ExceptionOr<void> CanvasPath::arc_to(double x1, double y1, double x2, do
     // and that has one point tangent to the half-infinite line that crosses the point (x0, y0) and ends at the point (x1, y1),
     // and that has a different point tangent to the half-infinite line that ends at the point (x1, y1) and crosses the point (x2, y2).
     // The points at which this circle touches these two lines are called the start and end tangent points respectively.
-    auto adjacent = radius / static_cast<double>(tan(acos(cos_theta) / 2));
+    auto adjacent = radius / static_cast<double>(AK::tan(AK::acos(cos_theta) / 2));
     auto factor1 = adjacent / static_cast<double>(v1.length());
     auto x3 = static_cast<double>(p1.x()) + factor1 * static_cast<double>(p0.x() - p1.x());
     auto y3 = static_cast<double>(p1.y()) + factor1 * static_cast<double>(p0.y() - p1.y());

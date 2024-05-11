@@ -1126,8 +1126,8 @@ static RefPtr<StyleValue const> interpolate_transform(DOM::Element& element, Sty
         if (AK::fabs(product) == 1.0f) {
             interpolated_rotation = from.rotation;
         } else {
-            auto theta = acos(product);
-            auto w = sin(delta * theta) / AK::sqrt(1.0f - product * product);
+            auto theta = AK::acos(product);
+            auto w = AK::sin(delta * theta) / AK::sqrt(1.0f - product * product);
 
             for (int i = 0; i < 4; i++) {
                 from.rotation[i] *= cos(delta * theta) - product * w;

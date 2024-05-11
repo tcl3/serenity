@@ -182,19 +182,19 @@ ErrorOr<Gfx::FloatMatrix4x4> Transformation::to_matrix(Optional<Painting::Painta
         break;
     case CSS::TransformFunction::Skew:
         if (count == 1)
-            return Gfx::FloatMatrix4x4(1, tanf(TRY(value(0))), 0, 0,
+            return Gfx::FloatMatrix4x4(1, AK::tan(TRY(value(0))), 0, 0,
                 0, 1, 0, 0,
                 0, 0, 1, 0,
                 0, 0, 0, 1);
         if (count == 2)
-            return Gfx::FloatMatrix4x4(1, tanf(TRY(value(0))), 0, 0,
-                tanf(TRY(value(1))), 1, 0, 0,
+            return Gfx::FloatMatrix4x4(1, AK::tan(TRY(value(0))), 0, 0,
+                AK::tan(TRY(value(1))), 1, 0, 0,
                 0, 0, 1, 0,
                 0, 0, 0, 1);
         break;
     case CSS::TransformFunction::SkewX:
         if (count == 1)
-            return Gfx::FloatMatrix4x4(1, tanf(TRY(value(0))), 0, 0,
+            return Gfx::FloatMatrix4x4(1, AK::tan(TRY(value(0))), 0, 0,
                 0, 1, 0, 0,
                 0, 0, 1, 0,
                 0, 0, 0, 1);
@@ -202,7 +202,7 @@ ErrorOr<Gfx::FloatMatrix4x4> Transformation::to_matrix(Optional<Painting::Painta
     case CSS::TransformFunction::SkewY:
         if (count == 1)
             return Gfx::FloatMatrix4x4(1, 0, 0, 0,
-                tanf(TRY(value(0))), 1, 0, 0,
+                AK::tan(TRY(value(0))), 1, 0, 0,
                 0, 0, 1, 0,
                 0, 0, 0, 1);
         break;
