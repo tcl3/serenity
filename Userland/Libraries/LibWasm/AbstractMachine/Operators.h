@@ -333,9 +333,9 @@ struct Minimum {
                 return lhs;
             if (__builtin_isnan(rhs))
                 return rhs;
-            if (isinf(lhs))
+            if (__builtin_isinf(lhs))
                 return lhs > 0 ? rhs : lhs;
-            if (isinf(rhs))
+            if (__builtin_isinf(rhs))
                 return rhs > 0 ? lhs : rhs;
         }
         return min(lhs, rhs);
@@ -353,9 +353,9 @@ struct Maximum {
                 return lhs;
             if (__builtin_isnan(rhs))
                 return rhs;
-            if (isinf(lhs))
+            if (__builtin_isinf(lhs))
                 return lhs > 0 ? lhs : rhs;
-            if (isinf(rhs))
+            if (__builtin_isinf(rhs))
                 return rhs > 0 ? rhs : lhs;
         }
         return max(lhs, rhs);
@@ -536,7 +536,7 @@ struct CheckedTruncate {
     template<typename Lhs>
     AK::ErrorOr<ResultT, StringView> operator()(Lhs lhs) const
     {
-        if (__builtin_isnan(lhs) || isinf(lhs)) // "undefined", let's just trap.
+        if (__builtin_isnan(lhs) || __builtin_isinf(lhs)) // "undefined", let's just trap.
             return "Truncation undefined behavior"sv;
 
         Lhs truncated;
@@ -610,7 +610,7 @@ struct Demote {
         if (__builtin_isnan(lhs))
             return nanf(""); // FIXME: Ensure canonical NaN remains canonical
 
-        if (isinf(lhs))
+        if (__builtin_isinf(lhs))
             return __builtin_huge_valf();
 
         return static_cast<float>(lhs);
@@ -641,7 +641,7 @@ struct SaturatingTruncate {
         if (__builtin_isnan(lhs))
             return 0;
 
-        if (isinf(lhs)) {
+        if (__builtin_isinf(lhs)) {
             if (lhs < 0)
                 return NumericLimits<ResultT>::min();
             return NumericLimits<ResultT>::max();

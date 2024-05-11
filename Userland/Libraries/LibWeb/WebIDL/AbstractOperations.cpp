@@ -376,7 +376,7 @@ JS::ThrowCompletionOr<T> convert_to_int(JS::VM& vm, JS::Value value, EnforceRang
     // 6. If the conversion is to an IDL type associated with the [EnforceRange] extended attribute, then:
     if (enforce_range == EnforceRange::Yes) {
         // 1. If x is NaN, +∞, or −∞, then throw a TypeError.
-        if (__builtin_isnan(x) || isinf(x))
+        if (__builtin_isnan(x) || __builtin_isinf(x))
             return vm.throw_completion<JS::TypeError>(JS::ErrorType::NumberIsNaNOrInfinity);
 
         // 2. Set x to IntegerPart(x).
@@ -401,7 +401,7 @@ JS::ThrowCompletionOr<T> convert_to_int(JS::VM& vm, JS::Value value, EnforceRang
     }
 
     // 8. If x is NaN, +0, +∞, or −∞, then return +0.
-    if (__builtin_isnan(x) || x == 0.0 || isinf(x))
+    if (__builtin_isnan(x) || x == 0.0 || __builtin_isinf(x))
         return 0;
 
     // 9. Set x to IntegerPart(x).

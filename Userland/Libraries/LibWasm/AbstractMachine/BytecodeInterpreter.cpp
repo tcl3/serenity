@@ -436,7 +436,7 @@ double BytecodeInterpreter::read_value<double>(ReadonlyBytes data)
 template<typename V, typename T>
 MakeSigned<T> BytecodeInterpreter::checked_signed_truncate(V value)
 {
-    if (__builtin_isnan(value) || isinf(value)) { // "undefined", let's just trap.
+    if (__builtin_isnan(value) || __builtin_isinf(value)) { // "undefined", let's just trap.
         m_trap = Trap { "Signed truncation undefined behavior" };
         return 0;
     }
@@ -459,7 +459,7 @@ MakeSigned<T> BytecodeInterpreter::checked_signed_truncate(V value)
 template<typename V, typename T>
 MakeUnsigned<T> BytecodeInterpreter::checked_unsigned_truncate(V value)
 {
-    if (__builtin_isnan(value) || isinf(value)) { // "undefined", let's just trap.
+    if (__builtin_isnan(value) || __builtin_isinf(value)) { // "undefined", let's just trap.
         m_trap = Trap { "Unsigned truncation undefined behavior" };
         return 0;
     }

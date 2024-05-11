@@ -263,7 +263,7 @@ WebIDL::ExceptionOr<void> Animation::set_playback_rate(double new_playback_rate)
     //    animation is resolved, associated effect end is not infinity, and either:
     //    - the previous playback rate < 0 and the new playback rate ≥ 0, or
     //    - the previous playback rate ≥ 0 and the new playback rate < 0,
-    else if (m_timeline && !m_timeline->is_monotonically_increasing() && m_start_time.has_value() && !isinf(associated_effect_end()) && ((previous_playback_rate < 0.0 && new_playback_rate >= 0.0) || (previous_playback_rate >= 0 && new_playback_rate < 0))) {
+    else if (m_timeline && !m_timeline->is_monotonically_increasing() && m_start_time.has_value() && !__builtin_isinf(associated_effect_end()) && ((previous_playback_rate < 0.0 && new_playback_rate >= 0.0) || (previous_playback_rate >= 0 && new_playback_rate < 0))) {
         // Set animation’s start time to the result of evaluating associated effect end - start time for animation.
         m_start_time = associated_effect_end() - m_start_time.value();
     }
@@ -482,7 +482,7 @@ WebIDL::ExceptionOr<void> Animation::finish()
     auto effective_playback_rate = this->effective_playback_rate();
     if (effective_playback_rate == 0.0)
         return WebIDL::InvalidStateError::create(realm(), "Animation with a playback rate of 0 cannot be finished"_fly_string);
-    if (effective_playback_rate > 0.0 && isinf(associated_effect_end()))
+    if (effective_playback_rate > 0.0 && __builtin_isinf(associated_effect_end()))
         return WebIDL::InvalidStateError::create(realm(), "Animation with no end cannot be finished"_fly_string);
 
     // 2. Apply any pending playback rate to animation.
@@ -583,7 +583,7 @@ WebIDL::ExceptionOr<void> Animation::play_an_animation(AutoRewind auto_rewind)
         //    - greater than associated effect end,
         else if (playback_rate < 0.0 && (!current_time.has_value() || current_time.value() <= 0.0 || current_time.value() > associated_effect_end)) {
             // -> If associated effect end is positive infinity,
-            if (isinf(associated_effect_end) && associated_effect_end > 0.0) {
+            if (__builtin_isinf(associated_effect_end) && associated_effect_end > 0.0) {
                 // throw an "InvalidStateError" DOMException and abort these steps.
                 return WebIDL::InvalidStateError::create(realm(), "Cannot rewind an animation with an infinite effect end"_fly_string);
             }
@@ -702,7 +702,7 @@ WebIDL::ExceptionOr<void> Animation::pause()
         else {
             // If associated effect end for animation is positive infinity,
             auto associated_effect_end = this->associated_effect_end();
-            if (isinf(associated_effect_end) && associated_effect_end > 0.0) {
+            if (__builtin_isinf(associated_effect_end) && associated_effect_end > 0.0) {
                 // throw an "InvalidStateError" DOMException and abort these steps.
                 return WebIDL::InvalidStateError::create(realm(), "Cannot pause an animation with an infinite effect end"_fly_string);
             }
@@ -866,7 +866,7 @@ Optional<double> Animation::convert_an_animation_time_to_timeline_time(Optional<
         return time;
 
     // 2. If time is infinity, return an unresolved time value.
-    if (isinf(time.value()))
+    if (__builtin_isinf(time.value()))
         return {};
 
     // 3. If animation’s playback rate is zero, return an unresolved time value.

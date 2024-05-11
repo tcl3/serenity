@@ -41,7 +41,7 @@ UnsignedBigInteger::UnsignedBigInteger(double value)
     // Because this is currently only used for LibJS we VERIFY some preconditions
     // also these values don't have a clear BigInteger representation.
     VERIFY(!__builtin_isnan(value));
-    VERIFY(!isinf(value));
+    VERIFY(!__builtin_isinf(value));
     VERIFY(AK::trunc(value) == value);
     VERIFY(value >= 0.0);
 
@@ -616,7 +616,7 @@ UnsignedBigInteger::CompareResult UnsignedBigInteger::compare_to_double(double v
 {
     VERIFY(!__builtin_isnan(value));
 
-    if (isinf(value)) {
+    if (__builtin_isinf(value)) {
         bool is_positive_infinity = __builtin_isinf_sign(value) > 0;
         return is_positive_infinity ? CompareResult::DoubleGreaterThanBigInt : CompareResult::DoubleLessThanBigInt;
     }

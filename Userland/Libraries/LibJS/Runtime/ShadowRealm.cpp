@@ -70,7 +70,7 @@ ThrowCompletionOr<void> copy_name_and_length(VM& vm, FunctionObject& function, F
                 auto target_length_as_int = MUST(target_length.to_integer_or_infinity(vm));
 
                 // 2. Assert: targetLenAsInt is finite.
-                VERIFY(!isinf(target_length_as_int));
+                VERIFY(!__builtin_isinf(target_length_as_int));
 
                 // 3. Set L to max(targetLenAsInt - argCount, 0).
                 length = max(target_length_as_int - *arg_count, 0);

@@ -20,7 +20,7 @@ struct ScrollOptions {
 {
     // When asked to normalize non-finite values for a value x, if x is one of the three special floating point
     // literal values (Infinity, -Infinity or NaN), then x must be changed to the value 0. [WEBIDL]
-    if (isinf(value) || __builtin_isnan(value))
+    if (__builtin_isinf(value) || __builtin_isnan(value))
         return 0;
 
     return value;

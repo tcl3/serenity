@@ -95,7 +95,7 @@ static void number_to_string_impl(StringBuilder& builder, double d, NumberToStri
     }
 
     // 4. If x is +∞𝔽, return "Infinity".
-    if (isinf(d)) {
+    if (__builtin_isinf(d)) {
         if (d > 0) {
             builder.append("Infinity"sv);
             return;
