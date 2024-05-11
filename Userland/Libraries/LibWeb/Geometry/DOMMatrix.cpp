@@ -514,7 +514,7 @@ JS::NonnullGCPtr<DOMMatrix> DOMMatrix::rotate_from_vector_self(Optional<double> 
 {
     // 1. Post-multiply a rotation transformation on the current matrix.
     //    The rotation angle is determined by the angle between the vector (1,0)T and (x,y)T in the clockwise direction. If x and y should both be 0 or -0, the angle is specified as 0.
-    double angle = (x == 0 || x == -0) && (y == 0 || y == -0) ? 0.0 : atan2(y.value_or(0), x.value_or(0));
+    double angle = (x == 0 || x == -0) && (y == 0 || y == -0) ? 0.0 : AK::atan2(y.value_or(0), x.value_or(0));
 
     // The 2D rotation matrix is described in CSS Transforms where alpha is the angle between the vector (1,0)T and (x,y)T in degrees. [CSS3-TRANSFORMS]
     m_matrix = m_matrix * Gfx::rotation_matrix<double>(Vector3<double> { 0.0, 0.0, 1.0 }, angle);

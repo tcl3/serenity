@@ -1632,7 +1632,7 @@ CalculatedStyleValue::CalculationResult Atan2CalculationNode::resolve(Optional<L
     auto node_b = m_x->resolve(context, percentage_basis);
     auto node_b_value = resolve_value(node_b.value(), context);
 
-    auto result = atan2(node_a_value, node_b_value);
+    auto result = AK::atan2(node_a_value, node_b_value);
 
     return { Angle(result, Angle::Type::Rad) };
 }

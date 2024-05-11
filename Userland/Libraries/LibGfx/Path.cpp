@@ -450,7 +450,7 @@ Path Path::stroke_to_fill(float thickness) const
 
     auto angle_between = [](auto p1, auto p2) {
         auto delta = p2 - p1;
-        return atan2f(delta.y(), delta.x());
+        return AK::atan2(delta.y(), delta.x());
     };
 
     struct ActiveRange {

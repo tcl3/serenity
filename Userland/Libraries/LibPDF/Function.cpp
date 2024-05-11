@@ -737,7 +737,7 @@ PDFErrorOr<void> PostScriptCalculatorFunction::execute(Vector<Token> const& toke
         case OperatorType::Atan: {
             float b = TRY(stack.pop());
             float a = TRY(stack.pop());
-            TRY(stack.push(AK::to_degrees(atan2f(b, a))));
+            TRY(stack.push(AK::to_degrees(AK::atan2f(b, a))));
             break;
         }
         case OperatorType::Ceiling:

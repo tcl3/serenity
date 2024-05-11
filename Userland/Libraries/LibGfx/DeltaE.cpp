@@ -37,7 +37,7 @@ float DeltaE(CIELAB const& c1, CIELAB const& c2)
     auto h_prime = [](float b, float a_prime) {
         if (b == 0 && a_prime == 0)
             return 0.f;
-        float h_prime = atan2(b, a_prime);
+        float h_prime = AK::atan2(b, a_prime);
         if (h_prime < 0)
             h_prime += 2 * static_cast<float>(M_PI);
         return AK::to_degrees(h_prime);

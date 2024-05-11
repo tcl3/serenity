@@ -332,7 +332,7 @@ JS_DEFINE_NATIVE_FUNCTION(MathObject::atan2)
     VERIFY(x.is_finite_number() && !x.is_positive_zero() && !x.is_negative_zero());
 
     // 12. Return an implementation-approximated Number value representing the result of the inverse tangent of the quotient ℝ(ny) / ℝ(nx).
-    return Value(::atan2(y.as_double(), x.as_double()));
+    return Value(AK::atan2(y.as_double(), x.as_double()));
 }
 
 // 21.3.2.9 Math.cbrt ( x ), https://tc39.es/ecma262/#sec-math.cbrt
