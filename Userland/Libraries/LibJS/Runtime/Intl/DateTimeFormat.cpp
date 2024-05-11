@@ -21,7 +21,6 @@
 #include <LibJS/Runtime/Utf16String.h>
 #include <LibLocale/Locale.h>
 #include <LibLocale/NumberFormat.h>
-#include <math.h>
 
 namespace JS::Intl {
 

@@ -17,7 +17,6 @@
 #include <LibJS/Runtime/Intl/PluralRules.h>
 #include <LibJS/Runtime/ValueInlines.h>
 #include <LibUnicode/CurrencyCode.h>
-#include <math.h>
 #include <stdlib.h>
 
 namespace JS::Intl {

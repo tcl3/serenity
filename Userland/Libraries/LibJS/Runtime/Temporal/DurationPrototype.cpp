@@ -10,7 +10,6 @@
 #include <LibJS/Runtime/Temporal/Duration.h>
 #include <LibJS/Runtime/Temporal/DurationPrototype.h>
 #include <LibJS/Runtime/Temporal/ZonedDateTime.h>
-#include <math.h>
 
 namespace JS::Temporal {
 

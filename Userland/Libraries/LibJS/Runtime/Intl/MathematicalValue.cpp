@@ -8,7 +8,6 @@
 #include <LibJS/Runtime/AbstractOperations.h>
 #include <LibJS/Runtime/GlobalObject.h>
 #include <LibJS/Runtime/Intl/MathematicalValue.h>
-#include <math.h>
 
 namespace JS::Intl {
 
