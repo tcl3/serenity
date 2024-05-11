@@ -102,7 +102,7 @@ public:
             [](double value) -> Optional<T> {
                 if (!AK::is_within_range<T>(value))
                     return {};
-                return static_cast<T>(round(value));
+                return static_cast<T>(AK::round(value));
             },
             [](bool value) -> Optional<T> { return static_cast<T>(value); },
             [](TupleValue const&) -> Optional<T> { return {}; });

@@ -68,7 +68,7 @@ class BitmapImage final : public Image {
 public:
     static NonnullRefPtr<BitmapImage> create(Gfx::Bitmap& bitmap, Gfx::FloatPoint scale) { return adopt_ref(*new BitmapImage(bitmap, scale)); }
 
-    virtual Gfx::IntSize size() const override { return { round(m_bitmap->size().width() * m_scale.x()), round(m_bitmap->size().height() * m_scale.y()) }; }
+    virtual Gfx::IntSize size() const override { return { AK::round(m_bitmap->size().width() * m_scale.x()), AK::round(m_bitmap->size().height() * m_scale.y()) }; }
 
     virtual void flip(Gfx::Orientation) override;
     virtual void rotate(Gfx::RotationDirection) override;

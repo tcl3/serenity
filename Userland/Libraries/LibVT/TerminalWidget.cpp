@@ -477,7 +477,7 @@ void TerminalWidget::set_window_progress(int value, int max)
     float float_value = value;
     float float_max = max;
     float progress = (float_value / float_max) * 100.0f;
-    window()->set_progress((int)roundf(progress));
+    window()->set_progress((int)AK::round(progress));
 }
 
 void TerminalWidget::set_window_title(StringView title)

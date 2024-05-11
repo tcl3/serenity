@@ -161,7 +161,7 @@ ErrorOr<Gfx::IntSize> Presentation::parse_presentation_size(JsonObject const& me
     auto aspect_ratio = static_cast<double>(aspect_height.value()) / static_cast<double>(aspect_width.value());
     return Gfx::IntSize {
         width,
-        static_cast<int>(round(static_cast<double>(width) * aspect_ratio)),
+        static_cast<int>(AK::round(static_cast<double>(width) * aspect_ratio)),
     };
 }
 

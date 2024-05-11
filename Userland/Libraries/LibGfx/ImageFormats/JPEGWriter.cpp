@@ -230,7 +230,7 @@ public:
                         double const fdct = cu * cv * sum_xy(u, v) / 4;
 
                         // A.3.4 - DCT coefficient quantization
-                        i16 const quantized = round(fdct / table.table[table_index]);
+                        i16 const quantized = AK::round(fdct / table.table[table_index]);
 
                         result[table_index] = quantized;
                     }

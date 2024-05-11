@@ -67,7 +67,7 @@ RefPtr<Font> Typeface::get_font(float point_size, Font::AllowInexactSizeMatch al
         return m_vector_font->scaled_font(point_size);
 
     RefPtr<BitmapFont> best_match;
-    int size = roundf(point_size);
+    int size = AK::round(point_size);
     int best_delta = NumericLimits<int>::max();
 
     for (auto font : m_bitmap_fonts) {

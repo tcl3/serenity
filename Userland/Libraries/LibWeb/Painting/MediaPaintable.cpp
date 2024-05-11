@@ -115,8 +115,8 @@ MediaPaintable::Components MediaPaintable::compute_control_bar_components(PaintC
         remaining_rect.take_from_right(components.speaker_button_size + component_padding);
     }
 
-    auto display_time = human_readable_digital_time(round(media_element.layout_display_time({})));
-    auto duration = human_readable_digital_time(__builtin_isnan(media_element.duration()) ? 0 : round(media_element.duration()));
+    auto display_time = human_readable_digital_time(AK::round(media_element.layout_display_time({})));
+    auto duration = human_readable_digital_time(__builtin_isnan(media_element.duration()) ? 0 : AK::round(media_element.duration()));
     components.timestamp = String::formatted("{} / {}", display_time, duration).release_value_but_fixme_should_propagate_errors();
     components.timestamp_font = layout_node().scaled_font(context);
 
@@ -178,7 +178,7 @@ void MediaPaintable::paint_control_bar_timeline(PaintContext& context, HTML::HTM
 
     auto playback_percentage = __builtin_isnan(media_element.duration()) ? 0.0 : media_element.layout_display_time({}) / media_element.duration();
     auto playback_position = static_cast<double>(static_cast<int>(components.timeline_rect.width())) * playback_percentage;
-    auto timeline_button_offset_x = static_cast<DevicePixels>(round(playback_position));
+    auto timeline_button_offset_x = static_cast<DevicePixels>(AK::round(playback_position));
 
     auto timeline_past_rect = components.timeline_rect;
     timeline_past_rect.set_width(timeline_button_offset_x);
@@ -248,7 +248,7 @@ void MediaPaintable::paint_control_bar_volume(PaintContext& context, HTML::HTMLM
         return;
 
     auto volume_position = static_cast<double>(static_cast<int>(components.volume_scrub_rect.width())) * media_element.volume();
-    auto volume_button_offset_x = static_cast<DevicePixels>(round(volume_position));
+    auto volume_button_offset_x = static_cast<DevicePixels>(AK::round(volume_position));
 
     auto volume_lower_rect = components.volume_scrub_rect;
     volume_lower_rect.set_width(volume_button_offset_x);

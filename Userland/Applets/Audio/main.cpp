@@ -69,7 +69,7 @@ private:
         };
 
         m_audio_client->on_main_mix_volume_change = [this](double volume) {
-            m_audio_volume = static_cast<int>(round(volume * 100));
+            m_audio_volume = static_cast<int>(AK::round(volume * 100));
             m_slider->set_value(m_slider->max() - m_audio_volume, GUI::AllowCallback::No);
             if (!m_audio_muted)
                 update();

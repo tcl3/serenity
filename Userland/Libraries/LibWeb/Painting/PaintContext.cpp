@@ -31,7 +31,7 @@ CSSPixelRect PaintContext::css_viewport_rect() const
 
 DevicePixels PaintContext::rounded_device_pixels(CSSPixels css_pixels) const
 {
-    return round(css_pixels.to_double() * m_device_pixels_per_css_pixel);
+    return AK::round(css_pixels.to_double() * m_device_pixels_per_css_pixel);
 }
 
 DevicePixels PaintContext::enclosing_device_pixels(CSSPixels css_pixels) const
@@ -47,8 +47,8 @@ DevicePixels PaintContext::floored_device_pixels(CSSPixels css_pixels) const
 DevicePixelPoint PaintContext::rounded_device_point(CSSPixelPoint point) const
 {
     return {
-        round(point.x().to_double() * m_device_pixels_per_css_pixel),
-        round(point.y().to_double() * m_device_pixels_per_css_pixel)
+        AK::round(point.x().to_double() * m_device_pixels_per_css_pixel),
+        AK::round(point.y().to_double() * m_device_pixels_per_css_pixel)
     };
 }
 
@@ -73,10 +73,10 @@ DevicePixelRect PaintContext::enclosing_device_rect(CSSPixelRect rect) const
 DevicePixelRect PaintContext::rounded_device_rect(CSSPixelRect rect) const
 {
     return {
-        round(rect.x().to_double() * m_device_pixels_per_css_pixel),
-        round(rect.y().to_double() * m_device_pixels_per_css_pixel),
-        round(rect.width().to_double() * m_device_pixels_per_css_pixel),
-        round(rect.height().to_double() * m_device_pixels_per_css_pixel)
+        AK::round(rect.x().to_double() * m_device_pixels_per_css_pixel),
+        AK::round(rect.y().to_double() * m_device_pixels_per_css_pixel),
+        AK::round(rect.width().to_double() * m_device_pixels_per_css_pixel),
+        AK::round(rect.height().to_double() * m_device_pixels_per_css_pixel)
     };
 }
 
@@ -91,8 +91,8 @@ DevicePixelSize PaintContext::enclosing_device_size(CSSPixelSize size) const
 DevicePixelSize PaintContext::rounded_device_size(CSSPixelSize size) const
 {
     return {
-        round(size.width().to_double() * m_device_pixels_per_css_pixel),
-        round(size.height().to_double() * m_device_pixels_per_css_pixel)
+        AK::round(size.width().to_double() * m_device_pixels_per_css_pixel),
+        AK::round(size.height().to_double() * m_device_pixels_per_css_pixel)
     };
 }
 

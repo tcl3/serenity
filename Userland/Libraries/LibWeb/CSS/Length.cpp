@@ -26,7 +26,7 @@ Length::FontMetrics::FontMetrics(CSSPixels font_size, Gfx::FontPixelMetrics cons
     //        https://www.w3.org/TR/css-values-4/#cap
     , cap_height(pixel_metrics.ascent)
     , zero_advance(pixel_metrics.advance_of_ascii_zero + pixel_metrics.glyph_spacing)
-    , line_height(round(pixel_metrics.line_spacing()))
+    , line_height(AK::round(pixel_metrics.line_spacing()))
 {
 }
 

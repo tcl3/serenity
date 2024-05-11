@@ -149,7 +149,7 @@ int ValueSlider::value_at(Gfx::IntPoint position) const
     float relative_offset = (float)(position.x() - leftmost_knob_center) / (rightmost_knob_center - leftmost_knob_center);
 
     int range = max() - min();
-    return min() + (int)roundf(relative_offset * (float)range);
+    return min() + (int)AK::round(relative_offset * (float)range);
 }
 
 void ValueSlider::set_value(int value, AllowCallback allow_callback, DoClamp do_clamp)

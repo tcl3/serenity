@@ -247,7 +247,7 @@ ErrorOr<XYZ> parse_pcs_illuminant(ICCHeader const& header)
     XYZ xyz = (XYZ)header.pcs_illuminant;
 
     /// "The value, when rounded to four decimals, shall be X = 0,9642, Y = 1,0 and Z = 0,8249."
-    if (round(xyz.X * 10'000) != 9'642 || round(xyz.Y * 10'000) != 10'000 || round(xyz.Z * 10'000) != 8'249)
+    if (AK::round(xyz.X * 10'000) != 9'642 || AK::round(xyz.Y * 10'000) != 10'000 || AK::round(xyz.Z * 10'000) != 8'249)
         return Error::from_string_literal("ICC::Profile: Invalid pcs illuminant");
 
     return xyz;
@@ -1595,9 +1595,9 @@ ErrorOr<void> Profile::from_pcs(Profile const& source_profile, FloatVector3 pcs,
             float device_g = evaluate_curve_inverse(greenTRCTag, linear_rgb[1]);
             float device_b = evaluate_curve_inverse(blueTRCTag, linear_rgb[2]);
 
-            color[0] = round(255 * device_r);
-            color[1] = round(255 * device_g);
-            color[2] = round(255 * device_b);
+            color[0] = AK::round(255 * device_r);
+            color[1] = AK::round(255 * device_g);
+            color[2] = AK::round(255 * device_b);
             return {};
         }
 

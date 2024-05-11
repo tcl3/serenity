@@ -156,10 +156,10 @@ DevicePixelRect Page::rounded_device_rect(CSSPixelRect rect) const
 {
     auto scale = client().device_pixels_per_css_pixel();
     return {
-        roundf(rect.x().to_double() * scale),
-        roundf(rect.y().to_double() * scale),
-        roundf(rect.width().to_double() * scale),
-        roundf(rect.height().to_double() * scale)
+        AK::round(rect.x().to_double() * scale),
+        AK::round(rect.y().to_double() * scale),
+        AK::round(rect.width().to_double() * scale),
+        AK::round(rect.height().to_double() * scale)
     };
 }
 

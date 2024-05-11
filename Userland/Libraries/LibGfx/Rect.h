@@ -995,18 +995,18 @@ public:
         //        while the break-tie algorithm does not really matter
         if constexpr (IsSame<T, float>) {
             return {
-                static_cast<U>(roundf(x())),
-                static_cast<U>(roundf(y())),
-                static_cast<U>(roundf(width())),
-                static_cast<U>(roundf(height())),
+                static_cast<U>(AK::round(x())),
+                static_cast<U>(AK::round(y())),
+                static_cast<U>(AK::round(width())),
+                static_cast<U>(AK::round(height())),
             };
         }
         if constexpr (IsSame<T, double>) {
             return {
-                static_cast<U>(round(x())),
-                static_cast<U>(round(y())),
-                static_cast<U>(round(width())),
-                static_cast<U>(round(height())),
+                static_cast<U>(AK::round(x())),
+                static_cast<U>(AK::round(y())),
+                static_cast<U>(AK::round(width())),
+                static_cast<U>(AK::round(height())),
             };
         }
 

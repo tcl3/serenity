@@ -40,9 +40,9 @@ struct XYZNumber {
     XYZNumber() = default;
 
     XYZNumber(XYZ const& xyz)
-        : X(round(xyz.X * 0x1'0000))
-        , Y(round(xyz.Y * 0x1'0000))
-        , Z(round(xyz.Z * 0x1'0000))
+        : X(AK::round(xyz.X * 0x1'0000))
+        , Y(AK::round(xyz.Y * 0x1'0000))
+        , Z(AK::round(xyz.Z * 0x1'0000))
     {
     }
 

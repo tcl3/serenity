@@ -792,7 +792,7 @@ PDFErrorOr<void> PostScriptCalculatorFunction::execute(Vector<Token> const& toke
             TRY(stack.push(-TRY(stack.pop())));
             break;
         case OperatorType::Round:
-            TRY(stack.push(roundf(TRY(stack.pop()))));
+            TRY(stack.push(AK::round(TRY(stack.pop()))));
             break;
         case OperatorType::Sin:
             TRY(stack.push(sinf(AK::to_radians(TRY(stack.pop())))));

@@ -188,7 +188,7 @@ void AntiAliasingPainter::draw_line(IntPoint actual_from, IntPoint actual_to, Co
 void AntiAliasingPainter::draw_line(FloatPoint actual_from, FloatPoint actual_to, Color color, float thickness, Painter::LineStyle style, Color alternate_color, LineLengthMode line_length_mode)
 {
     if (style == Painter::LineStyle::Dotted)
-        return draw_dotted_line(actual_from.to_rounded<int>(), actual_to.to_rounded<int>(), color, static_cast<int>(round(thickness)));
+        return draw_dotted_line(actual_from.to_rounded<int>(), actual_to.to_rounded<int>(), color, static_cast<int>(AK::round(thickness)));
     draw_anti_aliased_line(actual_from, actual_to, color, thickness, style, alternate_color, line_length_mode);
 }
 

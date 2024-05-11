@@ -244,7 +244,7 @@ public:
     template<typename U>
     [[nodiscard]] Point<U> to_rounded() const
     {
-        return Point<U>(roundf(x()), roundf(y()));
+        return Point<U>(AK::round(x()), AK::round(y()));
     }
 
     template<typename U>

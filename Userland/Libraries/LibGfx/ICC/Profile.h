@@ -214,9 +214,9 @@ inline Color MatrixMatrixConversion::map(FloatVector3 in_rgb) const
     float device_g = evaluate_curve_inverse(m_destination_green_TRC, linear_rgb[1]);
     float device_b = evaluate_curve_inverse(m_destination_blue_TRC, linear_rgb[2]);
 
-    u8 out_r = round(255 * device_r);
-    u8 out_g = round(255 * device_g);
-    u8 out_b = round(255 * device_b);
+    u8 out_r = AK::round(255 * device_r);
+    u8 out_g = AK::round(255 * device_g);
+    u8 out_b = AK::round(255 * device_b);
 
     return Color(out_r, out_g, out_b);
 }

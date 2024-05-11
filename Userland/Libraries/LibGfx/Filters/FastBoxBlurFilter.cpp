@@ -169,7 +169,7 @@ void FastBoxBlurFilter::apply_three_passes(size_t radius)
         wl--;
     int wu = wl - 2;
     double m_ideal = (12 * radius * radius - no_of_passes * wl * wl - 4 * no_of_passes * wl - 3 * no_of_passes) / (double)(-4 * wl - 4);
-    int m = round(m_ideal);
+    int m = AK::round(m_ideal);
 
     for (size_t i = 0; i < no_of_passes; ++i) {
         int weighted_radius = (int)i < m ? wl : wu;
