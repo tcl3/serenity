@@ -519,7 +519,7 @@ void Device::rasterize_line_antialiased(GPU::Vertex& from, GPU::Vertex& to)
 {
     auto const from_coords = from.window_coordinates.xy();
     auto const to_coords = to.window_coordinates.xy();
-    auto const line_width = ceilf(m_options.line_width);
+    auto const line_width = AK::ceil(m_options.line_width);
     auto const line_radius = line_width / 2;
 
     auto render_bounds = Gfx::IntRect {

@@ -2433,7 +2433,7 @@ void TextEditor::set_editing_engine(OwnPtr<EditingEngine> editing_engine)
 
 int TextEditor::line_height() const
 {
-    return static_cast<int>(ceilf(font().preferred_line_height()));
+    return static_cast<int>(AK::ceil(font().preferred_line_height()));
 }
 
 int TextEditor::fixed_glyph_width() const

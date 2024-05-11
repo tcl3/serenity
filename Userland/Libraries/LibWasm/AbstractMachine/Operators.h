@@ -451,10 +451,8 @@ struct Ceil {
     template<typename Lhs>
     auto operator()(Lhs lhs) const
     {
-        if constexpr (IsSame<Lhs, float>)
-            return ceilf(lhs);
-        else if constexpr (IsSame<Lhs, double>)
-            return ceil(lhs);
+        if constexpr (FloatingPoint<Lhs>)
+            return AK::ceil(lhs);
         else
             VERIFY_NOT_REACHED();
     }

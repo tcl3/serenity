@@ -70,7 +70,7 @@ ErrorOr<int> serenity_main(Main::Arguments arguments)
 
     auto& statusbar = *main_widget->find_descendant_of_type_named<GUI::Statusbar>("statusbar");
     auto width = board_widget.font().width("Ticks: 000,000,000"sv) + board_widget.font().max_glyph_width();
-    statusbar.segment(1).set_fixed_width(ceil(width));
+    statusbar.segment(1).set_fixed_width(AK::ceil(width));
 
     auto show_statusbar_hint = [&]() {
         auto tip = board_widget.selected_pattern() ? pattern_place_tip : toggle_cells_tip;

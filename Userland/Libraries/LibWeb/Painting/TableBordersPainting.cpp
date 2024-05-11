@@ -101,7 +101,7 @@ static Optional<size_t> column_index_for_element_kind(size_t index, Painting::Pa
 
 static DevicePixels half_ceil(DevicePixels width)
 {
-    return ceil(static_cast<double>(width.value()) / 2);
+    return AK::ceil(static_cast<double>(width.value()) / 2);
 }
 
 static DevicePixels half_floor(DevicePixels width)

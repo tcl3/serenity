@@ -1426,7 +1426,7 @@ static ErrorOr<Vector<NonnullRefPtr<Symbol>>> symbol_dictionary_decoding_procedu
 
         // 6.5.8.2.3 Setting SBSYMCODES and SBSYMCODELEN
         // FIXME: Implement support for SDHUFF = 1
-        u32 code_length = ceil(log2(inputs.input_symbols.size() + inputs.number_of_new_symbols));
+        u32 code_length = AK::ceil(log2(inputs.input_symbols.size() + inputs.number_of_new_symbols));
 
         // 6.5.8.2.2 Decoding a bitmap when REFAGGNINST = 1
         // FIXME: This is missing some steps for the SDHUFF = 1 case.
@@ -1751,7 +1751,7 @@ static ErrorOr<NonnullOwnPtr<BitBuffer>> halftone_region_decoding_procedure(Half
     }
 
     // "3) Set HBPP to ⌈log2 (HNUMPATS)⌉."
-    u8 bits_per_pattern = ceil(log2(inputs.patterns.size()));
+    u8 bits_per_pattern = AK::ceil(log2(inputs.patterns.size()));
 
     // "4) Decode an image GI of size HGW by HGH with HBPP bits per pixel using the gray-scale image decoding
     //     procedure as described in Annex C. Set the parameters to this decoding procedure as shown in Table 23.
@@ -2109,7 +2109,7 @@ static ErrorOr<void> decode_immediate_text_region(JBIG2LoadingContext& context, 
     inputs.region_height = information_field.height;
     inputs.number_of_instances = number_of_symbol_instances;
     inputs.size_of_symbol_instance_strips = strip_size;
-    inputs.id_symbol_code_length = ceil(log2(symbols.size()));
+    inputs.id_symbol_code_length = AK::ceil(log2(symbols.size()));
     inputs.symbols = move(symbols);
     // FIXME: Huffman tables.
     inputs.refinement_template = refinement_template;

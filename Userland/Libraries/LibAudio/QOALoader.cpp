@@ -89,7 +89,7 @@ MaybeLoaderError QOALoaderPlugin::load_one_frame(Span<Sample>& target, IsFirstFr
 
     // There's usually (and at maximum) 256 slices per channel, but less at the very end.
     // If the final slice would be partial, we still need to decode it; integer division would tell us that this final slice doesn't exist.
-    auto const slice_count = static_cast<size_t>(ceil(static_cast<double>(header.sample_count) / static_cast<double>(QOA::slice_samples)));
+    auto const slice_count = static_cast<size_t>(AK::ceil(static_cast<double>(header.sample_count) / static_cast<double>(QOA::slice_samples)));
     VERIFY(slice_count <= QOA::max_slices_per_frame);
 
     // Observe the loop nesting: Slices are channel-interleaved.

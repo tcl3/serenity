@@ -1342,11 +1342,11 @@ private:
     {
         // C.2.3 - Hybrid integer configuration
         HybridUint config {};
-        config.split_exponent = TRY(stream.read_bits(ceil(log2(log_alphabet_size + 1))));
+        config.split_exponent = TRY(stream.read_bits(AK::ceil(log2(log_alphabet_size + 1))));
         if (config.split_exponent != log_alphabet_size) {
-            auto nbits = ceil(log2(config.split_exponent + 1));
+            auto nbits = AK::ceil(log2(config.split_exponent + 1));
             config.msb_in_token = TRY(stream.read_bits(nbits));
-            nbits = ceil(log2(config.split_exponent - config.msb_in_token + 1));
+            nbits = AK::ceil(log2(config.split_exponent - config.msb_in_token + 1));
             config.lsb_in_token = TRY(stream.read_bits(nbits));
         } else {
             config.msb_in_token = 0;
@@ -2367,8 +2367,8 @@ static ErrorOr<Frame> read_frame(LittleEndianInputBitStream& stream,
     }
 
     if (frame.frame_header.upsampling > 1) {
-        frame.width = ceil(static_cast<double>(frame.width) / frame.frame_header.upsampling);
-        frame.height = ceil(static_cast<double>(frame.height) / frame.frame_header.upsampling);
+        frame.width = AK::ceil(static_cast<double>(frame.width) / frame.frame_header.upsampling);
+        frame.height = AK::ceil(static_cast<double>(frame.height) / frame.frame_header.upsampling);
     }
 
     if (frame.frame_header.lf_level > 0)
@@ -2379,8 +2379,8 @@ static ErrorOr<Frame> read_frame(LittleEndianInputBitStream& stream,
 
     auto const frame_width = static_cast<double>(frame.width);
     auto const frame_height = static_cast<double>(frame.height);
-    frame.num_groups = ceil(frame_width / group_dim) * ceil(frame_height / group_dim);
-    frame.num_lf_groups = ceil(frame_width / (group_dim * 8)) * ceil(frame_height / (group_dim * 8));
+    frame.num_groups = AK::ceil(frame_width / group_dim) * AK::ceil(frame_height / group_dim);
+    frame.num_lf_groups = AK::ceil(frame_width / (group_dim * 8)) * AK::ceil(frame_height / (group_dim * 8));
 
     frame.toc = TRY(read_toc(stream, frame.frame_header, frame.num_groups, frame.num_lf_groups));
 

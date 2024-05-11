@@ -108,7 +108,7 @@ Optional<UISize> CheckBox::calculated_min_size() const
 {
     auto const& font = this->font();
     int width = box_rect().width();
-    int height = max(22, max(static_cast<int>(ceilf(font.pixel_size())) + 8, box_rect().height()));
+    int height = max(22, max(static_cast<int>(AK::ceil(font.pixel_size())) + 8, box_rect().height()));
     return UISize(width, height);
 }
 

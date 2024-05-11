@@ -148,8 +148,8 @@ DevicePixelRect Page::enclosing_device_rect(CSSPixelRect rect) const
     return DevicePixelRect(
         AK::floor(rect.x().to_double() * scale),
         AK::floor(rect.y().to_double() * scale),
-        ceil(rect.width().to_double() * scale),
-        ceil(rect.height().to_double() * scale));
+        AK::ceil(rect.width().to_double() * scale),
+        AK::ceil(rect.height().to_double() * scale));
 }
 
 DevicePixelRect Page::rounded_device_rect(CSSPixelRect rect) const

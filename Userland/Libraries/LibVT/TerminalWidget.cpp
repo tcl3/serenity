@@ -1237,7 +1237,7 @@ void TerminalWidget::did_change_font()
 static void collect_font_metrics(Gfx::Font const& font, int& column_width, int& cell_height, int& line_height, int& line_spacing)
 {
     line_spacing = 4;
-    column_width = static_cast<int>(ceilf(font.glyph_width('x')));
+    column_width = static_cast<int>(AK::ceil(font.glyph_width('x')));
     cell_height = font.pixel_size_rounded_up();
     line_height = cell_height + line_spacing;
 }

@@ -365,7 +365,7 @@ ThrowCompletionOr<Value> MathObject::ceil_impl(VM& vm, Value x)
 
     // 4. If n is an integral Number, return n.
     // 5. Return the smallest (closest to -∞) integral Number value that is not less than n.
-    return Value(::ceil(number.as_double()));
+    return Value(AK::ceil(number.as_double()));
 }
 
 // 21.3.2.10 Math.ceil ( x ), https://tc39.es/ecma262/#sec-math.ceil
@@ -792,7 +792,7 @@ ThrowCompletionOr<Value> MathObject::round_impl(VM& vm, Value x)
     // 3. If n < 0.5𝔽 and n > +0𝔽, return +0𝔽.
     // 4. If n < -0𝔽 and n ≥ -0.5𝔽, return -0𝔽.
     // 5. Return the integral Number closest to n, preferring the Number closer to +∞ in the case of a tie.
-    double integer = ::ceil(number.as_double());
+    double integer = AK::ceil(number.as_double());
     if (integer - 0.5 > number.as_double())
         integer--;
     return Value(integer);
@@ -932,7 +932,7 @@ JS_DEFINE_NATIVE_FUNCTION(MathObject::trunc)
     // 4. If n < -0𝔽 and n > -1𝔽, return -0𝔽.
     // 5. Return the integral Number nearest n in the direction of +0𝔽.
     return Value(number.as_double() < 0
-            ? ::ceil(number.as_double())
+            ? AK::ceil(number.as_double())
             : AK::floor(number.as_double()));
 }
 

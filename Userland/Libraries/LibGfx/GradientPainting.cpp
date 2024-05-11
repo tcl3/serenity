@@ -348,7 +348,7 @@ static auto make_linear_gradient_between_two_points(FloatPoint p0, FloatPoint p1
     auto angle = AK::atan2(delta.y(), delta.x());
     float sin_angle, cos_angle;
     AK::sincos(angle, sin_angle, cos_angle);
-    int gradient_length = ceilf(p1.distance_from(p0));
+    int gradient_length = AK::ceil(p1.distance_from(p0));
     auto rotated_start_point_x = p0.x() * cos_angle - p0.y() * -sin_angle;
 
     return Gradient {

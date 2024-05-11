@@ -355,7 +355,7 @@ float BitmapFont::glyph_or_emoji_width(Utf32CodePointIterator& it) const
 
 int BitmapFont::width_rounded_up(StringView view) const
 {
-    return static_cast<int>(ceilf(width(view)));
+    return static_cast<int>(AK::ceil(width(view)));
 }
 
 float BitmapFont::width(StringView view) const { return unicode_view_width(Utf8View(view)); }

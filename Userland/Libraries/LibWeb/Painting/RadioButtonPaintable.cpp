@@ -79,8 +79,8 @@ void RadioButtonPaintable::paint(PaintContext& context, PaintPhase phase) const
 
     // This is based on a 1px outer border and 2px inner border when drawn at 13x13.
     auto radio_button_rect = context.enclosing_device_rect(absolute_rect()).to_type<int>();
-    auto outer_border_width = max(1, static_cast<int>(ceilf(radio_button_rect.width() / 13.0f)));
-    auto inner_border_width = max(2, static_cast<int>(ceilf(radio_button_rect.width() / 4.0f)));
+    auto outer_border_width = max(1, static_cast<int>(AK::ceil(radio_button_rect.width() / 13.0f)));
+    auto inner_border_width = max(2, static_cast<int>(AK::ceil(radio_button_rect.width() / 4.0f)));
 
     draw_circle(radio_button_rect, fill_color);
     draw_circle(shrink_all(radio_button_rect, outer_border_width), background_color);

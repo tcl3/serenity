@@ -501,7 +501,7 @@ void TableFormattingContext::compute_table_width()
             if (cell_width.is_percentage()) {
                 CSSPixels adjusted_used_width = undistributable_space;
                 if (cell_width.percentage().value() != 0)
-                    adjusted_used_width += CSSPixels::nearest_value_for(ceil(100 / cell_width.percentage().value() * cell.outer_max_width));
+                    adjusted_used_width += CSSPixels::nearest_value_for(AK::ceil(100 / cell_width.percentage().value() * cell.outer_max_width));
 
                 if (width_of_table_containing_block.is_definite())
                     used_width = min(max(used_width, adjusted_used_width), width_of_table_containing_block.to_px_or_zero());

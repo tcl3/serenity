@@ -213,8 +213,8 @@ void AntiAliasingPainter::fill_rect(FloatRect const& float_rect, Color color)
     // Draw the integer part of the rectangle:
     float right_x = float_rect.x() + float_rect.width();
     float bottom_y = float_rect.y() + float_rect.height();
-    int x1 = ceilf(float_rect.x());
-    int y1 = ceilf(float_rect.y());
+    int x1 = AK::ceil(float_rect.x());
+    int y1 = AK::ceil(float_rect.y());
     int x2 = AK::floor(right_x);
     int y2 = AK::floor(bottom_y);
     auto solid_rect = Gfx::IntRect::from_two_points({ x1, y1 }, { x2, y2 });

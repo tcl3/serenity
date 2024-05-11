@@ -1116,7 +1116,7 @@ double round_number_to_increment(double x, u64 increment, StringView rounding_mo
     auto r1 = AK::floor(quotient);
 
     // 6. Let r2 be the smallest integer such that r2 > quotient.
-    auto r2 = ceil(quotient);
+    auto r2 = AK::ceil(quotient);
     if (quotient == r2)
         r2++;
 

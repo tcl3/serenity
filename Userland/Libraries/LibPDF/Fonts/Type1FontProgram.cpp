@@ -60,8 +60,8 @@ RefPtr<Gfx::Bitmap> Type1FontProgram::rasterize_glyph(DeprecatedFlyString const&
     auto path = build_char(char_name, width, subpixel_offset);
     auto bounding_box = path.bounding_box().size();
 
-    u32 w = (u32)ceilf(bounding_box.width()) + 2;
-    u32 h = (u32)ceilf(bounding_box.height()) + 2;
+    u32 w = (u32)AK::ceil(bounding_box.width()) + 2;
+    u32 h = (u32)AK::ceil(bounding_box.height()) + 2;
 
     auto bitmap = Gfx::Bitmap::create(Gfx::BitmapFormat::BGRA8888, { w, h }).release_value_but_fixme_should_propagate_errors();
     Gfx::Painter painter { bitmap };

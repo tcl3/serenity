@@ -1020,7 +1020,7 @@ static RawPrecisionResult to_raw_precision_function(MathematicalValue const& num
             result.number = MathematicalValue { AK::floor(result.number.as_number()) };
             break;
         case PreferredResult::GreaterThanNumber:
-            result.number = MathematicalValue { ceil(result.number.as_number()) };
+            result.number = MathematicalValue { AK::ceil(result.number.as_number()) };
             break;
         }
     } else {
@@ -1169,7 +1169,7 @@ static RawFixedResult to_raw_fixed_function(MathematicalValue const& number, int
             result.number = MathematicalValue { AK::floor(result.number.as_number()) };
             break;
         case PreferredResult::GreaterThanNumber:
-            result.number = MathematicalValue { ceil(result.number.as_number()) };
+            result.number = MathematicalValue { AK::ceil(result.number.as_number()) };
             break;
         }
     } else {

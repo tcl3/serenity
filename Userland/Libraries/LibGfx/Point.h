@@ -251,7 +251,7 @@ public:
     requires FloatingPoint<T>
     [[nodiscard]] Point<U> to_ceiled() const
     {
-        return Point<U>(ceil(x()), ceil(y()));
+        return Point<U>(AK::ceil(x()), AK::ceil(y()));
     }
 
     template<typename U>

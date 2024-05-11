@@ -186,7 +186,7 @@ void Breadcrumbbar::relayout()
 
         int const max_button_width = 100;
 
-        segment.width = static_cast<int>(ceilf(min(button_text_width + icon_width + icon_padding + 16, max_button_width)));
+        segment.width = static_cast<int>(AK::ceil(min(button_text_width + icon_width + icon_padding + 16, max_button_width)));
         segment.shrunken_width = icon_width + icon_padding + (button.icon() ? 4 : 16);
 
         button.set_max_size(segment.width, 16 + 8);

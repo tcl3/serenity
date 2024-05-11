@@ -1044,8 +1044,8 @@ using DoubleRect = Rect<double>;
 {
     int x1 = AK::floor(float_rect.x());
     int y1 = AK::floor(float_rect.y());
-    int x2 = ceilf(float_rect.right());
-    int y2 = ceilf(float_rect.bottom());
+    int x2 = AK::ceil(float_rect.right());
+    int y2 = AK::ceil(float_rect.bottom());
     return Gfx::IntRect::from_two_points({ x1, y1 }, { x2, y2 });
 }
 

@@ -967,7 +967,7 @@ TagTree::~TagTree() = default;
 
 ErrorOr<TagTree> TagTree::create(u32 x_count, u32 y_count)
 {
-    auto level = ceil(log2(max(x_count, y_count)));
+    auto level = AK::ceil(log2(max(x_count, y_count)));
     return TagTree { TRY(TagTreeNode::create(x_count, y_count, level)) };
 }
 

@@ -379,8 +379,8 @@ ErrorOr<NonnullRefPtr<Gfx::Bitmap>> Bitmap::scaled(float sx, float sy) const
     if (AK::floor(sx) == sx && AK::floor(sy) == sy)
         return scaled(static_cast<int>(sx), static_cast<int>(sy));
 
-    int scaled_width = (int)ceilf(sx * (float)width());
-    int scaled_height = (int)ceilf(sy * (float)height());
+    int scaled_width = (int)AK::ceil(sx * (float)width());
+    int scaled_height = (int)AK::ceil(sy * (float)height());
     return scaled_to_size({ scaled_width, scaled_height });
 }
 

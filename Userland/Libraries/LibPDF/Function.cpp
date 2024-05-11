@@ -741,7 +741,7 @@ PDFErrorOr<void> PostScriptCalculatorFunction::execute(Vector<Token> const& toke
             break;
         }
         case OperatorType::Ceiling:
-            TRY(stack.push(ceilf(TRY(stack.pop()))));
+            TRY(stack.push(AK::ceil(TRY(stack.pop()))));
             break;
         case OperatorType::Cos:
             TRY(stack.push(cosf(AK::to_radians(TRY(stack.pop())))));

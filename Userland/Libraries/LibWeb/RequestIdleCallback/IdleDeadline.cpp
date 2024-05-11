@@ -49,7 +49,7 @@ double IdleDeadline::time_remaining() const
         time_remaining = 0;
     // 5. Return timeRemaining.
     // NOTE: coarsening to milliseconds
-    return ceil(time_remaining);
+    return AK::ceil(time_remaining);
 }
 
 }

@@ -31,7 +31,7 @@ void Delay::handle_delay_time_change()
 {
     // We want a delay buffer that can hold samples filling the specified number of milliseconds.
     double seconds = static_cast<double>(m_delay_time) / 1000.0;
-    size_t sample_count = ceil(seconds * m_transport->sample_rate());
+    size_t sample_count = AK::ceil(seconds * m_transport->sample_rate());
     if (sample_count != m_delay_buffer.size()) {
         m_delay_buffer.resize(sample_count, true);
         m_delay_index %= max(m_delay_buffer.size(), 1);

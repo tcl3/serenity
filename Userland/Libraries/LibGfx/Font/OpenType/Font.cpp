@@ -569,8 +569,8 @@ RefPtr<Gfx::Bitmap> Font::rasterize_glyph(u32 glyph_id, float x_scale, float y_s
     if (!glyph.has_value())
         return {};
 
-    u32 width = (u32)(ceilf((glyph->xmax() - glyph->xmin()) * x_scale)) + 2;
-    u32 height = (u32)(ceilf((ascender_and_descender.ascender - ascender_and_descender.descender) * y_scale)) + 2;
+    u32 width = (u32)(AK::ceil((glyph->xmax() - glyph->xmin()) * x_scale)) + 2;
+    u32 height = (u32)(AK::ceil((ascender_and_descender.ascender - ascender_and_descender.descender) * y_scale)) + 2;
     auto bitmap = Gfx::Bitmap::create(Gfx::BitmapFormat::BGRA8888, { width, height }).release_value_but_fixme_should_propagate_errors();
     Gfx::Painter painter { bitmap };
     Gfx::AntiAliasingPainter aa_painter(painter);
