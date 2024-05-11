@@ -559,7 +559,7 @@ JS_DEFINE_NATIVE_FUNCTION(MathObject::hypot)
         return Value(0);
 
     // 7. Return an implementation-approximated Number value representing the square root of the sum of squares of the mathematical values of the elements of coerced.
-    return Value(::sqrt(sum_of_squares));
+    return Value(AK::sqrt(sum_of_squares));
 }
 
 // 21.3.2.19 Math.imul ( x, y ), https://tc39.es/ecma262/#sec-math.imul
@@ -869,7 +869,7 @@ ThrowCompletionOr<Value> MathObject::sqrt_impl(VM& vm, Value x)
         return js_nan();
 
     // 4. Return an implementation-approximated Number value representing the result of the square root of ℝ(n).
-    return Value(::sqrt(number.as_double()));
+    return Value(AK::sqrt(number.as_double()));
 }
 
 // 21.3.2.32 Math.sqrt ( x ), https://tc39.es/ecma262/#sec-math.sqrt

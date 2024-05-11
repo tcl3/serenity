@@ -504,7 +504,7 @@ static auto create_radial_gradient_between_two_circles(Gfx::FloatPoint start_cen
             // in the direction of the "vec" vector.
             auto dx2 = vec.x() * vec.x();
             auto dy2 = vec.y() * vec.y();
-            auto root = sqrtf(dx2 * dx2_factor + dy2 * dy2_factor
+            auto root = AK::sqrt(dx2 * dx2_factor + dy2 * dy2_factor
                 + 2 * vec.x() * vec.y() * delta_xy);
             auto dot = vec.x() * delta.x() + vec.y() * delta.y();
             return ((positive_root ? root : -root) + dot) / (dx2 + dy2);

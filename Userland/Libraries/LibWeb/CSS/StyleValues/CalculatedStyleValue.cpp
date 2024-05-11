@@ -1771,7 +1771,7 @@ CalculatedStyleValue::CalculationResult SqrtCalculationNode::resolve(Optional<Le
 {
     auto node_a = m_value->resolve(context, percentage_basis);
     auto node_a_value = resolve_value(node_a.value(), context);
-    auto result = sqrt(node_a_value);
+    auto result = AK::sqrt(node_a_value);
 
     return { Number(Number::Type::Number, result) };
 }
@@ -1856,7 +1856,7 @@ CalculatedStyleValue::CalculationResult HypotCalculationNode::resolve(Optional<L
         square_sum += child_value * child_value;
     }
 
-    auto result = sqrt(square_sum);
+    auto result = AK::sqrt(square_sum);
 
     return to_resolved_type(resolved_type().value(), result);
 }

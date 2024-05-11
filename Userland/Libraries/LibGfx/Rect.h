@@ -829,7 +829,7 @@ public:
                 if (rect.intersects(other_rect))
                     center_sum += rect_center - other_rect.center();
             }
-            double m = sqrt((double)center_sum.x() * (double)center_sum.x() + (double)center_sum.y() * (double)center_sum.y());
+            double m = AK::sqrt((double)center_sum.x() * (double)center_sum.x() + (double)center_sum.y() * (double)center_sum.y());
             if (m != 0.0)
                 return { (double)center_sum.x() / m + 0.5, (double)center_sum.y() / m + 0.5 };
             return {};

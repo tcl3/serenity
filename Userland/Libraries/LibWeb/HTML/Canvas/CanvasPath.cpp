@@ -135,7 +135,7 @@ WebIDL::ExceptionOr<void> CanvasPath::ellipse(float x, float y, float radius_x, 
         auto ab = radius_x * radius_y;
         auto a2 = radius_x * radius_x;
         auto b2 = radius_y * radius_y;
-        auto sqrt = sqrtf(b2 + a2 * tan2);
+        auto sqrt = AK::sqrt(b2 + a2 * tan2);
 
         auto relative_x_position = ab / sqrt;
         auto relative_y_position = ab * tan_relative / sqrt;

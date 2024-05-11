@@ -36,15 +36,15 @@ private:
         AK::sincos(angle_rads, sin_angle, cos_angle);
         return FloatMatrix3x3 {
             float(cos_angle + (1.0f - cos_angle) / 3.0f),
-            float(1.0f / 3.0f * (1.0f - cos_angle) - sqrtf(1.0f / 3.0f) * sin_angle),
-            float(1.0f / 3.0f * (1.0f - cos_angle) + sqrtf(1.0f / 3.0f) * sin_angle),
+            float(1.0f / 3.0f * (1.0f - cos_angle) - AK::sqrt(1.0f / 3.0f) * sin_angle),
+            float(1.0f / 3.0f * (1.0f - cos_angle) + AK::sqrt(1.0f / 3.0f) * sin_angle),
 
-            float(1.0f / 3.0f * (1.0f - cos_angle) + sqrtf(1.0f / 3.0f) * sin_angle),
+            float(1.0f / 3.0f * (1.0f - cos_angle) + AK::sqrt(1.0f / 3.0f) * sin_angle),
             float(cos_angle + 1.0f / 3.0f * (1.0f - cos_angle)),
-            float(1.0f / 3.0f * (1.0f - cos_angle) - sqrtf(1.0f / 3.0f) * sin_angle),
+            float(1.0f / 3.0f * (1.0f - cos_angle) - AK::sqrt(1.0f / 3.0f) * sin_angle),
 
-            float(1.0f / 3.0f * (1.0f - cos_angle) - sqrtf(1.0f / 3.0f) * sin_angle),
-            float(1.0f / 3.0f * (1.0f - cos_angle) + sqrtf(1.0f / 3.0f) * sin_angle),
+            float(1.0f / 3.0f * (1.0f - cos_angle) - AK::sqrt(1.0f / 3.0f) * sin_angle),
+            float(1.0f / 3.0f * (1.0f - cos_angle) + AK::sqrt(1.0f / 3.0f) * sin_angle),
             float(cos_angle + 1.0f / 3.0f * (1.0f - cos_angle))
         };
     }

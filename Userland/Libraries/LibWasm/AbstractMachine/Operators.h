@@ -508,9 +508,9 @@ struct SquareRoot {
     auto operator()(Lhs lhs) const
     {
         if constexpr (IsSame<Lhs, float>)
-            return sqrtf(lhs);
+            return AK::sqrtf(lhs);
         else if constexpr (IsSame<Lhs, double>)
-            return sqrt(lhs);
+            return AK::sqrt(lhs);
         else
             VERIFY_NOT_REACHED();
     }

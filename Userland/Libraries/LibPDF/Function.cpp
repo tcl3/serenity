@@ -798,7 +798,7 @@ PDFErrorOr<void> PostScriptCalculatorFunction::execute(Vector<Token> const& toke
             TRY(stack.push(sinf(AK::to_radians(TRY(stack.pop())))));
             break;
         case OperatorType::Sqrt:
-            TRY(stack.push(sqrtf(TRY(stack.pop()))));
+            TRY(stack.push(AK::sqrt(TRY(stack.pop()))));
             break;
         case OperatorType::Sub: {
             float b = TRY(stack.pop());

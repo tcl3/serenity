@@ -1034,10 +1034,10 @@ static RefPtr<StyleValue const> interpolate_transform(DOM::Element& element, Sty
         }
 
         // Now, get the rotations out
-        values.rotation[0] = 0.5f * sqrt(max(1.f + row[0][0] - row[1][1] - row[2][2], 0.f));
-        values.rotation[1] = 0.5f * sqrt(max(1.f - row[0][0] + row[1][1] - row[2][2], 0.f));
-        values.rotation[2] = 0.5f * sqrt(max(1.f - row[0][0] - row[1][1] + row[2][2], 0.f));
-        values.rotation[3] = 0.5f * sqrt(max(1.f + row[0][0] + row[1][1] + row[2][2], 0.f));
+        values.rotation[0] = 0.5f * AK::sqrt(max(1.f + row[0][0] - row[1][1] - row[2][2], 0.f));
+        values.rotation[1] = 0.5f * AK::sqrt(max(1.f - row[0][0] + row[1][1] - row[2][2], 0.f));
+        values.rotation[2] = 0.5f * AK::sqrt(max(1.f - row[0][0] - row[1][1] + row[2][2], 0.f));
+        values.rotation[3] = 0.5f * AK::sqrt(max(1.f + row[0][0] + row[1][1] + row[2][2], 0.f));
 
         if (row[2][1] > row[1][2])
             values.rotation[0] = -values.rotation[0];
@@ -1127,7 +1127,7 @@ static RefPtr<StyleValue const> interpolate_transform(DOM::Element& element, Sty
             interpolated_rotation = from.rotation;
         } else {
             auto theta = acos(product);
-            auto w = sin(delta * theta) / sqrtf(1.0f - product * product);
+            auto w = sin(delta * theta) / AK::sqrt(1.0f - product * product);
 
             for (int i = 0; i < 4; i++) {
                 from.rotation[i] *= cos(delta * theta) - product * w;

@@ -25,7 +25,7 @@ float DeltaE(CIELAB const& c1, CIELAB const& c2)
     float C2 = hypotf(c2.a, c2.b);
     float C_bar = (C1 + C2) / 2;
 
-    float G = 0.5f * (1 - sqrtf(AK::pow(C_bar, 7.0f) / (AK::pow(C_bar, 7.0f) + AK::pow(25, 7))));
+    float G = 0.5f * (1 - AK::sqrt(AK::pow(C_bar, 7.0f) / (AK::pow(C_bar, 7.0f) + AK::pow(25, 7))));
     float a1_prime = (1 + G) * c1.a;
     float a2_prime = (1 + G) * c2.a;
 
@@ -59,7 +59,7 @@ float DeltaE(CIELAB const& c1, CIELAB const& c2)
     auto sin_degrees = [](float x) { return sinf(AK::to_radians(x)); };
     auto cos_degrees = [](float x) { return cosf(AK::to_radians(x)); };
 
-    float delta_H_prime = 2 * sqrtf(C1_prime * C2_prime) * sin_degrees(delta_h_prime / 2);
+    float delta_H_prime = 2 * AK::sqrt(C1_prime * C2_prime) * sin_degrees(delta_h_prime / 2);
 
     float h_prime_bar;
     if (C1_prime == 0 || C2_prime == 0)
@@ -73,11 +73,11 @@ float DeltaE(CIELAB const& c1, CIELAB const& c2)
 
     float T = 1 - 0.17f * cos_degrees(h_prime_bar - 30) + 0.24f * cos_degrees(2 * h_prime_bar) + 0.32f * cos_degrees(3 * h_prime_bar + 6) - 0.2f * cos_degrees(4 * h_prime_bar - 63);
 
-    float S_L = 1 + 0.015f * AK::pow(L_bar - 50, 2.0f) / sqrtf(20 + AK::pow(L_bar - 50, 2.0f));
+    float S_L = 1 + 0.015f * AK::pow(L_bar - 50, 2.0f) / AK::sqrt(20 + AK::pow(L_bar - 50, 2.0f));
     float S_C = 1 + 0.045f * C_prime_bar;
     float S_H = 1 + 0.015f * C_prime_bar * T;
 
-    float R_T = -2 * sqrtf(AK::pow(C_prime_bar, 7.0f) / (AK::pow(C_prime_bar, 7.0f) + AK::pow(25, 7))) * sin_degrees(60 * exp(-AK::pow((h_prime_bar - 275) / 25, 2.0f)));
+    float R_T = -2 * AK::sqrt(AK::pow(C_prime_bar, 7.0f) / (AK::pow(C_prime_bar, 7.0f) + AK::pow(25, 7))) * sin_degrees(60 * exp(-AK::pow((h_prime_bar - 275) / 25, 2.0f)));
 
     // "kL, kC, and kH are usually unity."
     float k_L = 1, k_C = 1, k_H = 1;
@@ -85,7 +85,7 @@ float DeltaE(CIELAB const& c1, CIELAB const& c2)
     float L = delta_L_prime / (k_L * S_L);
     float C = delta_C_prime / (k_C * S_C);
     float H = delta_H_prime / (k_H * S_H);
-    return sqrtf((L * L) + (C * C) + (H * H) + R_T * C * H);
+    return AK::sqrt((L * L) + (C * C) + (H * H) + R_T * C * H);
 }
 
 }

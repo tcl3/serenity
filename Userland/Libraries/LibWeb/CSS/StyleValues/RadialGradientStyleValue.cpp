@@ -97,7 +97,7 @@ CSSPixelSize RadialGradientStyleValue::resolve_size(Layout::Node const& node, CS
             corner = size.bottom_left();
             distance_squared = bottom_left_distance_squared;
         }
-        return sqrt(distance_squared);
+        return AK::sqrt(distance_squared);
     };
 
     auto const closest_corner_distance = [&](CSSPixelPoint& corner) {
@@ -115,7 +115,7 @@ CSSPixelSize RadialGradientStyleValue::resolve_size(Layout::Node const& node, CS
             auto shape = get_shape();
             auto aspect_ratio = shape.width() / shape.height();
             auto p = corner - center;
-            auto radius_a = sqrt(p.y() * p.y() * aspect_ratio * aspect_ratio + p.x() * p.x());
+            auto radius_a = AK::sqrt(p.y() * p.y() * aspect_ratio * aspect_ratio + p.x() * p.x());
             auto radius_b = radius_a / aspect_ratio;
             return CSSPixelSize { radius_a, radius_b };
         }

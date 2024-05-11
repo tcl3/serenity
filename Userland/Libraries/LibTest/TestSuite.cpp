@@ -214,7 +214,7 @@ int TestSuite::run(Vector<NonnullRefPtr<TestCase>> const& tests)
         if (repetitions != 1) {
             double average = total_time / double(repetitions);
             double average_squared = average * average;
-            double standard_deviation = sqrt((sum_of_squared_times + repetitions * average_squared - 2 * total_time * average) / (repetitions - 1));
+            double standard_deviation = AK::sqrt(sum_of_squared_times + repetitions * average_squared - 2 * total_time * average) / (repetitions - 1));
 
             dbgln("{} {} '{}' on average in {:.1f}±{:.1f}ms (min={}ms, max={}ms, total={}ms)",
                 test_result_to_string(m_current_test_result), test_type, t->name(),
