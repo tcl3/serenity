@@ -8,7 +8,6 @@
 #include <AK/IntegralMath.h>
 #include <AK/Math.h>
 #include <LibGfx/DeltaE.h>
-#include <math.h>
 
 namespace Gfx {
 
@@ -21,16 +20,16 @@ float DeltaE(CIELAB const& c1, CIELAB const& c2)
     float delta_L_prime = c2.L - c1.L;
     float L_bar = (c1.L + c2.L) / 2;
 
-    float C1 = hypotf(c1.a, c1.b);
-    float C2 = hypotf(c2.a, c2.b);
+    float C1 = AK::hypot(c1.a, c1.b);
+    float C2 = AK::hypot(c2.a, c2.b);
     float C_bar = (C1 + C2) / 2;
 
     float G = 0.5f * (1 - AK::sqrt(AK::pow(C_bar, 7.0f) / (AK::pow(C_bar, 7.0f) + AK::pow(25, 7))));
     float a1_prime = (1 + G) * c1.a;
     float a2_prime = (1 + G) * c2.a;
 
-    float C1_prime = hypotf(a1_prime, c1.b);
-    float C2_prime = hypotf(a2_prime, c2.b);
+    float C1_prime = AK::hypot(a1_prime, c1.b);
+    float C2_prime = AK::hypot(a2_prime, c2.b);
 
     float C_prime_bar = (C1_prime + C2_prime) / 2;
     float delta_C_prime = C2_prime - C1_prime;
