@@ -40,7 +40,6 @@
 #include <LibJS/Runtime/VM.h>
 #include <LibJS/Runtime/Value.h>
 #include <LibJS/Runtime/ValueInlines.h>
-#include <math.h>
 
 namespace JS {
 
@@ -912,7 +911,7 @@ ThrowCompletionOr<i32> Value::to_i32_slow_case(VM& vm) const
     // 3. Let int be the mathematical value whose sign is the sign of number and whose magnitude is floor(abs(ℝ(number))).
     auto abs = AK::fabs(number);
     auto int_val = AK::floor(abs);
-    if (signbit(number))
+    if (__builtin_signbit(number))
         int_val = -int_val;
 
     // 4. Let int32bit be int modulo 2^32.
@@ -948,7 +947,7 @@ ThrowCompletionOr<u32> Value::to_u32(VM& vm) const
 
     // 3. Let int be the mathematical value whose sign is the sign of number and whose magnitude is floor(abs(ℝ(number))).
     auto int_val = AK::floor(AK::fabs(number));
-    if (signbit(number))
+    if (__builtin_signbit(number))
         int_val = -int_val;
 
     // 4. Let int32bit be int modulo 2^32.
@@ -973,7 +972,7 @@ ThrowCompletionOr<i16> Value::to_i16(VM& vm) const
     // 3. Let int be the mathematical value whose sign is the sign of number and whose magnitude is floor(abs(ℝ(number))).
     auto abs = AK::fabs(number);
     auto int_val = AK::floor(abs);
-    if (signbit(number))
+    if (__builtin_signbit(number))
         int_val = -int_val;
 
     // 4. Let int16bit be int modulo 2^16.
@@ -997,7 +996,7 @@ ThrowCompletionOr<u16> Value::to_u16(VM& vm) const
 
     // 3. Let int be the mathematical value whose sign is the sign of number and whose magnitude is floor(abs(ℝ(number))).
     auto int_val = AK::floor(AK::fabs(number));
-    if (signbit(number))
+    if (__builtin_signbit(number))
         int_val = -int_val;
 
     // 4. Let int16bit be int modulo 2^16.
@@ -1020,7 +1019,7 @@ ThrowCompletionOr<i8> Value::to_i8(VM& vm) const
     // 3. Let int be the mathematical value whose sign is the sign of number and whose magnitude is floor(abs(ℝ(number))).
     auto abs = AK::fabs(number);
     auto int_val = AK::floor(abs);
-    if (signbit(number))
+    if (__builtin_signbit(number))
         int_val = -int_val;
 
     // 4. Let int8bit be int modulo 2^8.
@@ -1044,7 +1043,7 @@ ThrowCompletionOr<u8> Value::to_u8(VM& vm) const
 
     // 3. Let int be the mathematical value whose sign is the sign of number and whose magnitude is floor(abs(ℝ(number))).
     auto int_val = AK::floor(AK::fabs(number));
-    if (signbit(number))
+    if (__builtin_signbit(number))
         int_val = -int_val;
 
     // 4. Let int8bit be int modulo 2^8.
